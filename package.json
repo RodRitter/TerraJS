@@ -1,0 +1,26 @@
+{
+  "name": "terra",
+  "version": "1.0.0",
+  "description": "A simple to use game framework, utilizing the Entity-Component-System architecture",
+  "main": "webpack.config.js",
+  "scripts": {
+    "babel": "babel --presets es2015 js/main.js -o build/main.bundle.js",
+    "start": "http-server",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RodRitter/terra.js.git"
+  },
+  "author": "Rod Ritter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RodRitter/terra.js/issues"
+  },
+  "homepage": "https://github.com/RodRitter/terra.js#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}
