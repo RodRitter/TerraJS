@@ -166,22 +166,27 @@ class Game {
         this.callbacks.onUpdate = [];
     }
 
-    start() {
+    start(callback) {
         // Run start callbacks
         this.callbacks.onStart.forEach(systemObj => {
             systemObj.callback(systemObj.system);
         });
+
+        if (callback) {
+            callback();
+        }
 
         // Start game loop
         window.requestAnimationFrame(this.update.bind(this));
     }
 
     update(time) {
+        this.onUpdate(time);
+
         this.callbacks.onUpdate.forEach(systemObj => {
             systemObj.callback(systemObj.system, time);
         });
 
-        this.onUpdate(time);
         window.requestAnimationFrame(this.update.bind(this));
     }
 

@@ -3,9 +3,9 @@ let Game = new Terra.Game(500, 500);
 
 // Define Entities & Attach Components
 let ball = new Terra.Entity('Ball', Game, [
-    new Terra.Component('Transform', {x: 0, y: 0, w: 10, h: 10})
+    new Terra.Component('Transform', {x: 50, y: 100, w: 5, h: 5}),
+    new Terra.Component('Ball', {type: 'Square', color: 'white'})
 ])
-
 
 let paddle1 = new Terra.Entity('Paddle1', Game, [
     new Terra.Component('Transform', {x: 0, y: 0, w: 100, h: 30}),
@@ -17,8 +17,6 @@ let paddle2 = new Terra.Entity('Paddle2', Game, [
     new Terra.Component('Paddle', {type: 'Square', color: 'orange'})
 ])
 
-ball.attachComponent(new Terra.Component('Ball', {type: 'Square', color: 'blue'}));
-
 Game.createEntities([
     ball,
     paddle1,
@@ -29,34 +27,61 @@ Game.createEntities([
 Game.createSystem(new Terra.System('BallSystem', 
     (system) => {
         let ball = Game.getEntitiesWith(['Ball', 'Transform'])[0];
-
-        if(ball != undefined) {
-            let tf = ball.getComponent('Transform').data;
-            let b = ball.getComponent('Ball').data;
-    
-            let ballEl = document.createElement('div');
-            ballEl.setAttribute('style', `position: absolute; left: ${tf.x}px; top: ${tf.y}px; width: ${tf.w}px; height: ${tf.h}px; background: ${b.color}`);
-            document.body.appendChild(ballEl);
-
-            system.ball = ball;
-            system.ballEl = ballEl;
-        }
-        
+        system.ball = ball;
+        system.moveX = 4;
+        system.moveY = 4;
+        system.speedX = 6;
+        system.speedY = 6;
     },
     (system, time) => {
         if(system.ball != undefined) {
             let tf = system.ball.getComponent('Transform').data;
+            let b = system.ball.getComponent('Ball').data;
 
-            system.ballEl.setAttribute('style', `position: absolute; left: ${tf.x}px; top: ${tf.y}px; width: ${tf.w}px; height: ${tf.h}px; background: ${b.color}`);
+            // Collision
+            if(tf.x + tf.w >= Game.width) {
+                system.moveX = 0 - Math.abs(system.speedX);
+            } if (tf.x - tf.w <= 0) {
+                system.moveX = Math.abs(system.speedX);
+            }
+
+            if(tf.y + tf.h >= Game.height) {
+                system.moveY = 0 - Math.abs(system.speedY);
+            } if (tf.y - tf.h <= 0) {
+                system.moveY = Math.abs(system.speedY);
+            }
+
+            tf.x += system.moveX;
+            tf.y += system.moveY;
+
+            // Draw
+            if(Game.ctx) {
+                Game.ctx.beginPath();
+                Game.ctx.arc(tf.x, tf.y, tf.w, 0, 2 * Math.PI);
+                Game.ctx.fillStyle = b.color;
+                Game.ctx.fill();
+            }
         }
     }
 ));
 
 // Game Loop
-Game.onUpdate = function(time) {
-    //console.log('onUpdate loop');
-    let transform = Game.getComponentFromEntity('Paddle1', 'Transform').data;
-    //console.log(transform.x)
+Game.onUpdate = gameUpdate;
+Game.start(setupCanvas);
+
+function gameUpdate() {
+    if(Game.ctx) {
+        Game.ctx.clearRect(0, 0, Game.width, Game.height);
+        Game.ctx.fillStyle = 'black';
+        Game.ctx.fillRect(0, 0, Game.width, Game.height);
+    }
 }
 
-Game.start();
+function setupCanvas() {
+    // Setup Canvas
+    let canvas = document.createElement('canvas');
+    canvas.setAttribute('width', `${Game.width}px`);
+    canvas.setAttribute('height', `${Game.height}px`);
+    document.body.appendChild(canvas);
+    Game.ctx = canvas.getContext('2d');
+}
