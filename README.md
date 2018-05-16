@@ -69,5 +69,6 @@ Game.onUpdate = () => {
 Game.start(() => {
     // You can do any pre-start setup in this callback
 });
-// The game is now running. There is a ball bouncing from side to side now! In memory ofcourse. See if you can add your own canvas renderer!
+// The game is now running. There is a ball bouncing from side to side now! In memory ofcourse. 
+// See if you can add your own canvas renderer!
 ```
