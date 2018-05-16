@@ -1,3 +1,1 @@
-# TerraJS
-
-![](http://projects.ritter.co.za/storage/TerraJS.jpg =980px)
+<img src="http://projects.ritter.co.za/storage/TerraJS.jpg" width="980">
