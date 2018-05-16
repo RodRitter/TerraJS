@@ -1,7 +1,5 @@
 <img src="http://projects.ritter.co.za/storage/TerraJS_banner.jpg" width="980">
 
-
-## What is ECS pattern?
 TerraJS uses the [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) (ECS) pattern to create lightweight games.
 
 <!--**Entity** - This is essentially an 'object' or thing within your game's world. (Enemy, Bullets, etc)-->
