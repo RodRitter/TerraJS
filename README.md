@@ -72,3 +72,9 @@ Game.start(() => {
 // The game is now running. There is a ball bouncing from side to side now! In memory ofcourse. 
 // See if you can add your own canvas renderer!
 ```
+
+## Building & Contributing
+Once you make changes to the code, you need to build
+```
+npm run webpack
+```
