@@ -13,7 +13,7 @@ Include the TerraJS library script
 ```
 
 ## Usage
-This is just a simple example with no rendering. Everything is happening within the game memory. This means you can use a renderer of your choice, whether it's Canvas, HTML Elements, PixiJS, etc.
+> This is just a simple example with no rendering. Everything is happening within the game memory. This means you can use a renderer of your choice, whether it's Canvas, HTML Elements, PixiJS, etc.
 
 First you need to create an instance of the Game world. Let's make the dimensions 500x300.
 ```
