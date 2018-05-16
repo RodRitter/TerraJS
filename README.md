@@ -7,7 +7,7 @@ TerraJS uses the [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%
 <!--**System** - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)-->
 
 ## Setup
-Include the TerraJS library script
+Include the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js) library script
 ```
 <script src="path/to/terra.js"></script>
 ```
