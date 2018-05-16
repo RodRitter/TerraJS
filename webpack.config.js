@@ -2,7 +2,7 @@ var webpack = require("webpack");
 
 module.exports = {
     entry: __dirname + "/src/terra.js",
-    mode: "development",
+    mode: "production",
     devtool: 'source-map',
     output: {
         path: __dirname + "/dist",
