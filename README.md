@@ -1,1 +1,1 @@
-<img src="http://projects.ritter.co.za/storage/TerraJS.jpg" width="980">
+<img src="http://projects.ritter.co.za/storage/TerraJS_banner.jpg" width="980">
