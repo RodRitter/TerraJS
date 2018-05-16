@@ -22,10 +22,8 @@ var Game = new Terra.Game(500, 300);
 
 Now we can define a `Ball` Entity to live in the Game world. We can also give it a `Position` Component so we can track it's position in the world. *Remember, you can name these anything & give it any data you like.*
 ```
-// Terra.Component(ComponentID, data)
 let ballPosition = new Terra.Component('Position', {x: 0, y: 0});
 
-// Terra.Entity(entityID, gameInstance, components)
 // We give the entity the Position component that we created above
 var ball = new Terra.Entity('Ball', Game, [ballPosition]); 
 ```
@@ -39,8 +37,6 @@ var ballSystem = new Terra.System('BallSystem', onStart, onUpdate);
 ```
 // onStart is when the System first starts.
 function onStart(system) {
-    // Let's get the ball and save it in the System
-    // We can use getEntitiesWith() function to get an entity with specific components. In this case it's just one, the Ball component.
     system.ball = Game.getEntitiesWith(['Ball']);
     system.direction = 5;
 }
