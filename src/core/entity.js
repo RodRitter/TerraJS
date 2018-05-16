@@ -3,9 +3,11 @@ export class Entity {
         this.id = id;
         this.componentMap = {};
         this.game = game;
-
-        for(let i=0; i<components.length; i++) {
-            this.attachComponent(components[i]);
+        
+        if(components) {
+            for(let i=0; i<components.length; i++) {
+                this.attachComponent(components[i]);
+            }
         }
     }
 

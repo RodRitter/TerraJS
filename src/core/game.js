@@ -104,6 +104,10 @@ export class Game {
         return this.components[id];
     }
 
+    getSystem(id) {
+        return this.systems[id];
+    }
+
     getComponentFromEntity(entityId, componentId) {
         return this.getEntity(entityId).getComponent(componentId);
     }
