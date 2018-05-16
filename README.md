@@ -42,11 +42,21 @@ function onStart(system) {
     // Let's get the ball and save it in the System
     // We can use getEntitiesWith() function to get an entity with specific components. In this case it's just one, the Ball component.
     system.ball = Game.getEntitiesWith(['Ball']);
+    system.direction = 5;
 }
 
 // onUpdate happens every frame the game is running
 function onUpdate(system, time) {
+    var pos = system.ball.getComponent('Position').data;
     
+    if(pos.x > Game.width) {
+        system.direction = 0 - Math.abs(system.direction);
+    } 
+    else if (pos.x < 0) {
+        system.direction = Math.abs(system.direction);
+    }
+    
+    pos.x += system.direction;
 }
 ```
 ```
@@ -63,5 +73,5 @@ Game.onUpdate = () => {
 Game.start(() => {
     // You can do any pre-start setup in this callback
 });
-// The game is now running
+// The game is now running. There is a ball bouncing from side to side now! In memory ofcourse. See if you can add your own canvas renderer!
 ```
