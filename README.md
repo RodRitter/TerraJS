@@ -1,3 +1,3 @@
 # TerraJS
 
-![](http://projects.ritter.co.za/storage/TerraJS.jpg =980x)
+![](http://projects.ritter.co.za/storage/TerraJS.jpg =980px)
