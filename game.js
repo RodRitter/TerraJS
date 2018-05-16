@@ -7,20 +7,8 @@ let ball = new Terra.Entity('Ball', Game, [
     new Terra.Component('Ball', {type: 'Square', color: 'white'})
 ])
 
-let paddle1 = new Terra.Entity('Paddle1', Game, [
-    new Terra.Component('Transform', {x: 0, y: 0, w: 100, h: 30}),
-    new Terra.Component('Paddle', {type: 'Square', color: 'orange'})
-])
-
-let paddle2 = new Terra.Entity('Paddle2', Game, [
-    new Terra.Component('Transform', {x: 0, y: 0, w: 100, h: 100}),
-    new Terra.Component('Paddle', {type: 'Square', color: 'orange'})
-])
-
 Game.createEntities([
-    ball,
-    paddle1,
-    paddle2    
+    ball
 ]);
 
 // Create Systems
@@ -28,10 +16,10 @@ Game.createSystem(new Terra.System('BallSystem',
     (system) => {
         let ball = Game.getEntitiesWith(['Ball', 'Transform'])[0];
         system.ball = ball;
-        system.moveX = 4;
-        system.moveY = 4;
-        system.speedX = 6;
-        system.speedY = 6;
+        system.moveX = 6;
+        system.moveY = 3;
+        system.speedX = 5;
+        system.speedY = 5;
     },
     (system, time) => {
         if(system.ball != undefined) {

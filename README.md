@@ -1,2 +1,3 @@
-# terra.js
-A simple to use game framework, utilizing the Entity-Component-System architecture
+# TerraJS
+
+![alt text](http://projects.ritter.co.za/storage/TerraJS.jpg "TerraJS Banner")
