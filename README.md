@@ -13,7 +13,7 @@ Include the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master
 ```
 
 ## Usage
-Create game instance
+### Create game instance
 ```
 var Game = new Terra.Game(500, 300);
 Game.onUpdate = function() {} // Happens every frame fo the game.
