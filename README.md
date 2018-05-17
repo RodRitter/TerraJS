@@ -28,7 +28,7 @@ var attack = new Terra.Component('Attack', {damage: 50});
 
 ### Create an Entity
 ```
-var monsterEntity = new Terra.Entity('Monster', [position, movable]);
+var monsterEntity = new Terra.Entity('Monster', [position, attack]);
 ```
 
 ### Create a System
@@ -51,4 +51,9 @@ Game.start();
 Once you make changes to the code, you need to build
 ```
 npm run webpack
+```
+
+Please make sure to write tests for any new functionality (`test/test.js`). You can run tests with the command below.
+```
+npm test
 ```
