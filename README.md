@@ -33,7 +33,7 @@ var monsterEntity = new Terra.Entity('Monster', [position, attack]);
 
 ### Create a System
 ```
-var monsterSystem = new Terra.System('BallSystem', monsterSystemStart, monsterSystemUpdate);
+var monsterSystem = new Terra.System('MonsterSystem', monsterSystemStart, monsterSystemUpdate);
 
 function monsterSystemStart(system) {} // Happens on startup
 function monsterSystemUpdate(system, time) {} // Happens every frame
