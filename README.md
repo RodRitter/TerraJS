@@ -40,7 +40,7 @@ function monsterSystemUpdate(system, time) {} // Happens every frame
 ### Start the Game
 ```
 Game.onStart = function() {} // Happens on game start
-Game.onUpdate = function() {} // Happens every frame fo the game.
+Game.onUpdate = function() {} // Happens every frame of the game.
 
 Game.start();
 ```
