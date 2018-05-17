@@ -16,7 +16,6 @@ Include the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master
 ### Create game instance
 ```
 var Game = new Terra.Game(500, 300);
-Game.onUpdate = function() {} // Happens every frame fo the game.
 ```
 
 ### Create a Component
@@ -40,8 +39,10 @@ function monsterSystemUpdate(system, time) {} // Happens every frame
 
 ### Start the Game
 ```
-Game.start(onGameStart);
-function onGameStart() {} // Game initialization
+Game.onStart = function() {} // Happens on game start
+Game.onUpdate = function() {} // Happens every frame fo the game.
+
+Game.start();
 ```
 
 ## Building & Contributing
