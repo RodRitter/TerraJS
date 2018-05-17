@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "webpack": "webpack",
-    "test": "mocha --require babel-register"
+    "test": "nyc ./node_modules/.bin/_mocha  --require babel-register test/*"
   },
   "repository": {
     "type": "git",
@@ -19,11 +19,14 @@
   "homepage": "https://github.com/RodRitter/terra.js#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-istanbul": "^0.12.2",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
+    "nyc": "^11.8.0",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"
   },
