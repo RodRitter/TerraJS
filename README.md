@@ -52,3 +52,8 @@ Once you make changes to the code, you need to build
 ```
 npm run webpack
 ```
+
+Please make sure to write tests for any new functionality (`test/test.js`). You can run tests with the command below.
+```
+npm test
+```
