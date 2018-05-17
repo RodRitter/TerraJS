@@ -1,3 +1,5 @@
+import { Entity } from './entity.js';
+
 export class Game {
     constructor(width, height) {
         this.width = width;
@@ -53,7 +55,18 @@ export class Game {
 
     createEntities(entities) {
         for(let i=0; i<entities.length; i++) {
-            this.addEntity(entities[i]);
+            if(entities[i] instanceof Entity) {
+                this.addEntity(entities[i]);
+            } else {
+                throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);
+            }
+        }
+    }
+
+    addEntity(entity) {
+        if(this.entities[entity.id] === undefined) {
+            this.entities[entity.id] = entity;
+            entity.game = this;
         }
     }
 
@@ -64,13 +77,6 @@ export class Game {
             this.callbacks.onStart.push({system: system, callback: system.onStart});
             this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});
             return system;
-        }
-    }
-
-    addEntity(entity) {
-        if(this.entities[entity.id] === undefined) {
-            this.entities[entity.id] = entity;
-            entity.game = this;
         }
     }
 

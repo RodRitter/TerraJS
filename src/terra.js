@@ -14,4 +14,4 @@ class Terra {
     }
 }
 
-window.Terra = new Terra();
+global.Terra = new Terra();
