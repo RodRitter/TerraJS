@@ -28,7 +28,7 @@ var attack = new Terra.Component('Attack', {damage: 50});
 
 ### Create an Entity
 ```
-var monsterEntity = new Terra.Entity('Monster', [position, movable]);
+var monsterEntity = new Terra.Entity('Monster', [position, attack]);
 ```
 
 ### Create a System
