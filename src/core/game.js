@@ -13,15 +13,13 @@ export class Game {
         this.callbacks.onUpdate = [];
     }
 
-    start(callback) {
+    start() {
         // Run start callbacks
         this.callbacks.onStart.forEach((systemObj) => {
             systemObj.callback(systemObj.system);
         });
 
-        if(callback) {
-            callback();
-        }
+        this.onStart();
 
         // Start game loop
         window.requestAnimationFrame(this.update.bind(this));
@@ -38,6 +36,10 @@ export class Game {
     }
 
     onUpdate(time) {
+        // Override
+    }
+
+    onStart() {
         // Override
     }
 

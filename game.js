@@ -55,7 +55,8 @@ Game.createSystem(new Terra.System('BallSystem',
 
 // Game Loop
 Game.onUpdate = gameUpdate;
-Game.start(setupCanvas);
+Game.onStart = setupCanvas;
+Game.start();
 
 function gameUpdate() {
     if(Game.ctx) {
