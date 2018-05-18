@@ -44,6 +44,7 @@ export class Entity {
     /**
      * Get a specific Component from this Entity
      * @param {string} id - ID of the component
+     * @return {Component}
      */
     getComponent(id) {
         if(this.componentMap[id] !== undefined) {
