@@ -6,6 +6,6 @@ export class Component {
     }
 
     onAttach(entity) {
-        console.log(`Attached '${this.id}' to '${entity.id}'`);
+        
     }
 }

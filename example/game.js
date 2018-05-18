@@ -12,7 +12,7 @@ Game.createEntities([
 ]);
 
 // Create Systems
-Game.createSystem(new Terra.System('BallSystem', 
+Game.addSystem(new Terra.System('BallSystem', 
     (system) => {
         let ball = Game.getEntitiesWith(['Ball', 'Transform'])[0];
         system.ball = ball;

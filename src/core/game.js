@@ -1,4 +1,5 @@
 import { Entity } from './entity.js';
+import { System } from './system.js';
 
 export class Game {
     constructor(width, height) {
@@ -45,14 +46,6 @@ export class Game {
         // Override
     }
 
-    width() {
-        return this.width;
-    }
-
-    height() {
-        return this.height;
-    }
-
     createEntities(entities) {
         for(let i=0; i<entities.length; i++) {
             if(entities[i] instanceof Entity) {
@@ -70,13 +63,15 @@ export class Game {
         }
     }
 
-    createSystem(system) {
-        if(this.systems[system.id] === undefined) {
+    addSystem(system) {
+        if(this.systems[system.id] === undefined && system instanceof System) {
             system.game = this;
             this.systems[system.id] = system;
             this.callbacks.onStart.push({system: system, callback: system.onStart});
             this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});
             return system;
+        } else {
+            throw(new TypeError(`Trying to add system which is not type of 'System'`));
         }
     }
 
