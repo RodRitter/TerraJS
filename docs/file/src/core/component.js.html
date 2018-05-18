@@ -40,12 +40,26 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/core/component.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export class Component {
     constructor(id, data) {
+        /**
+         * @type {string}
+         */
         this.id = id;
+
+        /**
+         * @type {Object}
+         */
         this.data = data;
+
+        /**
+         * @type {Entity}
+         */
         this.entity = null;
     }
 
-    onAttach(entity) {
+    /**
+     * This is called when it is attached to an Entity
+     */
+    onAttach() {
         
     }
 }</code></pre>

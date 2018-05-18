@@ -6,7 +6,8 @@
   "scripts": {
     "webpack": "webpack",
     "test": "nyc ./node_modules/.bin/_mocha  --require babel-register test/*",
-    "docs": "./node_modules/.bin/esdoc"
+    "docs": "./node_modules/.bin/esdoc",
+    "build": "webpack && ./node_modules/.bin/esdoc && nyc ./node_modules/.bin/_mocha  --require babel-register test/*"
   },
   "repository": {
     "type": "git",

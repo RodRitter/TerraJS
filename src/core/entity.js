@@ -1,7 +1,18 @@
 export class Entity {
     constructor(id, game, components) {
+        /**
+         * @type {string}
+         */
         this.id = id;
+
+        /**
+         * @type {Object}
+         */
         this.componentMap = {};
+
+        /**
+         * @type {Game}
+         */
         this.game = game;
         
         if(components) {
@@ -11,6 +22,10 @@ export class Entity {
         }
     }
 
+    /**
+     * Attach a Component to this Entity
+     * @param {Component} component
+     */
     attachComponent(component) {
         if(this.componentMap[component.id] === undefined) {
             this.componentMap[component.id] = component;
@@ -19,13 +34,17 @@ export class Entity {
                 this.game.components[component.id] = [];
             } 
             this.game.components[component.id].push(component);
-            component.onAttach(this);
+            component.onAttach();
             
         } else {
             throw(`There is already a component with the ID '${component.id}'`);
         }
     }
 
+    /**
+     * Get a specific Component from this Entity
+     * @param {string} id - ID of the component
+     */
     getComponent(id) {
         if(this.componentMap[id] !== undefined) {
             return this.componentMap[id];

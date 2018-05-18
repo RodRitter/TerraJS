@@ -1,10 +1,6 @@
 import { Entity } from './entity.js';
 import { System } from './system.js';
 
-/**
- * @desc this is MyClass
- */
-
 export class Game {
 
     /**
@@ -12,7 +8,6 @@ export class Game {
      * @param {number} width width of game screen
      * @param {number} height height of game screen
      */
-
     constructor(width, height) {
         /**
          * @type {number}
@@ -58,7 +53,6 @@ export class Game {
     /**
      * The game start function. Use onStart() callback to hook in here
      */
-
     start() {
         this.onStart();
 
@@ -74,7 +68,6 @@ export class Game {
     /**
      * The game update function. Use onUpdate() callback to hook into here
      */
-
     update(time) {
         this.onUpdate(time);
 
@@ -88,7 +81,6 @@ export class Game {
     /**
      * The game update that happens every game frame/tick.
      */
-
     onUpdate(time) {
         // Override
     }
@@ -96,7 +88,6 @@ export class Game {
     /**
      * The intialization function for the game.
      */
-
     onStart() {
         // Override
     }
@@ -105,7 +96,6 @@ export class Game {
      * Create an array of entities & add them to the game
      * @param {Entity[]} entities An array of entities
      */
-
     createEntities(entities) {
         for(let i=0; i<entities.length; i++) {
             if(entities[i] instanceof Entity) {
@@ -120,7 +110,6 @@ export class Game {
      * Create & add a single entity
      * @param {Entity} entity
      */
-
     addEntity(entity) {
         this.entities[entity.id] = entity;
         entity.game = this;
@@ -131,7 +120,6 @@ export class Game {
      * @param {System} system
      * @return {System}
      */
-
     addSystem(system) {
         if(this.systems[system.id] === undefined && system instanceof System) {
             system.game = this;
@@ -149,7 +137,6 @@ export class Game {
      * @param {string} id - The ID of the entity
      * @return {Entity} Returns the matching entity
      */
-
     getEntity(id) {
         if(this.entities[id] !== undefined) {
             return this.entities[id];
@@ -162,7 +149,6 @@ export class Game {
      * @param {string[]} components - A list of component ID's to match against
      * @return {Entity[]}
      */
-
     getEntitiesWith(components) {
         let entities = [];
 
@@ -188,7 +174,6 @@ export class Game {
      * Retrive a system in the game
      * @param {string} id - The ID of the system
      */
-
     getSystem(id) {
         return this.systems[id];
     }
@@ -199,7 +184,6 @@ export class Game {
      * @param {string} componentId - The component ID
      * @return {Component}
      */
-
     getComponentFromEntity(entityId, componentId) {
         return this.getEntity(entityId).getComponent(componentId);
     }
