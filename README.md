@@ -2,11 +2,16 @@
 
 TerraJS uses the [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) (ECS) pattern to create lightweight games.
 
+### What is ECS?
+
 > **Entity** - This is essentially an 'object' or thing within your game's world. (Enemy, Bullets, etc)
 
 > **Component** - Components are attached to Entities and provide a lego-like approach to assigning behavior to an  Entity. (Health, Position, etc)
 
 > **System** - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)
+
+### Documentation
+You can find the documentation [here](https://rodritter.github.io/TerraJS/)
 
 ## Setup
 Include the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js) library script
