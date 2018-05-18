@@ -62,3 +62,8 @@ Please make sure to write tests for any new functionality (`test/test.js`). You 
 ```
 npm test
 ```
+
+You can run webpack, tests & documentation all together
+```
+npm run build
+```

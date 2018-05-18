@@ -90,7 +90,7 @@
         if(this.componentMap[id] !== undefined) {
             return this.componentMap[id];
         }
-        throw(`Cannot find Component &apos;${id}&apos; on Entity &apos;${this.id}&apos;`);
+        throw new Error(`Cannot find Component &apos;${id}&apos; on Entity &apos;${this.id}&apos;`);
     }
 
 }</code></pre>

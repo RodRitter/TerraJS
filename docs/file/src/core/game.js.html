@@ -151,8 +151,13 @@ export class Game {
      * @param {Entity} entity
      */
     addEntity(entity) {
-        this.entities[entity.id] = entity;
-        entity.game = this;
+        if(entity instanceof Entity) {
+            this.entities[entity.id] = entity;
+            entity.game = this;
+        } else {
+            throw new TypeError(`Trying to add an entity which is not of type &apos;Entity&apos;`);
+        }
+        
     }
 
     /**
@@ -181,7 +186,6 @@ export class Game {
         if(this.entities[id] !== undefined) {
             return this.entities[id];
         }
-        throw(`Cannot find Entity with id &apos;${id}&apos;`);
     }
 
     /**

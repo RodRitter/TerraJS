@@ -50,7 +50,7 @@ export class Entity {
         if(this.componentMap[id] !== undefined) {
             return this.componentMap[id];
         }
-        throw(`Cannot find Component '${id}' on Entity '${this.id}'`);
+        throw new Error(`Cannot find Component '${id}' on Entity '${this.id}'`);
     }
 
 }

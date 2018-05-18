@@ -40,7 +40,7 @@ describe('Game', () => {
         });
     });
 
-    describe('createSystem()', () => {
+    describe('addSystem()', () => {
         it('should add a system to the game', () => {
             let system = new System('TestSystem', ()=>{}, ()=>{});
             game.addSystem(system);
@@ -54,8 +54,46 @@ describe('Game', () => {
         });
     });
 
-    describe('getEntitiesWith()', () => {
+    describe('addEntity()', () => {
+        it('should return a valid entity', () => {
+            let entity = new Entity('TestEntity', game, []);
+            game.addEntity(entity);
+            let get = game.getEntity('TestEntity');
+            get.id.should.equal('TestEntity');
+        });
 
+        it('should throw an error if invalid entity', () => {
+            let invalidEntity = 123;
+            let addEntity = () => game.addEntity(invalidEntity);
+            addEntity.should.throw(TypeError);
+        });
+    });
+
+    describe('getComponentFromEntity()', () => {
+        it('should return a valid component', () => {
+            let comp1 = new Component('TestComp1', {foo: 1});
+            let comp2 = new Component('TestComp2', {foo: 2});
+
+            let entity = new Entity('TestEntity', game, [comp1, comp2]);
+            game.addEntity(entity);
+
+            let get = game.getComponentFromEntity('TestEntity', 'TestComp2');
+            get.data.foo.should.equal(2);
+        });
+
+        it('should throw an error if component doesn\'t exist', () => {
+            let comp1 = new Component('TestComp1', {foo: 1});
+            let comp2 = new Component('TestComp2', {foo: 2});
+
+            let entity = new Entity('TestEntity', game, [comp1, comp2]);
+            game.addEntity(entity);
+
+            let get = () => game.getComponentFromEntity('TestEntity', 'NonExistantComp');
+            get.should.throw(Error);
+        });
+    });
+
+    describe('getEntitiesWith()', () => {
         it('should return only entities with given component dependencies', () => {
             let comp1 = new Component('TestComp1', {foo: 'bar'});
             let comp2 = new Component('TestComp2', {foo: 'bar'});
