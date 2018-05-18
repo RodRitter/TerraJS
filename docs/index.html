@@ -39,7 +39,7 @@
 
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p><img src="http://projects.ritter.co.za/storage/TerraJS_banner.jpg" width="980"></p>
 <p>TerraJS uses the <a href="https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system">Entity-Component-System</a> (ECS) pattern to create lightweight games.</p>
-<blockquote>
+<h3 id="what-is-ecs-">What is ECS?</h3><blockquote>
 <p><strong>Entity</strong> - This is essentially an &apos;object&apos; or thing within your game&apos;s world. (Enemy, Bullets, etc)</p>
 </blockquote>
 <blockquote>
@@ -48,6 +48,7 @@
 <blockquote>
 <p><strong>System</strong> - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)</p>
 </blockquote>
+<h3 id="documentation">Documentation</h3><p>You can find the documentation <a href="https://rodritter.github.io/TerraJS/">here</a></p>
 <h2 id="setup">Setup</h2><p>Include the <a href="https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js">TerraJS</a> library script</p>
 <pre><code><code class="source-code prettyprint">&lt;script src=&quot;path/to/terra.js&quot;&gt;&lt;/script&gt;</code>
 </code></pre><h2 id="usage">Usage</h2><h3 id="create-game-instance">Create game instance</h3><pre><code><code class="source-code prettyprint">var Game = new Terra.Game(500, 300);</code>

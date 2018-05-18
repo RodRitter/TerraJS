@@ -680,7 +680,7 @@
     "__docId__": 55,
     "kind": "file",
     "name": "src/core/entity.js",
-    "content": "export class Entity {\n    constructor(id, game, components) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Object}\n         */\n        this.componentMap = {};\n\n        /**\n         * @type {Game}\n         */\n        this.game = game;\n        \n        if(components) {\n            for(let i=0; i<components.length; i++) {\n                this.attachComponent(components[i]);\n            }\n        }\n    }\n\n    /**\n     * Attach a Component to this Entity\n     * @param {Component} component\n     */\n    attachComponent(component) {\n        if(this.componentMap[component.id] === undefined) {\n            this.componentMap[component.id] = component;\n\n            if(this.game.components[component.id] === undefined) {\n                this.game.components[component.id] = [];\n            } \n            this.game.components[component.id].push(component);\n            component.onAttach();\n            \n        } else {\n            throw(`There is already a component with the ID '${component.id}'`);\n        }\n    }\n\n    /**\n     * Get a specific Component from this Entity\n     * @param {string} id - ID of the component\n     */\n    getComponent(id) {\n        if(this.componentMap[id] !== undefined) {\n            return this.componentMap[id];\n        }\n        throw(`Cannot find Component '${id}' on Entity '${this.id}'`);\n    }\n\n}",
+    "content": "export class Entity {\n    constructor(id, game, components) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Object}\n         */\n        this.componentMap = {};\n\n        /**\n         * @type {Game}\n         */\n        this.game = game;\n        \n        if(components) {\n            for(let i=0; i<components.length; i++) {\n                this.attachComponent(components[i]);\n            }\n        }\n    }\n\n    /**\n     * Attach a Component to this Entity\n     * @param {Component} component\n     */\n    attachComponent(component) {\n        if(this.componentMap[component.id] === undefined) {\n            this.componentMap[component.id] = component;\n\n            if(this.game.components[component.id] === undefined) {\n                this.game.components[component.id] = [];\n            } \n            this.game.components[component.id].push(component);\n            component.onAttach();\n            \n        } else {\n            throw(`There is already a component with the ID '${component.id}'`);\n        }\n    }\n\n    /**\n     * Get a specific Component from this Entity\n     * @param {string} id - ID of the component\n     * @return {Component}\n     */\n    getComponent(id) {\n        if(this.componentMap[id] !== undefined) {\n            return this.componentMap[id];\n        }\n        throw(`Cannot find Component '${id}' on Entity '${this.id}'`);\n    }\n\n}",
     "static": true,
     "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/entity.js",
     "access": "public",
@@ -811,7 +811,7 @@
     "longname": "src/core/entity.js~Entity#getComponent",
     "access": "public",
     "description": "Get a specific Component from this Entity",
-    "lineNumber": 48,
+    "lineNumber": 49,
     "params": [
       {
         "nullable": null,
@@ -825,9 +825,12 @@
       }
     ],
     "return": {
+      "nullable": null,
       "types": [
-        "*"
-      ]
+        "Component"
+      ],
+      "spread": false,
+      "description": ""
     }
   },
   {
@@ -1603,7 +1606,7 @@
   },
   {
     "kind": "index",
-    "content": "<img src=\"http://projects.ritter.co.za/storage/TerraJS_banner.jpg\" width=\"980\">\n\nTerraJS uses the [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) (ECS) pattern to create lightweight games.\n\n> **Entity** - This is essentially an 'object' or thing within your game's world. (Enemy, Bullets, etc)\n\n> **Component** - Components are attached to Entities and provide a lego-like approach to assigning behavior to an  Entity. (Health, Position, etc)\n\n> **System** - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)\n\n## Setup\nInclude the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js) library script\n```\n<script src=\"path/to/terra.js\"></script>\n```\n\n## Usage\n### Create game instance\n```\nvar Game = new Terra.Game(500, 300);\n```\n\n### Create a Component\n```\nvar position = new Terra.Component('Position', {x: 0, y: 0});\nvar attack = new Terra.Component('Attack', {damage: 50});\n```\n\n### Create an Entity\n```\nvar monsterEntity = new Terra.Entity('Monster', [position, attack]);\n```\n\n### Create a System\n```\nvar monsterSystem = new Terra.System('MonsterSystem', monsterSystemStart, monsterSystemUpdate);\n\nfunction monsterSystemStart(system) {} // Happens on startup\nfunction monsterSystemUpdate(system, time) {} // Happens every frame\n```\n\n### Start the Game\n```\nGame.onStart = function() {} // Happens on game start\nGame.onUpdate = function() {} // Happens every frame of the game.\n\nGame.start();\n```\n\n## Building & Contributing\nOnce you make changes to the code, you need to build\n```\nnpm run webpack\n```\n\nPlease make sure to write tests for any new functionality (`test/test.js`). You can run tests with the command below.\n```\nnpm test\n```\n",
+    "content": "<img src=\"http://projects.ritter.co.za/storage/TerraJS_banner.jpg\" width=\"980\">\n\nTerraJS uses the [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) (ECS) pattern to create lightweight games.\n\n### What is ECS?\n\n> **Entity** - This is essentially an 'object' or thing within your game's world. (Enemy, Bullets, etc)\n\n> **Component** - Components are attached to Entities and provide a lego-like approach to assigning behavior to an  Entity. (Health, Position, etc)\n\n> **System** - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)\n\n### Documentation\nYou can find the documentation [here](https://rodritter.github.io/TerraJS/)\n\n## Setup\nInclude the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js) library script\n```\n<script src=\"path/to/terra.js\"></script>\n```\n\n## Usage\n### Create game instance\n```\nvar Game = new Terra.Game(500, 300);\n```\n\n### Create a Component\n```\nvar position = new Terra.Component('Position', {x: 0, y: 0});\nvar attack = new Terra.Component('Attack', {damage: 50});\n```\n\n### Create an Entity\n```\nvar monsterEntity = new Terra.Entity('Monster', [position, attack]);\n```\n\n### Create a System\n```\nvar monsterSystem = new Terra.System('MonsterSystem', monsterSystemStart, monsterSystemUpdate);\n\nfunction monsterSystemStart(system) {} // Happens on startup\nfunction monsterSystemUpdate(system, time) {} // Happens every frame\n```\n\n### Start the Game\n```\nGame.onStart = function() {} // Happens on game start\nGame.onUpdate = function() {} // Happens every frame of the game.\n\nGame.start();\n```\n\n## Building & Contributing\nOnce you make changes to the code, you need to build\n```\nnpm run webpack\n```\n\nPlease make sure to write tests for any new functionality (`test/test.js`). You can run tests with the command below.\n```\nnpm test\n```\n",
     "longname": "/Users/rodr/Documents/Projects/terra.js/README.md",
     "name": "./README.md",
     "static": true,
