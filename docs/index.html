@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">Home | terra</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A simple to use game framework, utilizing the Entity-Component-System architecture"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="terra"><meta property="twitter:description" content="A simple to use game framework, utilizing the Entity-Component-System architecture"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/RodRitter/terra.js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/component.js~Component.html">Component</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p><img src="http://projects.ritter.co.za/storage/TerraJS_banner.jpg" width="980"></p>
+<p>TerraJS uses the <a href="https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system">Entity-Component-System</a> (ECS) pattern to create lightweight games.</p>
+<blockquote>
+<p><strong>Entity</strong> - This is essentially an &apos;object&apos; or thing within your game&apos;s world. (Enemy, Bullets, etc)</p>
+</blockquote>
+<blockquote>
+<p><strong>Component</strong> - Components are attached to Entities and provide a lego-like approach to assigning behavior to an  Entity. (Health, Position, etc)</p>
+</blockquote>
+<blockquote>
+<p><strong>System</strong> - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)</p>
+</blockquote>
+<h2 id="setup">Setup</h2><p>Include the <a href="https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js">TerraJS</a> library script</p>
+<pre><code><code class="source-code prettyprint">&lt;script src=&quot;path/to/terra.js&quot;&gt;&lt;/script&gt;</code>
+</code></pre><h2 id="usage">Usage</h2><h3 id="create-game-instance">Create game instance</h3><pre><code><code class="source-code prettyprint">var Game = new Terra.Game(500, 300);</code>
+</code></pre><h3 id="create-a-component">Create a Component</h3><pre><code><code class="source-code prettyprint">var position = new Terra.Component(&apos;Position&apos;, {x: 0, y: 0});
+var attack = new Terra.Component(&apos;Attack&apos;, {damage: 50});</code>
+</code></pre><h3 id="create-an-entity">Create an Entity</h3><pre><code><code class="source-code prettyprint">var monsterEntity = new Terra.Entity(&apos;Monster&apos;, [position, attack]);</code>
+</code></pre><h3 id="create-a-system">Create a System</h3><pre><code><code class="source-code prettyprint">var monsterSystem = new Terra.System(&apos;MonsterSystem&apos;, monsterSystemStart, monsterSystemUpdate);
+
+function monsterSystemStart(system) {} // Happens on startup
+function monsterSystemUpdate(system, time) {} // Happens every frame</code>
+</code></pre><h3 id="start-the-game">Start the Game</h3><pre><code><code class="source-code prettyprint">Game.onStart = function() {} // Happens on game start
+Game.onUpdate = function() {} // Happens every frame of the game.
+
+Game.start();</code>
+</code></pre><h2 id="building--amp--contributing">Building &amp; Contributing</h2><p>Once you make changes to the code, you need to build</p>
+<pre><code><code class="source-code prettyprint">npm run webpack</code>
+</code></pre><p>Please make sure to write tests for any new functionality (<code>test/test.js</code>). You can run tests with the command below.</p>
+<pre><code><code class="source-code prettyprint">npm test</code>
+</code></pre></div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

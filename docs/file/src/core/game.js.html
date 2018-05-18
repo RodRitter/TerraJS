@@ -1,5 +1,45 @@
-import { Entity } from './entity.js';
-import { System } from './system.js';
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/core/game.js | terra</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="A simple to use game framework, utilizing the Entity-Component-System architecture"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="terra"><meta property="twitter:description" content="A simple to use game framework, utilizing the Entity-Component-System architecture"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/RodRitter/terra.js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/component.js~Component.html">Component</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/core/game.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Entity } from &apos;./entity.js&apos;;
+import { System } from &apos;./system.js&apos;;
 
 /**
  * @desc this is MyClass
@@ -63,7 +103,7 @@ export class Game {
         this.onStart();
 
         // Run start callbacks
-        this.callbacks.onStart.forEach((systemObj) => {
+        this.callbacks.onStart.forEach((systemObj) =&gt; {
             systemObj.callback(systemObj.system);
         });
 
@@ -78,7 +118,7 @@ export class Game {
     update(time) {
         this.onUpdate(time);
 
-        this.callbacks.onUpdate.forEach((systemObj) => {
+        this.callbacks.onUpdate.forEach((systemObj) =&gt; {
             systemObj.callback(systemObj.system, time);
         });
         
@@ -102,22 +142,22 @@ export class Game {
     }
 
     /**
-     * Create an array of entities & add them to the game
+     * Create an array of entities &amp; add them to the game
      * @param {Entity[]} entities An array of entities
      */
 
     createEntities(entities) {
-        for(let i=0; i<entities.length; i++) {
+        for(let i=0; i&lt;entities.length; i++) {
             if(entities[i] instanceof Entity) {
                 this.addEntity(entities[i]);
             } else {
-                throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);
+                throw new TypeError(`Trying to add an entity which is not of type &apos;Entity&apos;`);
             }
         }
     }
 
     /**
-     * Create & add a single entity
+     * Create &amp; add a single entity
      * @param {Entity} entity
      */
 
@@ -133,14 +173,14 @@ export class Game {
      */
 
     addSystem(system) {
-        if(this.systems[system.id] === undefined && system instanceof System) {
+        if(this.systems[system.id] === undefined &amp;&amp; system instanceof System) {
             system.game = this;
             this.systems[system.id] = system;
             this.callbacks.onStart.push({system: system, callback: system.onStart});
             this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});
             return system;
         } else {
-            throw(new TypeError(`Trying to add system which is not type of 'System'`));
+            throw(new TypeError(`Trying to add system which is not type of &apos;System&apos;`));
         }
     }
 
@@ -154,26 +194,26 @@ export class Game {
         if(this.entities[id] !== undefined) {
             return this.entities[id];
         }
-        throw(`Cannot find Entity with id '${id}'`);
+        throw(`Cannot find Entity with id &apos;${id}&apos;`);
     }
 
     /**
      * Retrieves all entities that have all provided components.
-     * @param {string[]} components - A list of component ID's to match against
+     * @param {string[]} components - A list of component ID&apos;s to match against
      * @return {Entity[]}
      */
 
     getEntitiesWith(components) {
         let entities = [];
 
-        for(let i=0; i<Object.keys(this.entities).length; i++) {
+        for(let i=0; i&lt;Object.keys(this.entities).length; i++) {
             let entity = this.entities[Object.keys(this.entities)[i]];
             let count = 0;
             let target = components.length;
             
-            for(let j=0; j<Object.keys(entity.componentMap).length; j++) {
+            for(let j=0; j&lt;Object.keys(entity.componentMap).length; j++) {
                 let key = Object.keys(entity.componentMap)[j];
-                let result = components.find(c => c == entity.componentMap[key].id);
+                let result = components.find(c =&gt; c == entity.componentMap[key].id);
                 if(result) count++
             }
 
@@ -203,4 +243,20 @@ export class Game {
     getComponentFromEntity(entityId, componentId) {
         return this.getEntity(entityId).getComponent(componentId);
     }
-}
+}</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

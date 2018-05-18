@@ -1,0 +1,1587 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/core/component.js",
+    "content": "export class Component {\n    constructor(id, data) {\n        this.id = id;\n        this.data = data;\n        this.entity = null;\n    }\n\n    onAttach(entity) {\n        \n    }\n}",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/component.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "Component",
+    "memberof": "src/core/component.js",
+    "static": true,
+    "longname": "src/core/component.js~Component",
+    "access": "public",
+    "export": true,
+    "importPath": "terra/src/core/component.js",
+    "importStyle": "{Component}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/component.js~Component",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/component.js~Component#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "name": "id",
+    "memberof": "src/core/component.js~Component",
+    "static": false,
+    "longname": "src/core/component.js~Component#id",
+    "access": "public",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "data",
+    "memberof": "src/core/component.js~Component",
+    "static": false,
+    "longname": "src/core/component.js~Component#data",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "member",
+    "name": "entity",
+    "memberof": "src/core/component.js~Component",
+    "static": false,
+    "longname": "src/core/component.js~Component#entity",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "onAttach",
+    "memberof": "src/core/component.js~Component",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/component.js~Component#onAttach",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "params": [
+      {
+        "name": "entity",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 55,
+    "kind": "file",
+    "name": "src/core/entity.js",
+    "content": "export class Entity {\n    constructor(id, game, components) {\n        this.id = id;\n        this.componentMap = {};\n        this.game = game;\n        \n        if(components) {\n            for(let i=0; i<components.length; i++) {\n                this.attachComponent(components[i]);\n            }\n        }\n    }\n\n    attachComponent(component) {\n        if(this.componentMap[component.id] === undefined) {\n            this.componentMap[component.id] = component;\n\n            if(this.game.components[component.id] === undefined) {\n                this.game.components[component.id] = [];\n            } \n            this.game.components[component.id].push(component);\n            component.onAttach(this);\n            \n        } else {\n            throw(`There is already a component with the ID '${component.id}'`);\n        }\n    }\n\n    getComponent(id) {\n        if(this.componentMap[id] !== undefined) {\n            return this.componentMap[id];\n        }\n        throw(`Cannot find Component '${id}' on Entity '${this.id}'`);\n    }\n\n}",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/entity.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 56,
+    "kind": "class",
+    "name": "Entity",
+    "memberof": "src/core/entity.js",
+    "static": true,
+    "longname": "src/core/entity.js~Entity",
+    "access": "public",
+    "export": true,
+    "importPath": "terra/src/core/entity.js",
+    "importStyle": "{Entity}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 57,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/entity.js~Entity",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/entity.js~Entity#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "member",
+    "name": "id",
+    "memberof": "src/core/entity.js~Entity",
+    "static": false,
+    "longname": "src/core/entity.js~Entity#id",
+    "access": "public",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 59,
+    "kind": "member",
+    "name": "componentMap",
+    "memberof": "src/core/entity.js~Entity",
+    "static": false,
+    "longname": "src/core/entity.js~Entity#componentMap",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 60,
+    "kind": "member",
+    "name": "game",
+    "memberof": "src/core/entity.js~Entity",
+    "static": false,
+    "longname": "src/core/entity.js~Entity#game",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "method",
+    "name": "attachComponent",
+    "memberof": "src/core/entity.js~Entity",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/entity.js~Entity#attachComponent",
+    "access": "public",
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "params": [
+      {
+        "name": "component",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 62,
+    "kind": "method",
+    "name": "getComponent",
+    "memberof": "src/core/entity.js~Entity",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/entity.js~Entity#getComponent",
+    "access": "public",
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "file",
+    "name": "src/core/game.js",
+    "content": "import { Entity } from './entity.js';\nimport { System } from './system.js';\n\n/**\n * @desc this is MyClass\n */\n\nexport class Game {\n\n    /**\n     * The Game class takes in dimensions of the game screen\n     * @param {number} width width of game screen\n     * @param {number} height height of game screen\n     */\n\n    constructor(width, height) {\n        /**\n         * @type {number}\n         */\n        this.width = width;\n\n        /**\n         * @type {number}\n         */\n        this.height = height;\n\n        /**\n         * @type {Object}\n         */\n        this.entities = {};\n\n        /**\n         * @type {Object}\n         */\n        this.components = {};\n\n        /**\n         * @type {Object}\n         */\n        this.systems = {};\n\n        /**\n         * @type {Object}\n         */\n        this.callbacks = {};\n\n        /**\n         * @type {Array}\n         */\n        this.callbacks.onStart = [];\n\n        /**\n         * @type {Array}\n         */\n        this.callbacks.onUpdate = [];\n    }\n\n    /**\n     * The game start function. Use onStart() callback to hook in here\n     */\n\n    start() {\n        this.onStart();\n\n        // Run start callbacks\n        this.callbacks.onStart.forEach((systemObj) => {\n            systemObj.callback(systemObj.system);\n        });\n\n        // Start game loop\n        window.requestAnimationFrame(this.update.bind(this));\n    }\n\n    /**\n     * The game update function. Use onUpdate() callback to hook into here\n     */\n\n    update(time) {\n        this.onUpdate(time);\n\n        this.callbacks.onUpdate.forEach((systemObj) => {\n            systemObj.callback(systemObj.system, time);\n        });\n        \n        window.requestAnimationFrame(this.update.bind(this));\n    }\n\n    /**\n     * The game update that happens every game frame/tick.\n     */\n\n    onUpdate(time) {\n        // Override\n    }\n\n    /**\n     * The intialization function for the game.\n     */\n\n    onStart() {\n        // Override\n    }\n\n    /**\n     * Create an array of entities & add them to the game\n     * @param {Entity[]} entities An array of entities\n     */\n\n    createEntities(entities) {\n        for(let i=0; i<entities.length; i++) {\n            if(entities[i] instanceof Entity) {\n                this.addEntity(entities[i]);\n            } else {\n                throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);\n            }\n        }\n    }\n\n    /**\n     * Create & add a single entity\n     * @param {Entity} entity\n     */\n\n    addEntity(entity) {\n        this.entities[entity.id] = entity;\n        entity.game = this;\n    }\n\n    /**\n     * Register a system in the game instance\n     * @param {System} system\n     * @return {System}\n     */\n\n    addSystem(system) {\n        if(this.systems[system.id] === undefined && system instanceof System) {\n            system.game = this;\n            this.systems[system.id] = system;\n            this.callbacks.onStart.push({system: system, callback: system.onStart});\n            this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});\n            return system;\n        } else {\n            throw(new TypeError(`Trying to add system which is not type of 'System'`));\n        }\n    }\n\n    /**\n     * Retrieve an entity\n     * @param {string} id - The ID of the entity\n     * @return {Entity} Returns the matching entity\n     */\n\n    getEntity(id) {\n        if(this.entities[id] !== undefined) {\n            return this.entities[id];\n        }\n        throw(`Cannot find Entity with id '${id}'`);\n    }\n\n    /**\n     * Retrieves all entities that have all provided components.\n     * @param {string[]} components - A list of component ID's to match against\n     * @return {Entity[]}\n     */\n\n    getEntitiesWith(components) {\n        let entities = [];\n\n        for(let i=0; i<Object.keys(this.entities).length; i++) {\n            let entity = this.entities[Object.keys(this.entities)[i]];\n            let count = 0;\n            let target = components.length;\n            \n            for(let j=0; j<Object.keys(entity.componentMap).length; j++) {\n                let key = Object.keys(entity.componentMap)[j];\n                let result = components.find(c => c == entity.componentMap[key].id);\n                if(result) count++\n            }\n\n            if(count == target) {\n                entities.push(entity);\n            }\n        }\n        return entities;\n    }\n\n    /**\n     * Retrive a system in the game\n     * @param {string} id - The ID of the system\n     */\n\n    getSystem(id) {\n        return this.systems[id];\n    }\n\n    /**\n     * Retrieves a component from a specific entity\n     * @param {string} entityId - The entity to retrieve the component from\n     * @param {string} componentId - The component ID\n     * @return {Component}\n     */\n\n    getComponentFromEntity(entityId, componentId) {\n        return this.getEntity(entityId).getComponent(componentId);\n    }\n}",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/game.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 64,
+    "kind": "class",
+    "name": "Game",
+    "memberof": "src/core/game.js",
+    "static": true,
+    "longname": "src/core/game.js~Game",
+    "access": "public",
+    "export": true,
+    "importPath": "terra/src/core/game.js",
+    "importStyle": "{Game}",
+    "description": "this is MyClass",
+    "lineNumber": 8,
+    "interface": false
+  },
+  {
+    "__docId__": 65,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#constructor",
+    "access": "public",
+    "description": "The Game class takes in dimensions of the game screen",
+    "lineNumber": 16,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "width",
+        "description": "width of game screen"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "number"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "height",
+        "description": "height of game screen"
+      }
+    ]
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "name": "width",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#width",
+    "access": "public",
+    "description": "",
+    "lineNumber": 20,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "height",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#height",
+    "access": "public",
+    "description": "",
+    "lineNumber": 25,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "member",
+    "name": "entities",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#entities",
+    "access": "public",
+    "description": "",
+    "lineNumber": 30,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "member",
+    "name": "components",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#components",
+    "access": "public",
+    "description": "",
+    "lineNumber": 35,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "member",
+    "name": "systems",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#systems",
+    "access": "public",
+    "description": "",
+    "lineNumber": 40,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "member",
+    "name": "callbacks",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#callbacks",
+    "access": "public",
+    "description": "",
+    "lineNumber": 45,
+    "type": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "start",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#start",
+    "access": "public",
+    "description": "The game start function. Use onStart() callback to hook in here",
+    "lineNumber": 62,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "update",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#update",
+    "access": "public",
+    "description": "The game update function. Use onUpdate() callback to hook into here",
+    "lineNumber": 78,
+    "params": [
+      {
+        "name": "time",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "onUpdate",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#onUpdate",
+    "access": "public",
+    "description": "The game update that happens every game frame/tick.",
+    "lineNumber": 92,
+    "params": [
+      {
+        "name": "time",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "onStart",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#onStart",
+    "access": "public",
+    "description": "The intialization function for the game.",
+    "lineNumber": 100,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 76,
+    "kind": "method",
+    "name": "createEntities",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#createEntities",
+    "access": "public",
+    "description": "Create an array of entities & add them to the game",
+    "lineNumber": 109,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Entity[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "entities",
+        "description": "An array of entities"
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 77,
+    "kind": "method",
+    "name": "addEntity",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#addEntity",
+    "access": "public",
+    "description": "Create & add a single entity",
+    "lineNumber": 124,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Entity"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "entity",
+        "description": ""
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "addSystem",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#addSystem",
+    "access": "public",
+    "description": "Register a system in the game instance",
+    "lineNumber": 135,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "System"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "system",
+        "description": ""
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "System"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "method",
+    "name": "getEntity",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#getEntity",
+    "access": "public",
+    "description": "Retrieve an entity",
+    "lineNumber": 153,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "The ID of the entity"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Entity"
+      ],
+      "spread": false,
+      "description": "Returns the matching entity"
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "getEntitiesWith",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#getEntitiesWith",
+    "access": "public",
+    "description": "Retrieves all entities that have all provided components.",
+    "lineNumber": 166,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string[]"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "components",
+        "description": "A list of component ID's to match against"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Entity[]"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "method",
+    "name": "getSystem",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#getSystem",
+    "access": "public",
+    "description": "Retrive a system in the game",
+    "lineNumber": 192,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": "The ID of the system"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "getComponentFromEntity",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#getComponentFromEntity",
+    "access": "public",
+    "description": "Retrieves a component from a specific entity",
+    "lineNumber": 203,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "entityId",
+        "description": "The entity to retrieve the component from"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "componentId",
+        "description": "The component ID"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Component"
+      ],
+      "spread": false,
+      "description": ""
+    }
+  },
+  {
+    "__docId__": 83,
+    "kind": "file",
+    "name": "src/core/system.js",
+    "content": "export class System {\n    constructor(id, onStart, onUpdate) {\n        this.id = id;\n        this.game = null;\n        this.onStart = onStart;\n        this.onUpdate = onUpdate;\n    }\n\n    getEntity(id) {\n        if(this.game !== null) {\n            this.game.getEntity(id);\n        }\n    }\n\n    getComponentFromEntity(entityId, componentId) {\n        if(this.game) {\n            return this.game.getEntity(entityId).getComponent(componentId);\n        }\n    }\n}",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/system.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 84,
+    "kind": "class",
+    "name": "System",
+    "memberof": "src/core/system.js",
+    "static": true,
+    "longname": "src/core/system.js~System",
+    "access": "public",
+    "export": true,
+    "importPath": "terra/src/core/system.js",
+    "importStyle": "{System}",
+    "description": null,
+    "lineNumber": 1,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 85,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/core/system.js~System",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/system.js~System#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true
+  },
+  {
+    "__docId__": 86,
+    "kind": "member",
+    "name": "id",
+    "memberof": "src/core/system.js~System",
+    "static": false,
+    "longname": "src/core/system.js~System#id",
+    "access": "public",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "member",
+    "name": "game",
+    "memberof": "src/core/system.js~System",
+    "static": false,
+    "longname": "src/core/system.js~System#game",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 88,
+    "kind": "member",
+    "name": "onStart",
+    "memberof": "src/core/system.js~System",
+    "static": false,
+    "longname": "src/core/system.js~System#onStart",
+    "access": "public",
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "member",
+    "name": "onUpdate",
+    "memberof": "src/core/system.js~System",
+    "static": false,
+    "longname": "src/core/system.js~System#onUpdate",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "method",
+    "name": "getEntity",
+    "memberof": "src/core/system.js~System",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/system.js~System#getEntity",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 91,
+    "kind": "method",
+    "name": "getComponentFromEntity",
+    "memberof": "src/core/system.js~System",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/system.js~System#getComponentFromEntity",
+    "access": "public",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "params": [
+      {
+        "name": "entityId",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "componentId",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "file",
+    "name": "src/terra.js",
+    "content": "import { Game } from './core/game.js';\nimport { Entity } from './core/entity.js';\nimport { Component } from './core/component.js';\nimport { System } from './core/system.js';\n\nclass Terra {\n    constructor() {\n        this.Game = Game;\n\n        // Base Classes\n        this.Entity = Entity;\n        this.Component = Component;\n        this.System = System;\n    }\n}\n\nglobal.Terra = new Terra();",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/terra.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 93,
+    "kind": "class",
+    "name": "Terra",
+    "memberof": "src/terra.js",
+    "static": true,
+    "longname": "src/terra.js~Terra",
+    "access": "public",
+    "export": false,
+    "importPath": "terra/src/terra.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "interface": false,
+    "ignore": true
+  },
+  {
+    "__docId__": 94,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/terra.js~Terra",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/terra.js~Terra#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true
+  },
+  {
+    "__docId__": 95,
+    "kind": "member",
+    "name": "Game",
+    "memberof": "src/terra.js~Terra",
+    "static": false,
+    "longname": "src/terra.js~Terra#Game",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 96,
+    "kind": "member",
+    "name": "Entity",
+    "memberof": "src/terra.js~Terra",
+    "static": false,
+    "longname": "src/terra.js~Terra#Entity",
+    "access": "public",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "member",
+    "name": "Component",
+    "memberof": "src/terra.js~Terra",
+    "static": false,
+    "longname": "src/terra.js~Terra#Component",
+    "access": "public",
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "member",
+    "name": "System",
+    "memberof": "src/terra.js~Terra",
+    "static": false,
+    "longname": "src/terra.js~Terra#System",
+    "access": "public",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "index",
+    "content": "<img src=\"http://projects.ritter.co.za/storage/TerraJS_banner.jpg\" width=\"980\">\n\nTerraJS uses the [Entity-Component-System](https://en.wikipedia.org/wiki/Entity%E2%80%93component%E2%80%93system) (ECS) pattern to create lightweight games.\n\n> **Entity** - This is essentially an 'object' or thing within your game's world. (Enemy, Bullets, etc)\n\n> **Component** - Components are attached to Entities and provide a lego-like approach to assigning behavior to an  Entity. (Health, Position, etc)\n\n> **System** - This is where you logic will live. A System will control all Entities that pertain to itself. (BulletSystem, EnemySystem, etc)\n\n## Setup\nInclude the [TerraJS](https://raw.githubusercontent.com/RodRitter/TerraJS/master/dist/terra.js) library script\n```\n<script src=\"path/to/terra.js\"></script>\n```\n\n## Usage\n### Create game instance\n```\nvar Game = new Terra.Game(500, 300);\n```\n\n### Create a Component\n```\nvar position = new Terra.Component('Position', {x: 0, y: 0});\nvar attack = new Terra.Component('Attack', {damage: 50});\n```\n\n### Create an Entity\n```\nvar monsterEntity = new Terra.Entity('Monster', [position, attack]);\n```\n\n### Create a System\n```\nvar monsterSystem = new Terra.System('MonsterSystem', monsterSystemStart, monsterSystemUpdate);\n\nfunction monsterSystemStart(system) {} // Happens on startup\nfunction monsterSystemUpdate(system, time) {} // Happens every frame\n```\n\n### Start the Game\n```\nGame.onStart = function() {} // Happens on game start\nGame.onUpdate = function() {} // Happens every frame of the game.\n\nGame.start();\n```\n\n## Building & Contributing\nOnce you make changes to the code, you need to build\n```\nnpm run webpack\n```\n\nPlease make sure to write tests for any new functionality (`test/test.js`). You can run tests with the command below.\n```\nnpm test\n```\n",
+    "longname": "/Users/rodr/Documents/Projects/terra.js/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"terra\",\n  \"version\": \"1.0.0\",\n  \"description\": \"A simple to use game framework, utilizing the Entity-Component-System architecture\",\n  \"main\": \"webpack.config.js\",\n  \"scripts\": {\n    \"webpack\": \"webpack\",\n    \"test\": \"nyc ./node_modules/.bin/_mocha  --require babel-register test/*\",\n    \"docs\": \"./node_modules/.bin/esdoc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/RodRitter/terra.js.git\"\n  },\n  \"author\": \"Rod Ritter\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/RodRitter/terra.js/issues\"\n  },\n  \"homepage\": \"https://github.com/RodRitter/terra.js#readme\",\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-istanbul\": \"^0.12.2\",\n    \"babel-loader\": \"^7.1.4\",\n    \"babel-preset-env\": \"^1.7.0\",\n    \"babel-register\": \"^6.26.0\",\n    \"chai\": \"^4.1.2\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"istanbul\": \"^0.4.5\",\n    \"mocha\": \"^5.1.1\",\n    \"nyc\": \"^11.8.0\",\n    \"webpack\": \"^4.8.3\",\n    \"webpack-cli\": \"^2.1.3\"\n  },\n  \"dependencies\": {}\n}\n",
+    "longname": "/Users/rodr/Documents/Projects/terra.js/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]
