@@ -5,9 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "webpack": "webpack",
-    "test": "nyc ./node_modules/.bin/_mocha  --require babel-register test/*",
+    "test": "nyc ./node_modules/.bin/_mocha  --require babel-register test/* -r jsdom-global/register",
     "docs": "./node_modules/.bin/esdoc",
-    "build": "webpack && ./node_modules/.bin/esdoc && nyc ./node_modules/.bin/_mocha  --require babel-register test/*"
+    "build": "webpack && ./node_modules/.bin/esdoc && nyc ./node_modules/.bin/_mocha  --require babel-register test/*  -r jsdom-global/register"
   },
   "repository": {
     "type": "git",
@@ -25,10 +25,13 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "canvas": "^1.6.11",
     "chai": "^4.1.2",
     "esdoc": "^1.1.0",
     "esdoc-standard-plugin": "^1.0.0",
     "istanbul": "^0.4.5",
+    "jsdom": "11.10.0",
+    "jsdom-global": "3.0.2",
     "mocha": "^5.1.1",
     "nyc": "^11.8.0",
     "pixi.js": "^4.7.3",

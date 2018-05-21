@@ -18,6 +18,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "terra/src/modules/components/shapecomponent.js~shapecomponent",
+    "class/src/modules/components/shapeComponent.js~ShapeComponent.html",
+    "<span>ShapeComponent</span> <span class=\"search-result-import-path\">terra/src/modules/components/shapeComponent.js</span>",
+    "class"
+  ],
+  [
     "terra/src/core/system.js~system",
     "class/src/core/system.js~System.html",
     "<span>System</span> <span class=\"search-result-import-path\">terra/src/core/system.js</span>",
@@ -312,6 +318,18 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/core/component.js~component#beforeattach",
+    "class/src/core/component.js~Component.html#instance-method-beforeAttach",
+    "src/core/component.js~Component#beforeAttach",
+    "method"
+  ],
+  [
+    "src/core/component.js~component#checkdependencies",
+    "class/src/core/component.js~Component.html#instance-method-checkDependencies",
+    "src/core/component.js~Component#checkDependencies",
+    "method"
+  ],
+  [
     "src/core/component.js~component#constructor",
     "class/src/core/component.js~Component.html#instance-constructor-constructor",
     "src/core/component.js~Component#constructor",
@@ -324,10 +342,22 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/core/component.js~component#dependencies",
+    "class/src/core/component.js~Component.html#instance-member-dependencies",
+    "src/core/component.js~Component#dependencies",
+    "member"
+  ],
+  [
     "src/core/component.js~component#entity",
     "class/src/core/component.js~Component.html#instance-member-entity",
     "src/core/component.js~Component#entity",
     "member"
+  ],
+  [
+    "src/core/component.js~component#hasdependency",
+    "class/src/core/component.js~Component.html#instance-method-hasDependency",
+    "src/core/component.js~Component#hasDependency",
+    "method"
   ],
   [
     "src/core/component.js~component#id",
@@ -357,6 +387,12 @@ window.esdocSearchIndex = [
     "src/core/entity.js~entity#attach",
     "class/src/core/entity.js~Entity.html#instance-method-attach",
     "src/core/entity.js~Entity#attach",
+    "method"
+  ],
+  [
+    "src/core/entity.js~entity#componentcallback",
+    "class/src/core/entity.js~Entity.html#instance-method-componentCallback",
+    "src/core/entity.js~Entity#componentCallback",
     "method"
   ],
   [
@@ -396,6 +432,18 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/core/entity.js~entity#x",
+    "class/src/core/entity.js~Entity.html#instance-member-x",
+    "src/core/entity.js~Entity#x",
+    "member"
+  ],
+  [
+    "src/core/entity.js~entity#y",
+    "class/src/core/entity.js~Entity.html#instance-member-y",
+    "src/core/entity.js~Entity#y",
+    "member"
+  ],
+  [
     "src/core/game.js",
     "file/src/core/game.js.html",
     "src/core/game.js",
@@ -412,6 +460,12 @@ window.esdocSearchIndex = [
     "class/src/core/game.js~Game.html#instance-method-addSystem",
     "src/core/game.js~Game#addSystem",
     "method"
+  ],
+  [
+    "src/core/game.js~game#application",
+    "class/src/core/game.js~Game.html#instance-member-application",
+    "src/core/game.js~Game#application",
+    "member"
   ],
   [
     "src/core/game.js~game#callbacks",
@@ -486,6 +540,36 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/core/game.js~game#renderer",
+    "class/src/core/game.js~Game.html#instance-member-renderer",
+    "src/core/game.js~Game#renderer",
+    "member"
+  ],
+  [
+    "src/core/game.js~game#renderersettings",
+    "class/src/core/game.js~Game.html#instance-member-rendererSettings",
+    "src/core/game.js~Game#rendererSettings",
+    "member"
+  ],
+  [
+    "src/core/game.js~game#renderersetup",
+    "class/src/core/game.js~Game.html#instance-method-rendererSetup",
+    "src/core/game.js~Game#rendererSetup",
+    "method"
+  ],
+  [
+    "src/core/game.js~game#running",
+    "class/src/core/game.js~Game.html#instance-member-running",
+    "src/core/game.js~Game#running",
+    "member"
+  ],
+  [
+    "src/core/game.js~game#stage",
+    "class/src/core/game.js~Game.html#instance-member-stage",
+    "src/core/game.js~Game#stage",
+    "member"
+  ],
+  [
     "src/core/game.js~game#start",
     "class/src/core/game.js~Game.html#instance-method-start",
     "src/core/game.js~Game#start",
@@ -556,6 +640,24 @@ window.esdocSearchIndex = [
     "class/src/core/system.js~System.html#instance-member-onUpdate",
     "src/core/system.js~System#onUpdate",
     "member"
+  ],
+  [
+    "src/modules/components/shapecomponent.js",
+    "file/src/modules/components/shapeComponent.js.html",
+    "src/modules/components/shapeComponent.js",
+    "file"
+  ],
+  [
+    "src/modules/components/shapecomponent.js~shapecomponent#constructor",
+    "class/src/modules/components/shapeComponent.js~ShapeComponent.html#instance-constructor-constructor",
+    "src/modules/components/shapeComponent.js~ShapeComponent#constructor",
+    "method"
+  ],
+  [
+    "src/modules/systems/shapesystem.js",
+    "file/src/modules/systems/shapeSystem.js.html",
+    "src/modules/systems/shapeSystem.js",
+    "file"
   ],
   [
     "src/terra.js",

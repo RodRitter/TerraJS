@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -42,6 +43,9 @@
 import { Entity } from &apos;./core/entity.js&apos;;
 import { Component } from &apos;./core/component.js&apos;;
 import { System } from &apos;./core/system.js&apos;;
+
+// Components
+import { ShapeComponent } from &apos;./modules/components/shapeComponent.js&apos;;
 
 /**
  * This is the global class for accessing the framework from your document
@@ -54,6 +58,10 @@ class Terra {
         this.Entity = Entity;
         this.Component = Component;
         this.System = System;
+
+        this.Module = {
+            ShapeComponent: ShapeComponent
+        }
     }
 }
 

@@ -1,6 +1,4 @@
-
 let chai = require('chai');
-let expect = chai.expect;
 chai.should();
 
 // Import dependencies
@@ -9,21 +7,21 @@ import { Entity } from '../src/core/entity.js';
 import { Component } from '../src/core/component.js';
 import { System } from '../src/core/system.js';
 
-describe('Game', () => {
+describe('Game', function() {
     
     var game;
         
-    beforeEach(() => {
+    beforeEach(function() {
         game = new Game(100,100);
     });
 
-    it('should have a valid width & height', () => {
+    it('should have a valid width & height', function() {
         game.width.should.equal(100);
         game.height.should.equal(100);
     });
 
-    describe('createEntities()', () => {
-        it('should add entities to the game', () => {
+    describe('createEntities()', function() {
+        it('should add entities to the game', function() {
             let entities = [
                 new Entity('TestEntity1', game, []),
                 new Entity('TestEntity2', game, [])
@@ -33,44 +31,44 @@ describe('Game', () => {
             Object.keys(game.entities).length.should.equal(2);
         });
 
-        it('should only accept valid entities', () => {
+        it('should only accept valid entities', function() {
             let invalidEntities = ['string'];
-            let createEntities = () => game.createEntities(invalidEntities);
+            let createEntities = function() {game.createEntities(invalidEntities)};
             createEntities.should.throw(TypeError);
         });
     });
 
-    describe('addSystem()', () => {
-        it('should add a system to the game', () => {
-            let system = new System('TestSystem', ()=>{}, ()=>{});
+    describe('addSystem()', function() {
+        it('should add a system to the game', function() {
+            let system = new System('TestSystem', function(){}, function(){});
             game.addSystem(system);
             game.getSystem('TestSystem').should.equal(system);
         });
 
-        it('should only accept a valid system', () => {
+        it('should only accept a valid system', function() {
             let invalidSystem = new Entity('FakeSystem', game, []);
-            let addSystem = () => game.addSystem(invalidSystem);;
+            let addSystem = function() {game.addSystem(invalidSystem)};
             addSystem.should.throw(TypeError);
         });
     });
 
-    describe('addEntity()', () => {
-        it('should return a valid entity', () => {
+    describe('addEntity()', function() {
+        it('should return a valid entity', function() {
             let entity = new Entity('TestEntity', game, []);
             game.addEntity(entity);
             let get = game.getEntity('TestEntity');
             get.id.should.equal('TestEntity');
         });
 
-        it('should throw an error if invalid entity', () => {
+        it('should throw an error if invalid entity', function() {
             let invalidEntity = 123;
-            let addEntity = () => game.addEntity(invalidEntity);
+            let addEntity = function() {game.addEntity(invalidEntity)};
             addEntity.should.throw(TypeError);
         });
     });
 
-    describe('getComponentFromEntity()', () => {
-        it('should return a valid component', () => {
+    describe('getComponentFromEntity()', function() {
+        it('should return a valid component', function() {
             let comp1 = new Component('TestComp1', {foo: 1});
             let comp2 = new Component('TestComp2', {foo: 2});
 
@@ -81,20 +79,20 @@ describe('Game', () => {
             get.data.foo.should.equal(2);
         });
 
-        it('should throw an error if component doesn\'t exist', () => {
+        it('should throw an error if component doesn\'t exist', function() {
             let comp1 = new Component('TestComp1', {foo: 1});
             let comp2 = new Component('TestComp2', {foo: 2});
 
             let entity = new Entity('TestEntity', game, [comp1, comp2]);
             game.addEntity(entity);
 
-            let get = () => game.getComponentFromEntity('TestEntity', 'NonExistantComp');
+            let get = function() { game.getComponentFromEntity('TestEntity', 'NonExistantComp')};
             get.should.throw(Error);
         });
     });
 
-    describe('getEntitiesWith()', () => {
-        it('should return only entities with given component dependencies', () => {
+    describe('getEntitiesWith()', function() {
+        it('should return only entities with given component dependencies', function() {
             let comp1 = new Component('TestComp1', {foo: 'bar'});
             let comp2 = new Component('TestComp2', {foo: 'bar'});
             let comp3 = new Component('TestComp3', {foo: 'bar'});
@@ -117,7 +115,7 @@ describe('Game', () => {
             get23.length.should.equal(2);
         });
 
-        it('should return an empty array when no matches', () => {
+        it('should return an empty array when no matches', function() {
             let comp = new Component('TestComp', {foo: 'bar'});
 
             let entities = [ new Entity('TestEntity', game, [comp]) ]

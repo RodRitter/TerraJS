@@ -43878,7 +43878,7 @@ module.exports = function (module) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -43886,44 +43886,90 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Component = exports.Component = function () {
-  function Component(id, data) {
-    _classCallCheck(this, Component);
+    function Component(id, data) {
+        _classCallCheck(this, Component);
+
+        /**
+         * @type {string}
+         */
+        this.id = id;
+
+        /**
+         * @type {Object}
+         */
+        this.data = data;
+
+        /**
+         * @type {Entity}
+         */
+        this.entity = null;
+
+        /**
+         * @type {string[]}
+         */
+        this.dependencies = [];
+    }
 
     /**
-     * @type {string}
-     */
-    this.id = id;
-
-    /**
-     * @type {Object}
-     */
-    this.data = data;
-
-    /**
-     * @type {Entity}
-     */
-    this.entity = null;
-  }
-
-  /**
-   * This is called when it is attached to an Entity
-   */
-
-
-  _createClass(Component, [{
-    key: "onAttach",
-    value: function onAttach() {}
-
-    /**
-     * This is called when it is detatched from an Entity
+     * This is called before onAttach
      */
 
-  }, {
-    key: "onDetatch",
-    value: function onDetatch() {}
-  }]);
 
-  return Component;
+    _createClass(Component, [{
+        key: "beforeAttach",
+        value: function beforeAttach(entity) {
+            this.checkDependencies(entity);
+        }
+
+        /**
+         * This is called when it is attached to an Entity
+         */
+
+    }, {
+        key: "onAttach",
+        value: function onAttach() {}
+
+        /**
+         * This is called when it is detatched from an Entity
+         */
+
+    }, {
+        key: "onDetatch",
+        value: function onDetatch() {}
+    }, {
+        key: "hasDependency",
+        value: function hasDependency(id) {
+            this.dependencies.push(id);
+        }
+
+        /**
+         * This will check if the entity it's being attached to, has this component's dependencies.
+         */
+
+    }, {
+        key: "checkDependencies",
+        value: function checkDependencies(entity) {
+            var missingDependencies = [];
+
+            this.dependencies.forEach(function (dependency) {
+                var isMissing = true;
+
+                for (var i = 0; i < Object.keys(entity.componentMap).length; i++) {
+                    if (Object.keys(entity.componentMap)[i] == dependency) {
+                        isMissing = false;
+                    }
+                }
+
+                if (isMissing) missingDependencies.push(dependency);
+            });
+
+            if (missingDependencies.length > 0) {
+                throw new Error(this.id + " requires " + missingDependencies.length + " other component dependencies. Make sure " + this.id + " is added after it's dependencies.");
+            }
+        }
+    }]);
+
+    return Component;
 }();
 
 /***/ }),
@@ -43999,7 +44045,8 @@ var Entity = exports.Entity = function () {
                 }
                 this.game.components[component.id].push(component);
                 component.entity = this;
-                component.onAttach();
+
+                this.componentCallback(component);
             } else {
                 throw "There is already a component with the ID '" + component.id + "'";
             }
@@ -44042,6 +44089,14 @@ var Entity = exports.Entity = function () {
                 return this.componentMap[id];
             }
             throw new Error("Cannot find Component '" + id + "' on Entity '" + this.id + "'");
+        }
+    }, {
+        key: "componentCallback",
+        value: function componentCallback(component) {
+            if (this.game.running) {
+                component.beforeAttach(this);
+                component.onAttach();
+            }
         }
     }]);
 
@@ -44089,6 +44144,11 @@ var Game = exports.Game = function () {
      */
     function Game(width, height, settings) {
         _classCallCheck(this, Game);
+
+        /**
+         * @type {boolean}
+         */
+        this.running = false;
 
         /**
          * @type {number}
@@ -44141,8 +44201,17 @@ var Game = exports.Game = function () {
     _createClass(Game, [{
         key: 'start',
         value: function start() {
+            this.running = true;
             this.rendererSetup(this.rendererSettings);
             this.onStart();
+
+            // Run component callbacks
+            for (var i = 0; i < Object.keys(this.entities).length; i++) {
+                var entity = this.entities[Object.keys(this.entities)[i]];
+                for (var j = 0; j < Object.keys(entity.componentMap).length; j++) {
+                    entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
+                }
+            };
 
             // Run start callbacks
             this.callbacks.onStart.forEach(function (systemObj) {
@@ -44418,6 +44487,46 @@ var System = exports.System = function () {
 
 /***/ }),
 
+/***/ "./src/modules/components/shapeComponent.js":
+/*!**************************************************!*\
+  !*** ./src/modules/components/shapeComponent.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ShapeComponent = undefined;
+
+var _component = __webpack_require__(/*! ../../core/component.js */ "./src/core/component.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ShapeComponent = exports.ShapeComponent = function (_Component) {
+    _inherits(ShapeComponent, _Component);
+
+    function ShapeComponent(id, data) {
+        _classCallCheck(this, ShapeComponent);
+
+        var _this = _possibleConstructorReturn(this, (ShapeComponent.__proto__ || Object.getPrototypeOf(ShapeComponent)).call(this, id, data));
+
+        _this.hasDependency('Transform');
+        return _this;
+    }
+
+    return ShapeComponent;
+}(_component.Component);
+
+/***/ }),
+
 /***/ "./src/terra.js":
 /*!**********************!*\
   !*** ./src/terra.js ***!
@@ -44436,7 +44545,12 @@ var _component = __webpack_require__(/*! ./core/component.js */ "./src/core/comp
 
 var _system = __webpack_require__(/*! ./core/system.js */ "./src/core/system.js");
 
+var _shapeComponent = __webpack_require__(/*! ./modules/components/shapeComponent.js */ "./src/modules/components/shapeComponent.js");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// Components
+
 
 /**
  * This is the global class for accessing the framework from your document
@@ -44450,6 +44564,10 @@ var Terra = function Terra() {
     this.Entity = _entity.Entity;
     this.Component = _component.Component;
     this.System = _system.System;
+
+    this.Module = {
+        ShapeComponent: _shapeComponent.ShapeComponent
+    };
 };
 
 global.Terra = new Terra();

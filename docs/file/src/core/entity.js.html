@@ -33,6 +33,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -54,6 +55,16 @@
          * @type {Game}
          */
         this.game = game;
+
+        /**
+         * @type {number}
+         */
+        this.x = 0;
+
+        /**
+         * @type {number}
+         */
+        this.y = 0;
         
         if(components) {
             for(let i=0; i&lt;components.length; i++) {
@@ -75,7 +86,8 @@
             }
             this.game.components[component.id].push(component);
             component.entity = this;
-            component.onAttach();
+
+            this.componentCallback(component);
             
         } else {
             throw(`There is already a component with the ID &apos;${component.id}&apos;`);
@@ -111,6 +123,13 @@
             return this.componentMap[id];
         }
         throw new Error(`Cannot find Component &apos;${id}&apos; on Entity &apos;${this.id}&apos;`);
+    }
+
+    componentCallback(component) {
+        if(this.game.running) {
+            component.beforeAttach(this);
+            component.onAttach();
+        }
     }
 
 }</code></pre>

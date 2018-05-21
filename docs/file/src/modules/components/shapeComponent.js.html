@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/core/component.js | terra</title>
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">src/modules/components/shapeComponent.js | terra</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -38,74 +38,14 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/core/component.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export class Component {
+<div class="content" data-ice="content"><h1 data-ice="title">src/modules/components/shapeComponent.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Component } from &apos;../../core/component.js&apos;;
+
+export class ShapeComponent extends Component {
     constructor(id, data) {
-        /**
-         * @type {string}
-         */
-        this.id = id;
-
-        /**
-         * @type {Object}
-         */
-        this.data = data;
-
-        /**
-         * @type {Entity}
-         */
-        this.entity = null;
-
-        /**
-         * @type {string[]}
-         */
-        this.dependencies = [];
+        super(id, data);
+        this.hasDependency(&apos;Transform&apos;);
     }
-
-    /**
-     * This is called before onAttach
-     */
-    beforeAttach(entity) {
-        this.checkDependencies(entity);
-    }
-
-    /**
-     * This is called when it is attached to an Entity
-     */
-    onAttach() {}
-
-    /**
-     * This is called when it is detatched from an Entity
-     */
-    onDetatch() {}
-
-    hasDependency(id) {
-        this.dependencies.push(id);
-    }
-
-    /**
-     * This will check if the entity it&apos;s being attached to, has this component&apos;s dependencies.
-     */
-    checkDependencies(entity) {
-        let missingDependencies = [];
-
-        this.dependencies.forEach((dependency) =&gt; {
-            let isMissing = true;
-
-            for(let i=0; i &lt; Object.keys(entity.componentMap).length; i++) {
-                if(Object.keys(entity.componentMap)[i] == dependency) {
-                    isMissing = false;
-                }
-            }
-
-            if(isMissing) missingDependencies.push(dependency);
-        });
-
-        if(missingDependencies.length &gt; 0) {
-            throw new Error(`${this.id} requires ${missingDependencies.length} other component dependencies. Make sure ${this.id} is added after it&apos;s dependencies.`);
-        }
-    }
-
 }</code></pre>
 
 </div>

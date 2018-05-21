@@ -1,6 +1,6 @@
 import { Entity } from './entity.js';
 import { System } from './system.js';
-import * as PIXI from 'pixi.js'
+import * as PIXI from 'pixi.js';
 
 export class Game {
 
@@ -11,6 +11,11 @@ export class Game {
      * @param {Object} extra settings for the renderer
      */
     constructor(width, height, settings) {
+        /**
+         * @type {boolean}
+         */
+        this.running = false;
+
         /**
          * @type {number}
          */
@@ -58,13 +63,23 @@ export class Game {
      * The game start function. Use onStart() callback to hook in here
      */
     start() {
+        this.running = true;
         this.rendererSetup(this.rendererSettings);
         this.onStart();
+
+        // Run component callbacks
+        for(let i=0; i < Object.keys(this.entities).length; i++) {
+            let entity = this.entities[Object.keys(this.entities)[i]];
+            for(let j=0; j < Object.keys(entity.componentMap).length; j++) {
+                entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
+            }
+        };
 
         // Run start callbacks
         this.callbacks.onStart.forEach((systemObj) => {
             systemObj.callback(systemObj.system);
         });
+  
 
         // Start game loop
         window.requestAnimationFrame(this.update.bind(this));

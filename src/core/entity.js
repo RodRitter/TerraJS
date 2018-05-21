@@ -45,7 +45,8 @@ export class Entity {
             }
             this.game.components[component.id].push(component);
             component.entity = this;
-            component.onAttach();
+
+            this.componentCallback(component);
             
         } else {
             throw(`There is already a component with the ID '${component.id}'`);
@@ -81,6 +82,13 @@ export class Entity {
             return this.componentMap[id];
         }
         throw new Error(`Cannot find Component '${id}' on Entity '${this.id}'`);
+    }
+
+    componentCallback(component) {
+        if(this.game.running) {
+            component.beforeAttach(this);
+            component.onAttach();
+        }
     }
 
 }

@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/core/component.js",
-    "content": "export class Component {\n    constructor(id, data) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Object}\n         */\n        this.data = data;\n\n        /**\n         * @type {Entity}\n         */\n        this.entity = null;\n    }\n\n    /**\n     * This is called when it is attached to an Entity\n     */\n    onAttach() {}\n\n    /**\n     * This is called when it is detatched from an Entity\n     */\n    onDetatch() {}\n\n}",
+    "content": "export class Component {\n    constructor(id, data) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Object}\n         */\n        this.data = data;\n\n        /**\n         * @type {Entity}\n         */\n        this.entity = null;\n\n        /**\n         * @type {string[]}\n         */\n        this.dependencies = [];\n    }\n\n    /**\n     * This is called before onAttach\n     */\n    beforeAttach(entity) {\n        this.checkDependencies(entity);\n    }\n\n    /**\n     * This is called when it is attached to an Entity\n     */\n    onAttach() {}\n\n    /**\n     * This is called when it is detatched from an Entity\n     */\n    onDetatch() {}\n\n    hasDependency(id) {\n        this.dependencies.push(id);\n    }\n\n    /**\n     * This will check if the entity it's being attached to, has this component's dependencies.\n     */\n    checkDependencies(entity) {\n        let missingDependencies = [];\n\n        this.dependencies.forEach((dependency) => {\n            let isMissing = true;\n\n            for(let i=0; i < Object.keys(entity.componentMap).length; i++) {\n                if(Object.keys(entity.componentMap)[i] == dependency) {\n                    isMissing = false;\n                }\n            }\n\n            if(isMissing) missingDependencies.push(dependency);\n        });\n\n        if(missingDependencies.length > 0) {\n            throw new Error(`${this.id} requires ${missingDependencies.length} other component dependencies. Make sure ${this.id} is added after it's dependencies.`);\n        }\n    }\n\n}",
     "static": true,
     "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/component.js",
     "access": "public",
@@ -663,6 +663,47 @@
   },
   {
     "__docId__": 54,
+    "kind": "member",
+    "name": "dependencies",
+    "memberof": "src/core/component.js~Component",
+    "static": false,
+    "longname": "src/core/component.js~Component#dependencies",
+    "access": "public",
+    "description": "",
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "string[]"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "method",
+    "name": "beforeAttach",
+    "memberof": "src/core/component.js~Component",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/component.js~Component#beforeAttach",
+    "access": "public",
+    "description": "This is called before onAttach",
+    "lineNumber": 27,
+    "params": [
+      {
+        "name": "entity",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 56,
     "kind": "method",
     "name": "onAttach",
     "memberof": "src/core/component.js~Component",
@@ -672,12 +713,12 @@
     "longname": "src/core/component.js~Component#onAttach",
     "access": "public",
     "description": "This is called when it is attached to an Entity",
-    "lineNumber": 22,
+    "lineNumber": 34,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 55,
+    "__docId__": 57,
     "kind": "method",
     "name": "onDetatch",
     "memberof": "src/core/component.js~Component",
@@ -687,15 +728,60 @@
     "longname": "src/core/component.js~Component#onDetatch",
     "access": "public",
     "description": "This is called when it is detatched from an Entity",
-    "lineNumber": 27,
+    "lineNumber": 39,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 56,
+    "__docId__": 58,
+    "kind": "method",
+    "name": "hasDependency",
+    "memberof": "src/core/component.js~Component",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/component.js~Component#hasDependency",
+    "access": "public",
+    "description": null,
+    "lineNumber": 41,
+    "undocument": true,
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 59,
+    "kind": "method",
+    "name": "checkDependencies",
+    "memberof": "src/core/component.js~Component",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/component.js~Component#checkDependencies",
+    "access": "public",
+    "description": "This will check if the entity it's being attached to, has this component's dependencies.",
+    "lineNumber": 48,
+    "params": [
+      {
+        "name": "entity",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 60,
     "kind": "file",
     "name": "src/core/entity.js",
-    "content": "export class Entity {\n    constructor(id, game, components) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Object}\n         */\n        this.componentMap = {};\n\n        /**\n         * @type {Game}\n         */\n        this.game = game;\n        \n        if(components) {\n            for(let i=0; i<components.length; i++) {\n                this.attach(components[i]);\n            }\n        }\n    }\n\n    /**\n     * Attach a Component to this Entity\n     * @param {Component} component\n     */\n    attach(component) {\n        if(this.componentMap[component.id] === undefined) {\n            this.componentMap[component.id] = component;\n\n            if(this.game.components[component.id] === undefined) {\n                this.game.components[component.id] = [];\n            }\n            this.game.components[component.id].push(component);\n            component.entity = this;\n            component.onAttach();\n            \n        } else {\n            throw(`There is already a component with the ID '${component.id}'`);\n        }\n    }\n\n    /**\n     * Detatch a component from entity\n     * @param {string} ID of component\n     */\n    detatch(id) {\n        this.componentMap[id].onDetatch(); // First call onDetatch before removing it\n        delete this.componentMap[id]; // Remove from Entity map\n\n        // Remove from Game global component list\n        this.game.components[id].forEach((component) => {\n            if(component.entity.id == this.id) {\n                let index = this.game.components[id].indexOf(component);\n                if(index > -1) {\n                    this.game.components[id].splice(index, 1);\n                }\n            }\n        });\n    }\n\n    /**\n     * Find a specific Component from this Entity\n     * @param {string} id - ID of the component\n     * @return {Component}\n     */\n    find(id) {\n        if(this.componentMap[id] !== undefined) {\n            return this.componentMap[id];\n        }\n        throw new Error(`Cannot find Component '${id}' on Entity '${this.id}'`);\n    }\n\n}",
+    "content": "export class Entity {\n    constructor(id, game, components) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Object}\n         */\n        this.componentMap = {};\n\n        /**\n         * @type {Game}\n         */\n        this.game = game;\n\n        /**\n         * @type {number}\n         */\n        this.x = 0;\n\n        /**\n         * @type {number}\n         */\n        this.y = 0;\n        \n        if(components) {\n            for(let i=0; i<components.length; i++) {\n                this.attach(components[i]);\n            }\n        }\n    }\n\n    /**\n     * Attach a Component to this Entity\n     * @param {Component} component\n     */\n    attach(component) {\n        if(this.componentMap[component.id] === undefined) {\n            this.componentMap[component.id] = component;\n\n            if(this.game.components[component.id] === undefined) {\n                this.game.components[component.id] = [];\n            }\n            this.game.components[component.id].push(component);\n            component.entity = this;\n\n            this.componentCallback(component);\n            \n        } else {\n            throw(`There is already a component with the ID '${component.id}'`);\n        }\n    }\n\n    /**\n     * Detatch a component from entity\n     * @param {string} ID of component\n     */\n    detatch(id) {\n        this.componentMap[id].onDetatch(); // First call onDetatch before removing it\n        delete this.componentMap[id]; // Remove from Entity map\n\n        // Remove from Game global component list\n        this.game.components[id].forEach((component) => {\n            if(component.entity.id == this.id) {\n                let index = this.game.components[id].indexOf(component);\n                if(index > -1) {\n                    this.game.components[id].splice(index, 1);\n                }\n            }\n        });\n    }\n\n    /**\n     * Find a specific Component from this Entity\n     * @param {string} id - ID of the component\n     * @return {Component}\n     */\n    find(id) {\n        if(this.componentMap[id] !== undefined) {\n            return this.componentMap[id];\n        }\n        throw new Error(`Cannot find Component '${id}' on Entity '${this.id}'`);\n    }\n\n    componentCallback(component) {\n        if(this.game.running) {\n            component.beforeAttach(this);\n            component.onAttach();\n        }\n    }\n\n}",
     "static": true,
     "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/entity.js",
     "access": "public",
@@ -703,7 +789,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 57,
+    "__docId__": 61,
     "kind": "class",
     "name": "Entity",
     "memberof": "src/core/entity.js",
@@ -719,7 +805,7 @@
     "interface": false
   },
   {
-    "__docId__": 58,
+    "__docId__": 62,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/core/entity.js~Entity",
@@ -733,7 +819,7 @@
     "undocument": true
   },
   {
-    "__docId__": 59,
+    "__docId__": 63,
     "kind": "member",
     "name": "id",
     "memberof": "src/core/entity.js~Entity",
@@ -752,7 +838,7 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 64,
     "kind": "member",
     "name": "componentMap",
     "memberof": "src/core/entity.js~Entity",
@@ -771,7 +857,7 @@
     }
   },
   {
-    "__docId__": 61,
+    "__docId__": 65,
     "kind": "member",
     "name": "game",
     "memberof": "src/core/entity.js~Entity",
@@ -790,7 +876,45 @@
     }
   },
   {
-    "__docId__": 62,
+    "__docId__": 66,
+    "kind": "member",
+    "name": "x",
+    "memberof": "src/core/entity.js~Entity",
+    "static": false,
+    "longname": "src/core/entity.js~Entity#x",
+    "access": "public",
+    "description": "",
+    "lineNumber": 21,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "member",
+    "name": "y",
+    "memberof": "src/core/entity.js~Entity",
+    "static": false,
+    "longname": "src/core/entity.js~Entity#y",
+    "access": "public",
+    "description": "",
+    "lineNumber": 26,
+    "type": {
+      "nullable": null,
+      "types": [
+        "number"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 68,
     "kind": "method",
     "name": "attach",
     "memberof": "src/core/entity.js~Entity",
@@ -800,7 +924,7 @@
     "longname": "src/core/entity.js~Entity#attach",
     "access": "public",
     "description": "Attach a Component to this Entity",
-    "lineNumber": 29,
+    "lineNumber": 39,
     "params": [
       {
         "nullable": null,
@@ -816,7 +940,7 @@
     "return": null
   },
   {
-    "__docId__": 63,
+    "__docId__": 69,
     "kind": "method",
     "name": "detatch",
     "memberof": "src/core/entity.js~Entity",
@@ -826,7 +950,7 @@
     "longname": "src/core/entity.js~Entity#detatch",
     "access": "public",
     "description": "Detatch a component from entity",
-    "lineNumber": 49,
+    "lineNumber": 60,
     "params": [
       {
         "nullable": null,
@@ -842,7 +966,7 @@
     "return": null
   },
   {
-    "__docId__": 64,
+    "__docId__": 70,
     "kind": "method",
     "name": "find",
     "memberof": "src/core/entity.js~Entity",
@@ -852,7 +976,7 @@
     "longname": "src/core/entity.js~Entity#find",
     "access": "public",
     "description": "Find a specific Component from this Entity",
-    "lineNumber": 69,
+    "lineNumber": 80,
     "params": [
       {
         "nullable": null,
@@ -875,10 +999,33 @@
     }
   },
   {
-    "__docId__": 65,
+    "__docId__": 71,
+    "kind": "method",
+    "name": "componentCallback",
+    "memberof": "src/core/entity.js~Entity",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/entity.js~Entity#componentCallback",
+    "access": "public",
+    "description": null,
+    "lineNumber": 87,
+    "undocument": true,
+    "params": [
+      {
+        "name": "component",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 72,
     "kind": "file",
     "name": "src/core/game.js",
-    "content": "import { Entity } from './entity.js';\nimport { System } from './system.js';\n\nexport class Game {\n\n    /**\n     * The Game class takes in dimensions of the game screen\n     * @param {number} width width of game screen\n     * @param {number} height height of game screen\n     */\n    constructor(width, height) {\n        /**\n         * @type {number}\n         */\n        this.width = width;\n\n        /**\n         * @type {number}\n         */\n        this.height = height;\n\n        /**\n         * @type {Object}\n         */\n        this.entities = {};\n\n        /**\n         * @type {Object}\n         */\n        this.components = {};\n\n        /**\n         * @type {Object}\n         */\n        this.systems = {};\n\n        /**\n         * @type {Object}\n         */\n        this.callbacks = {};\n\n        /**\n         * @type {Array}\n         */\n        this.callbacks.onStart = [];\n\n        /**\n         * @type {Array}\n         */\n        this.callbacks.onUpdate = [];\n    }\n\n    /**\n     * The game start function. Use onStart() callback to hook in here\n     */\n    start() {\n        this.onStart();\n\n        // Run start callbacks\n        this.callbacks.onStart.forEach((systemObj) => {\n            systemObj.callback(systemObj.system);\n        });\n\n        // Start game loop\n        window.requestAnimationFrame(this.update.bind(this));\n    }\n\n    /**\n     * The game update function. Use onUpdate() callback to hook into here\n     */\n    update(time) {\n        this.onUpdate(time);\n\n        this.callbacks.onUpdate.forEach((systemObj) => {\n            systemObj.callback(systemObj.system, time);\n        });\n        \n        window.requestAnimationFrame(this.update.bind(this));\n    }\n\n    /**\n     * The game update that happens every game frame/tick.\n     */\n    onUpdate(time) {\n        // Override\n    }\n\n    /**\n     * The intialization function for the game.\n     */\n    onStart() {\n        // Override\n    }\n\n    /**\n     * Create an array of entities & add them to the game\n     * @param {Entity[]} entities An array of entities\n     */\n    createEntities(entities) {\n        for(let i=0; i<entities.length; i++) {\n            if(entities[i] instanceof Entity) {\n                this.addEntity(entities[i]);\n            } else {\n                throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);\n            }\n        }\n    }\n\n    /**\n     * Create & add a single entity\n     * @param {Entity} entity\n     */\n    addEntity(entity) {\n        if(entity instanceof Entity) {\n            this.entities[entity.id] = entity;\n            entity.game = this;\n        } else {\n            throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);\n        }\n        \n    }\n\n    /**\n     * Register a system in the game instance\n     * @param {System} system\n     * @return {System}\n     */\n    addSystem(system) {\n        if(this.systems[system.id] === undefined && system instanceof System) {\n            system.game = this;\n            this.systems[system.id] = system;\n            this.callbacks.onStart.push({system: system, callback: system.onStart});\n            this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});\n            return system;\n        } else {\n            throw(new TypeError(`Trying to add system which is not type of 'System'`));\n        }\n    }\n\n    /**\n     * Retrieve an entity\n     * @param {string} id - The ID of the entity\n     * @return {Entity} Returns the matching entity\n     */\n    getEntity(id) {\n        if(this.entities[id] !== undefined) {\n            return this.entities[id];\n        }\n    }\n\n    /**\n     * Retrieves all entities that have all provided components.\n     * @param {string[]} components - A list of component ID's to match against\n     * @return {Entity[]}\n     */\n    getEntitiesWith(components) {\n        let entities = [];\n\n        for(let i=0; i<Object.keys(this.entities).length; i++) {\n            let entity = this.entities[Object.keys(this.entities)[i]];\n            let count = 0;\n            let target = components.length;\n            \n            for(let j=0; j<Object.keys(entity.componentMap).length; j++) {\n                let key = Object.keys(entity.componentMap)[j];\n                let result = components.find(c => c == entity.componentMap[key].id);\n                if(result) count++\n            }\n\n            if(count == target) {\n                entities.push(entity);\n            }\n        }\n        return entities;\n    }\n\n    /**\n     * Retrive a system in the game\n     * @param {string} id - The ID of the system\n     */\n    getSystem(id) {\n        return this.systems[id];\n    }\n\n    /**\n     * Retrieves a component from a specific entity\n     * @param {string} entityId - The entity to retrieve the component from\n     * @param {string} componentId - The component ID\n     * @return {Component}\n     */\n    getComponentFromEntity(entityId, componentId) {\n        return this.getEntity(entityId).find(componentId);\n    }\n}",
+    "content": "import { Entity } from './entity.js';\nimport { System } from './system.js';\nimport * as PIXI from 'pixi.js';\n\nexport class Game {\n\n    /**\n     * The Game class takes in dimensions of the game screen\n     * @param {number} width width of game screen\n     * @param {number} height height of game screen\n     * @param {Object} extra settings for the renderer\n     */\n    constructor(width, height, settings) {\n        /**\n         * @type {boolean}\n         */\n        this.running = false;\n\n        /**\n         * @type {number}\n         */\n        this.width = width;\n\n        /**\n         * @type {number}\n         */\n        this.height = height;\n\n        /**\n         * @type {Object}\n         */\n        this.entities = {};\n\n        /**\n         * @type {Object}\n         */\n        this.components = {};\n\n        /**\n         * @type {Object}\n         */\n        this.systems = {};\n\n        /**\n         * @type {Object}\n         */\n        this.callbacks = {};\n\n        /**\n         * @type {Array}\n         */\n        this.callbacks.onStart = [];\n\n        /**\n         * @type {Array}\n         */\n        this.callbacks.onUpdate = [];\n\n        this.rendererSettings = settings;\n    }\n\n    /**\n     * The game start function. Use onStart() callback to hook in here\n     */\n    start() {\n        this.running = true;\n        this.rendererSetup(this.rendererSettings);\n        this.onStart();\n\n        // Run component callbacks\n        for(let i=0; i < Object.keys(this.entities).length; i++) {\n            let entity = this.entities[Object.keys(this.entities)[i]];\n            for(let j=0; j < Object.keys(entity.componentMap).length; j++) {\n                entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);\n            }\n        };\n\n        // Run start callbacks\n        this.callbacks.onStart.forEach((systemObj) => {\n            systemObj.callback(systemObj.system);\n        });\n  \n\n        // Start game loop\n        window.requestAnimationFrame(this.update.bind(this));\n    }\n\n    /**\n     * The game update function. Use onUpdate() callback to hook into here\n     */\n    update(time) {\n        this.onUpdate(time);\n\n        this.callbacks.onUpdate.forEach((systemObj) => {\n            systemObj.callback(systemObj.system, time);\n        });\n        \n        window.requestAnimationFrame(this.update.bind(this));\n    }\n\n    /**\n     * The game update that happens every game frame/tick.\n     */\n    onUpdate(time) {\n        // Override\n    }\n\n    /**\n     * The intialization function for the game.\n     */\n    onStart() {\n        // Override\n    }\n\n    /**\n     * Create an array of entities & add them to the game\n     * @param {Entity[]} entities An array of entities\n     */\n    createEntities(entities) {\n        for(let i=0; i<entities.length; i++) {\n            if(entities[i] instanceof Entity) {\n                this.addEntity(entities[i]);\n            } else {\n                throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);\n            }\n        }\n    }\n\n    /**\n     * Create & add a single entity\n     * @param {Entity} entity\n     */\n    addEntity(entity) {\n        if(entity instanceof Entity) {\n            this.entities[entity.id] = entity;\n            entity.game = this;\n\n        } else {\n            throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);\n        }\n        \n    }\n\n    /**\n     * Register a system in the game instance\n     * @param {System} system\n     * @return {System}\n     */\n    addSystem(system) {\n        if(this.systems[system.id] === undefined && system instanceof System) {\n            system.game = this;\n            this.systems[system.id] = system;\n            this.callbacks.onStart.push({system: system, callback: system.onStart});\n            this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});\n            return system;\n        } else {\n            throw(new TypeError(`Trying to add system which is not type of 'System'`));\n        }\n    }\n\n    /**\n     * Retrieve an entity\n     * @param {string} id - The ID of the entity\n     * @return {Entity} Returns the matching entity\n     */\n    getEntity(id) {\n        if(this.entities[id] !== undefined) {\n            return this.entities[id];\n        }\n    }\n\n    /**\n     * Retrieves all entities that have all provided components.\n     * @param {string[]} components - A list of component ID's to match against\n     * @return {Entity[]}\n     */\n    getEntitiesWith(components) {\n        let entities = [];\n\n        for(let i=0; i<Object.keys(this.entities).length; i++) {\n            let entity = this.entities[Object.keys(this.entities)[i]];\n            let count = 0;\n            let target = components.length;\n            \n            for(let j=0; j<Object.keys(entity.componentMap).length; j++) {\n                let key = Object.keys(entity.componentMap)[j];\n                let result = components.find(c => c == entity.componentMap[key].id);\n                if(result) count++\n            }\n\n            if(count == target) {\n                entities.push(entity);\n            }\n        }\n        return entities;\n    }\n\n    /**\n     * Retrive a system in the game\n     * @param {string} id - The ID of the system\n     */\n    getSystem(id) {\n        return this.systems[id];\n    }\n\n    /**\n     * Retrieves a component from a specific entity\n     * @param {string} entityId - The entity to retrieve the component from\n     * @param {string} componentId - The component ID\n     * @return {Component}\n     */\n    getComponentFromEntity(entityId, componentId) {\n        return this.getEntity(entityId).find(componentId);\n    }\n\n    rendererSetup(settings) {\n        this.application = new PIXI.Application({\n            width: this.width,\n            height: this.height,\n            antialias: settings.antialias ? settings.antialias : false,\n            transparent: settings.transparent ? settings.transparent : false,\n            resolution: settings.resolution ? settings.resolution : 1\n        });\n        this.stage = this.application.stage;\n        this.renderer = this.application.renderer;\n        this.renderer.autoResize = true;\n\n        document.body.appendChild(this.application.view);\n    }\n}",
     "static": true,
     "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/game.js",
     "access": "public",
@@ -886,7 +1033,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 66,
+    "__docId__": 73,
     "kind": "class",
     "name": "Game",
     "memberof": "src/core/game.js",
@@ -897,12 +1044,12 @@
     "importPath": "terra/src/core/game.js",
     "importStyle": "{Game}",
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 5,
     "undocument": true,
     "interface": false
   },
   {
-    "__docId__": 67,
+    "__docId__": 74,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/core/game.js~Game",
@@ -912,7 +1059,7 @@
     "longname": "src/core/game.js~Game#constructor",
     "access": "public",
     "description": "The Game class takes in dimensions of the game screen",
-    "lineNumber": 11,
+    "lineNumber": 13,
     "params": [
       {
         "nullable": null,
@@ -933,11 +1080,40 @@
         "optional": false,
         "name": "height",
         "description": "height of game screen"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "extra",
+        "description": "settings for the renderer"
       }
     ]
   },
   {
-    "__docId__": 68,
+    "__docId__": 75,
+    "kind": "member",
+    "name": "running",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#running",
+    "access": "public",
+    "description": "",
+    "lineNumber": 17,
+    "type": {
+      "nullable": null,
+      "types": [
+        "boolean"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 76,
     "kind": "member",
     "name": "width",
     "memberof": "src/core/game.js~Game",
@@ -945,7 +1121,7 @@
     "longname": "src/core/game.js~Game#width",
     "access": "public",
     "description": "",
-    "lineNumber": 15,
+    "lineNumber": 22,
     "type": {
       "nullable": null,
       "types": [
@@ -956,7 +1132,7 @@
     }
   },
   {
-    "__docId__": 69,
+    "__docId__": 77,
     "kind": "member",
     "name": "height",
     "memberof": "src/core/game.js~Game",
@@ -964,7 +1140,7 @@
     "longname": "src/core/game.js~Game#height",
     "access": "public",
     "description": "",
-    "lineNumber": 20,
+    "lineNumber": 27,
     "type": {
       "nullable": null,
       "types": [
@@ -975,7 +1151,7 @@
     }
   },
   {
-    "__docId__": 70,
+    "__docId__": 78,
     "kind": "member",
     "name": "entities",
     "memberof": "src/core/game.js~Game",
@@ -983,7 +1159,7 @@
     "longname": "src/core/game.js~Game#entities",
     "access": "public",
     "description": "",
-    "lineNumber": 25,
+    "lineNumber": 32,
     "type": {
       "nullable": null,
       "types": [
@@ -994,7 +1170,7 @@
     }
   },
   {
-    "__docId__": 71,
+    "__docId__": 79,
     "kind": "member",
     "name": "components",
     "memberof": "src/core/game.js~Game",
@@ -1002,7 +1178,7 @@
     "longname": "src/core/game.js~Game#components",
     "access": "public",
     "description": "",
-    "lineNumber": 30,
+    "lineNumber": 37,
     "type": {
       "nullable": null,
       "types": [
@@ -1013,7 +1189,7 @@
     }
   },
   {
-    "__docId__": 72,
+    "__docId__": 80,
     "kind": "member",
     "name": "systems",
     "memberof": "src/core/game.js~Game",
@@ -1021,7 +1197,7 @@
     "longname": "src/core/game.js~Game#systems",
     "access": "public",
     "description": "",
-    "lineNumber": 35,
+    "lineNumber": 42,
     "type": {
       "nullable": null,
       "types": [
@@ -1032,7 +1208,7 @@
     }
   },
   {
-    "__docId__": 73,
+    "__docId__": 81,
     "kind": "member",
     "name": "callbacks",
     "memberof": "src/core/game.js~Game",
@@ -1040,7 +1216,7 @@
     "longname": "src/core/game.js~Game#callbacks",
     "access": "public",
     "description": "",
-    "lineNumber": 40,
+    "lineNumber": 47,
     "type": {
       "nullable": null,
       "types": [
@@ -1051,7 +1227,24 @@
     }
   },
   {
-    "__docId__": 74,
+    "__docId__": 82,
+    "kind": "member",
+    "name": "rendererSettings",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#rendererSettings",
+    "access": "public",
+    "description": null,
+    "lineNumber": 59,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 83,
     "kind": "method",
     "name": "start",
     "memberof": "src/core/game.js~Game",
@@ -1061,12 +1254,12 @@
     "longname": "src/core/game.js~Game#start",
     "access": "public",
     "description": "The game start function. Use onStart() callback to hook in here",
-    "lineNumber": 56,
+    "lineNumber": 65,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 75,
+    "__docId__": 85,
     "kind": "method",
     "name": "update",
     "memberof": "src/core/game.js~Game",
@@ -1076,7 +1269,7 @@
     "longname": "src/core/game.js~Game#update",
     "access": "public",
     "description": "The game update function. Use onUpdate() callback to hook into here",
-    "lineNumber": 71,
+    "lineNumber": 91,
     "params": [
       {
         "name": "time",
@@ -1088,7 +1281,7 @@
     "return": null
   },
   {
-    "__docId__": 76,
+    "__docId__": 86,
     "kind": "method",
     "name": "onUpdate",
     "memberof": "src/core/game.js~Game",
@@ -1098,7 +1291,7 @@
     "longname": "src/core/game.js~Game#onUpdate",
     "access": "public",
     "description": "The game update that happens every game frame/tick.",
-    "lineNumber": 84,
+    "lineNumber": 104,
     "params": [
       {
         "name": "time",
@@ -1110,7 +1303,7 @@
     "return": null
   },
   {
-    "__docId__": 77,
+    "__docId__": 87,
     "kind": "method",
     "name": "onStart",
     "memberof": "src/core/game.js~Game",
@@ -1120,12 +1313,12 @@
     "longname": "src/core/game.js~Game#onStart",
     "access": "public",
     "description": "The intialization function for the game.",
-    "lineNumber": 91,
+    "lineNumber": 111,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 78,
+    "__docId__": 88,
     "kind": "method",
     "name": "createEntities",
     "memberof": "src/core/game.js~Game",
@@ -1135,7 +1328,7 @@
     "longname": "src/core/game.js~Game#createEntities",
     "access": "public",
     "description": "Create an array of entities & add them to the game",
-    "lineNumber": 99,
+    "lineNumber": 119,
     "params": [
       {
         "nullable": null,
@@ -1151,7 +1344,7 @@
     "return": null
   },
   {
-    "__docId__": 79,
+    "__docId__": 89,
     "kind": "method",
     "name": "addEntity",
     "memberof": "src/core/game.js~Game",
@@ -1161,7 +1354,7 @@
     "longname": "src/core/game.js~Game#addEntity",
     "access": "public",
     "description": "Create & add a single entity",
-    "lineNumber": 113,
+    "lineNumber": 133,
     "params": [
       {
         "nullable": null,
@@ -1177,7 +1370,7 @@
     "return": null
   },
   {
-    "__docId__": 80,
+    "__docId__": 90,
     "kind": "method",
     "name": "addSystem",
     "memberof": "src/core/game.js~Game",
@@ -1187,7 +1380,7 @@
     "longname": "src/core/game.js~Game#addSystem",
     "access": "public",
     "description": "Register a system in the game instance",
-    "lineNumber": 128,
+    "lineNumber": 149,
     "params": [
       {
         "nullable": null,
@@ -1210,7 +1403,7 @@
     }
   },
   {
-    "__docId__": 81,
+    "__docId__": 91,
     "kind": "method",
     "name": "getEntity",
     "memberof": "src/core/game.js~Game",
@@ -1220,7 +1413,7 @@
     "longname": "src/core/game.js~Game#getEntity",
     "access": "public",
     "description": "Retrieve an entity",
-    "lineNumber": 145,
+    "lineNumber": 166,
     "params": [
       {
         "nullable": null,
@@ -1243,7 +1436,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 92,
     "kind": "method",
     "name": "getEntitiesWith",
     "memberof": "src/core/game.js~Game",
@@ -1253,7 +1446,7 @@
     "longname": "src/core/game.js~Game#getEntitiesWith",
     "access": "public",
     "description": "Retrieves all entities that have all provided components.",
-    "lineNumber": 156,
+    "lineNumber": 177,
     "params": [
       {
         "nullable": null,
@@ -1276,7 +1469,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 93,
     "kind": "method",
     "name": "getSystem",
     "memberof": "src/core/game.js~Game",
@@ -1286,7 +1479,7 @@
     "longname": "src/core/game.js~Game#getSystem",
     "access": "public",
     "description": "Retrive a system in the game",
-    "lineNumber": 181,
+    "lineNumber": 202,
     "params": [
       {
         "nullable": null,
@@ -1306,7 +1499,7 @@
     }
   },
   {
-    "__docId__": 84,
+    "__docId__": 94,
     "kind": "method",
     "name": "getComponentFromEntity",
     "memberof": "src/core/game.js~Game",
@@ -1316,7 +1509,7 @@
     "longname": "src/core/game.js~Game#getComponentFromEntity",
     "access": "public",
     "description": "Retrieves a component from a specific entity",
-    "lineNumber": 191,
+    "lineNumber": 212,
     "params": [
       {
         "nullable": null,
@@ -1349,7 +1542,81 @@
     }
   },
   {
-    "__docId__": 85,
+    "__docId__": 95,
+    "kind": "method",
+    "name": "rendererSetup",
+    "memberof": "src/core/game.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/core/game.js~Game#rendererSetup",
+    "access": "public",
+    "description": null,
+    "lineNumber": 216,
+    "undocument": true,
+    "params": [
+      {
+        "name": "settings",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 96,
+    "kind": "member",
+    "name": "application",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#application",
+    "access": "public",
+    "description": null,
+    "lineNumber": 217,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 97,
+    "kind": "member",
+    "name": "stage",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#stage",
+    "access": "public",
+    "description": null,
+    "lineNumber": 224,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 98,
+    "kind": "member",
+    "name": "renderer",
+    "memberof": "src/core/game.js~Game",
+    "static": false,
+    "longname": "src/core/game.js~Game#renderer",
+    "access": "public",
+    "description": null,
+    "lineNumber": 225,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 99,
     "kind": "file",
     "name": "src/core/system.js",
     "content": "export class System {\n    constructor(id, onStart, onUpdate) {\n        /**\n         * @type {string}\n         */\n        this.id = id;\n\n        /**\n         * @type {Game}\n         */\n        this.game = null;\n\n        /**\n         * @type {function}\n         */\n\n        this.onStart = onStart;\n        this.onUpdate = onUpdate;\n    }\n\n    /**\n     * Retrieves an Entity from the Game\n     * @param {string} id - ID of the entity\n     * @return {Entity}\n     */\n    getEntity(id) {\n        if(this.game !== null) {\n            return this.game.getEntity(id);\n        }\n    }\n\n    /**\n     * Retrieves a Components from a specific Entity\n     * @param {string} entityId - The ID of the Entity\n     * @param {string} componentId - The ID of the Component\n     */\n    getComponentFromEntity(entityId, componentId) {\n        if(this.game) {\n            return this.game.getEntity(entityId).getComponent(componentId);\n        }\n    }\n}",
@@ -1360,7 +1627,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 86,
+    "__docId__": 100,
     "kind": "class",
     "name": "System",
     "memberof": "src/core/system.js",
@@ -1376,7 +1643,7 @@
     "interface": false
   },
   {
-    "__docId__": 87,
+    "__docId__": 101,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/core/system.js~System",
@@ -1390,7 +1657,7 @@
     "undocument": true
   },
   {
-    "__docId__": 88,
+    "__docId__": 102,
     "kind": "member",
     "name": "id",
     "memberof": "src/core/system.js~System",
@@ -1409,7 +1676,7 @@
     }
   },
   {
-    "__docId__": 89,
+    "__docId__": 103,
     "kind": "member",
     "name": "game",
     "memberof": "src/core/system.js~System",
@@ -1428,7 +1695,7 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 104,
     "kind": "member",
     "name": "onStart",
     "memberof": "src/core/system.js~System",
@@ -1447,7 +1714,7 @@
     }
   },
   {
-    "__docId__": 91,
+    "__docId__": 105,
     "kind": "member",
     "name": "onUpdate",
     "memberof": "src/core/system.js~System",
@@ -1464,7 +1731,7 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 106,
     "kind": "method",
     "name": "getEntity",
     "memberof": "src/core/system.js~System",
@@ -1497,7 +1764,7 @@
     }
   },
   {
-    "__docId__": 93,
+    "__docId__": 107,
     "kind": "method",
     "name": "getComponentFromEntity",
     "memberof": "src/core/system.js~System",
@@ -1537,10 +1804,65 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 108,
+    "kind": "file",
+    "name": "src/modules/components/shapeComponent.js",
+    "content": "import { Component } from '../../core/component.js';\n\nexport class ShapeComponent extends Component {\n    constructor(id, data) {\n        super(id, data);\n        this.hasDependency('Transform');\n    }\n}",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/modules/components/shapeComponent.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 109,
+    "kind": "class",
+    "name": "ShapeComponent",
+    "memberof": "src/modules/components/shapeComponent.js",
+    "static": true,
+    "longname": "src/modules/components/shapeComponent.js~ShapeComponent",
+    "access": "public",
+    "export": true,
+    "importPath": "terra/src/modules/components/shapeComponent.js",
+    "importStyle": "{ShapeComponent}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "interface": false,
+    "extends": [
+      "src/core/component.js~Component"
+    ]
+  },
+  {
+    "__docId__": 110,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/modules/components/shapeComponent.js~ShapeComponent",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/modules/components/shapeComponent.js~ShapeComponent#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true
+  },
+  {
+    "__docId__": 111,
+    "kind": "file",
+    "name": "src/modules/systems/shapeSystem.js",
+    "content": "",
+    "static": true,
+    "longname": "/Users/rodr/Documents/Projects/terra.js/src/modules/systems/shapeSystem.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 112,
     "kind": "file",
     "name": "src/terra.js",
-    "content": "import { Game } from './core/game.js';\nimport { Entity } from './core/entity.js';\nimport { Component } from './core/component.js';\nimport { System } from './core/system.js';\n\n/**\n * This is the global class for accessing the framework from your document\n */\nclass Terra {\n    constructor() {\n        this.Game = Game;\n\n        // Base Classes\n        this.Entity = Entity;\n        this.Component = Component;\n        this.System = System;\n    }\n}\n\nglobal.Terra = new Terra();",
+    "content": "import { Game } from './core/game.js';\nimport { Entity } from './core/entity.js';\nimport { Component } from './core/component.js';\nimport { System } from './core/system.js';\n\n// Components\nimport { ShapeComponent } from './modules/components/shapeComponent.js';\n\n/**\n * This is the global class for accessing the framework from your document\n */\nclass Terra {\n    constructor() {\n        this.Game = Game;\n\n        // Base Classes\n        this.Entity = Entity;\n        this.Component = Component;\n        this.System = System;\n\n        this.Module = {\n            ShapeComponent: ShapeComponent\n        }\n    }\n}\n\nglobal.Terra = new Terra();",
     "static": true,
     "longname": "/Users/rodr/Documents/Projects/terra.js/src/terra.js",
     "access": "public",
@@ -1548,7 +1870,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 95,
+    "__docId__": 113,
     "kind": "class",
     "name": "Terra",
     "memberof": "src/terra.js",
@@ -1559,12 +1881,12 @@
     "importPath": "terra/src/terra.js",
     "importStyle": null,
     "description": "This is the global class for accessing the framework from your document",
-    "lineNumber": 9,
+    "lineNumber": 12,
     "interface": false,
     "ignore": true
   },
   {
-    "__docId__": 96,
+    "__docId__": 114,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/terra.js~Terra",
@@ -1574,33 +1896,16 @@
     "longname": "src/terra.js~Terra#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 13,
     "undocument": true
   },
   {
-    "__docId__": 97,
+    "__docId__": 115,
     "kind": "member",
     "name": "Game",
     "memberof": "src/terra.js~Terra",
     "static": false,
     "longname": "src/terra.js~Terra#Game",
-    "access": "public",
-    "description": null,
-    "lineNumber": 11,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 98,
-    "kind": "member",
-    "name": "Entity",
-    "memberof": "src/terra.js~Terra",
-    "static": false,
-    "longname": "src/terra.js~Terra#Entity",
     "access": "public",
     "description": null,
     "lineNumber": 14,
@@ -1612,15 +1917,15 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 116,
     "kind": "member",
-    "name": "Component",
+    "name": "Entity",
     "memberof": "src/terra.js~Terra",
     "static": false,
-    "longname": "src/terra.js~Terra#Component",
+    "longname": "src/terra.js~Terra#Entity",
     "access": "public",
     "description": null,
-    "lineNumber": 15,
+    "lineNumber": 17,
     "undocument": true,
     "type": {
       "types": [
@@ -1629,7 +1934,24 @@
     }
   },
   {
-    "__docId__": 100,
+    "__docId__": 117,
+    "kind": "member",
+    "name": "Component",
+    "memberof": "src/terra.js~Terra",
+    "static": false,
+    "longname": "src/terra.js~Terra#Component",
+    "access": "public",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 118,
     "kind": "member",
     "name": "System",
     "memberof": "src/terra.js~Terra",
@@ -1637,11 +1959,28 @@
     "longname": "src/terra.js~Terra#System",
     "access": "public",
     "description": null,
-    "lineNumber": 16,
+    "lineNumber": 19,
     "undocument": true,
     "type": {
       "types": [
         "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 119,
+    "kind": "member",
+    "name": "Module",
+    "memberof": "src/terra.js~Terra",
+    "static": false,
+    "longname": "src/terra.js~Terra#Module",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"ShapeComponent\": *}"
       ]
     }
   },
@@ -1655,7 +1994,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"terra\",\n  \"version\": \"1.0.0\",\n  \"description\": \"A simple to use game framework, utilizing the Entity-Component-System architecture\",\n  \"main\": \"webpack.config.js\",\n  \"scripts\": {\n    \"webpack\": \"webpack\",\n    \"test\": \"nyc ./node_modules/.bin/_mocha  --require babel-register test/*\",\n    \"docs\": \"./node_modules/.bin/esdoc\",\n    \"build\": \"webpack && ./node_modules/.bin/esdoc && nyc ./node_modules/.bin/_mocha  --require babel-register test/*\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/RodRitter/terra.js.git\"\n  },\n  \"author\": \"Rod Ritter\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/RodRitter/terra.js/issues\"\n  },\n  \"homepage\": \"https://github.com/RodRitter/terra.js#readme\",\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-istanbul\": \"^0.12.2\",\n    \"babel-loader\": \"^7.1.4\",\n    \"babel-preset-env\": \"^1.7.0\",\n    \"babel-register\": \"^6.26.0\",\n    \"chai\": \"^4.1.2\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"istanbul\": \"^0.4.5\",\n    \"mocha\": \"^5.1.1\",\n    \"nyc\": \"^11.8.0\",\n    \"webpack\": \"^4.8.3\",\n    \"webpack-cli\": \"^2.1.3\"\n  },\n  \"dependencies\": {}\n}\n",
+    "content": "{\n  \"name\": \"terra\",\n  \"version\": \"1.0.0\",\n  \"description\": \"A simple to use game framework, utilizing the Entity-Component-System architecture\",\n  \"main\": \"webpack.config.js\",\n  \"scripts\": {\n    \"webpack\": \"webpack\",\n    \"test\": \"nyc ./node_modules/.bin/_mocha  --require babel-register test/* -r jsdom-global/register\",\n    \"docs\": \"./node_modules/.bin/esdoc\",\n    \"build\": \"webpack && ./node_modules/.bin/esdoc && nyc ./node_modules/.bin/_mocha  --require babel-register test/*  -r jsdom-global/register\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/RodRitter/terra.js.git\"\n  },\n  \"author\": \"Rod Ritter\",\n  \"license\": \"MIT\",\n  \"bugs\": {\n    \"url\": \"https://github.com/RodRitter/terra.js/issues\"\n  },\n  \"homepage\": \"https://github.com/RodRitter/terra.js#readme\",\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-istanbul\": \"^0.12.2\",\n    \"babel-loader\": \"^7.1.4\",\n    \"babel-preset-env\": \"^1.7.0\",\n    \"babel-register\": \"^6.26.0\",\n    \"canvas\": \"^1.6.11\",\n    \"chai\": \"^4.1.2\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"istanbul\": \"^0.4.5\",\n    \"jsdom\": \"11.10.0\",\n    \"jsdom-global\": \"3.0.2\",\n    \"mocha\": \"^5.1.1\",\n    \"nyc\": \"^11.8.0\",\n    \"pixi.js\": \"^4.7.3\",\n    \"webpack\": \"^4.8.3\",\n    \"webpack-cli\": \"^2.1.3\"\n  },\n  \"dependencies\": {}\n}\n",
     "longname": "/Users/rodr/Documents/Projects/terra.js/package.json",
     "name": "package.json",
     "static": true,
