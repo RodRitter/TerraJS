@@ -1,5 +1,6 @@
 import { Entity } from './entity.js';
 import { System } from './system.js';
+import * as PIXI from 'pixi.js'
 
 export class Game {
 
@@ -54,6 +55,9 @@ export class Game {
      * The game start function. Use onStart() callback to hook in here
      */
     start() {
+        // Renderer Setup
+        this.setupCanvas();
+
         this.onStart();
 
         // Run start callbacks
@@ -189,6 +193,14 @@ export class Game {
      * @return {Component}
      */
     getComponentFromEntity(entityId, componentId) {
-        return this.getEntity(entityId).getComponent(componentId);
+        return this.getEntity(entityId).find(componentId);
+    }
+
+    setupCanvas() {
+        let canvas = document.createElement('canvas');
+        canvas.setAttribute('width', `${this.width}px`);
+        canvas.setAttribute('height', `${this.height}px`);
+        document.body.appendChild(canvas);
+        this.canvas = canvas.getContext('2d');
     }
 }

@@ -342,15 +342,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/core/component.js~component#ondetatch",
+    "class/src/core/component.js~Component.html#instance-method-onDetatch",
+    "src/core/component.js~Component#onDetatch",
+    "method"
+  ],
+  [
     "src/core/entity.js",
     "file/src/core/entity.js.html",
     "src/core/entity.js",
     "file"
   ],
   [
-    "src/core/entity.js~entity#attachcomponent",
-    "class/src/core/entity.js~Entity.html#instance-method-attachComponent",
-    "src/core/entity.js~Entity#attachComponent",
+    "src/core/entity.js~entity#attach",
+    "class/src/core/entity.js~Entity.html#instance-method-attach",
+    "src/core/entity.js~Entity#attach",
     "method"
   ],
   [
@@ -366,16 +372,22 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/core/entity.js~entity#detatch",
+    "class/src/core/entity.js~Entity.html#instance-method-detatch",
+    "src/core/entity.js~Entity#detatch",
+    "method"
+  ],
+  [
+    "src/core/entity.js~entity#find",
+    "class/src/core/entity.js~Entity.html#instance-method-find",
+    "src/core/entity.js~Entity#find",
+    "method"
+  ],
+  [
     "src/core/entity.js~entity#game",
     "class/src/core/entity.js~Entity.html#instance-member-game",
     "src/core/entity.js~Entity#game",
     "member"
-  ],
-  [
-    "src/core/entity.js~entity#getcomponent",
-    "class/src/core/entity.js~Entity.html#instance-method-getComponent",
-    "src/core/entity.js~Entity#getComponent",
-    "method"
   ],
   [
     "src/core/entity.js~entity#id",

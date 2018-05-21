@@ -222,7 +222,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/core/entity.js~Entity.html#instance-method-attachComponent">attachComponent</a></span></span><span class="code" data-ice="signature">(component: <span><a href="class/src/core/component.js~Component.html">Component</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/core/entity.js~Entity.html#instance-method-attach">attach</a></span></span><span class="code" data-ice="signature">(component: <span><a href="class/src/core/component.js~Component.html">Component</a></span>)</span>
         </p>
       </div>
       <div>
@@ -251,13 +251,42 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/core/entity.js~Entity.html#instance-method-getComponent">getComponent</a></span></span><span class="code" data-ice="signature">(id: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="class/src/core/component.js~Component.html">Component</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/core/entity.js~Entity.html#instance-method-detatch">detatch</a></span></span><span class="code" data-ice="signature">(ID: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Get a specific Component from this Entity</p>
+        <div data-ice="description"><p>Detatch a component from entity</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/core/entity.js~Entity.html#instance-method-find">find</a></span></span><span class="code" data-ice="signature">(id: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="class/src/core/component.js~Component.html">Component</a></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Find a specific Component from this Entity</p>
 </div>
       </div>
     </td>
@@ -455,14 +484,14 @@
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-attachComponent">
+  <h3 data-ice="anchor" id="instance-method-attach">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">attachComponent</span><span class="code" data-ice="signature">(component: <span><a href="class/src/core/component.js~Component.html">Component</a></span>)</span>
+    <span class="code" data-ice="name">attach</span><span class="code" data-ice="signature">(component: <span><a href="class/src/core/component.js~Component.html">Component</a></span>)</span>
     <span class="right-info">
       
       
@@ -515,14 +544,14 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-getComponent">
+  <h3 data-ice="anchor" id="instance-method-detatch">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">getComponent</span><span class="code" data-ice="signature">(id: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="class/src/core/component.js~Component.html">Component</a></span></span>
+    <span class="code" data-ice="name">detatch</span><span class="code" data-ice="signature">(ID: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
     <span class="right-info">
       
       
@@ -533,7 +562,68 @@
   
   
   
-  <div data-ice="description"><p>Get a specific Component from this Entity</p>
+  <div data-ice="description"><p>Detatch a component from entity</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">ID</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>of component</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-find">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">find</span><span class="code" data-ice="signature">(id: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>): <span><a href="class/src/core/component.js~Component.html">Component</a></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/core/entity.js.html#lineNumber69">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Find a specific Component from this Entity</p>
 </div>
 
   

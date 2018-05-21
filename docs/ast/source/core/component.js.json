@@ -1,28 +1,28 @@
 {
   "type": "File",
   "start": 0,
-  "end": 392,
+  "end": 473,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 25,
+      "line": 29,
       "column": 1
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 392,
+    "end": 473,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 25,
+        "line": 29,
         "column": 1
       }
     },
@@ -31,14 +31,14 @@
       {
         "type": "ExportNamedDeclaration",
         "start": 0,
-        "end": 392,
+        "end": 473,
         "loc": {
           "start": {
             "line": 1,
             "column": 0
           },
           "end": {
-            "line": 25,
+            "line": 29,
             "column": 1
           }
         },
@@ -47,14 +47,14 @@
         "declaration": {
           "type": "ClassDeclaration",
           "start": 7,
-          "end": 392,
+          "end": 473,
           "loc": {
             "start": {
               "line": 1,
               "column": 7
             },
             "end": {
-              "line": 25,
+              "line": 29,
               "column": 1
             }
           },
@@ -79,14 +79,14 @@
           "body": {
             "type": "ClassBody",
             "start": 23,
-            "end": 392,
+            "end": 473,
             "loc": {
               "start": {
                 "line": 1,
                 "column": 23
               },
               "end": {
-                "line": 25,
+                "line": 29,
                 "column": 1
               }
             },
@@ -591,15 +591,15 @@
               {
                 "type": "ClassMethod",
                 "start": 363,
-                "end": 390,
+                "end": 376,
                 "loc": {
                   "start": {
                     "line": 22,
                     "column": 4
                   },
                   "end": {
-                    "line": 24,
-                    "column": 5
+                    "line": 22,
+                    "column": 17
                   }
                 },
                 "static": false,
@@ -631,19 +631,21 @@
                 "body": {
                   "type": "BlockStatement",
                   "start": 374,
-                  "end": 390,
+                  "end": 376,
                   "loc": {
                     "start": {
                       "line": 22,
                       "column": 15
                     },
                     "end": {
-                      "line": 24,
-                      "column": 5
+                      "line": 22,
+                      "column": 17
                     }
                   },
                   "body": [],
-                  "directives": []
+                  "directives": [],
+                  "leadingComments": null,
+                  "trailingComments": null
                 },
                 "leadingComments": [
                   {
@@ -658,6 +660,100 @@
                       },
                       "end": {
                         "line": 21,
+                        "column": 7
+                      }
+                    }
+                  }
+                ],
+                "trailingComments": [
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n     * This is called when it is detatched from an Entity\n     ",
+                    "start": 382,
+                    "end": 451,
+                    "loc": {
+                      "start": {
+                        "line": 24,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 26,
+                        "column": 7
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "ClassMethod",
+                "start": 456,
+                "end": 470,
+                "loc": {
+                  "start": {
+                    "line": 27,
+                    "column": 4
+                  },
+                  "end": {
+                    "line": 27,
+                    "column": 18
+                  }
+                },
+                "static": false,
+                "computed": false,
+                "key": {
+                  "type": "Identifier",
+                  "start": 456,
+                  "end": 465,
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 13
+                    },
+                    "identifierName": "onDetatch"
+                  },
+                  "name": "onDetatch",
+                  "leadingComments": null
+                },
+                "kind": "method",
+                "id": null,
+                "generator": false,
+                "expression": false,
+                "async": false,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "start": 468,
+                  "end": 470,
+                  "loc": {
+                    "start": {
+                      "line": 27,
+                      "column": 16
+                    },
+                    "end": {
+                      "line": 27,
+                      "column": 18
+                    }
+                  },
+                  "body": [],
+                  "directives": []
+                },
+                "leadingComments": [
+                  {
+                    "type": "CommentBlock",
+                    "value": "*\n     * This is called when it is detatched from an Entity\n     ",
+                    "start": 382,
+                    "end": 451,
+                    "loc": {
+                      "start": {
+                        "line": 24,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 26,
                         "column": 7
                       }
                     }
@@ -734,6 +830,22 @@
         },
         "end": {
           "line": 21,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * This is called when it is detatched from an Entity\n     ",
+      "start": 382,
+      "end": 451,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 4
+        },
+        "end": {
+          "line": 26,
           "column": 7
         }
       }
@@ -1707,16 +1819,133 @@
         "postfix": false,
         "binop": null
       },
-      "start": 389,
-      "end": 390,
+      "start": 375,
+      "end": 376,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 16
+        },
+        "end": {
+          "line": 22,
+          "column": 17
+        }
+      }
+    },
+    {
+      "type": "CommentBlock",
+      "value": "*\n     * This is called when it is detatched from an Entity\n     ",
+      "start": 382,
+      "end": 451,
       "loc": {
         "start": {
           "line": 24,
           "column": 4
         },
         "end": {
-          "line": 24,
-          "column": 5
+          "line": 26,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "onDetatch",
+      "start": 456,
+      "end": 465,
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 4
+        },
+        "end": {
+          "line": 27,
+          "column": 13
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "(",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 465,
+      "end": 466,
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 13
+        },
+        "end": {
+          "line": 27,
+          "column": 14
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ")",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 466,
+      "end": 467,
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 14
+        },
+        "end": {
+          "line": 27,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 468,
+      "end": 469,
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 16
+        },
+        "end": {
+          "line": 27,
+          "column": 17
         }
       }
     },
@@ -1732,15 +1961,40 @@
         "postfix": false,
         "binop": null
       },
-      "start": 391,
-      "end": 392,
+      "start": 469,
+      "end": 470,
       "loc": {
         "start": {
-          "line": 25,
+          "line": 27,
+          "column": 17
+        },
+        "end": {
+          "line": 27,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 472,
+      "end": 473,
+      "loc": {
+        "start": {
+          "line": 29,
           "column": 0
         },
         "end": {
-          "line": 25,
+          "line": 29,
           "column": 1
         }
       }
@@ -1758,15 +2012,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 392,
-      "end": 392,
+      "start": 473,
+      "end": 473,
       "loc": {
         "start": {
-          "line": 25,
+          "line": 29,
           "column": 1
         },
         "end": {
-          "line": 25,
+          "line": 29,
           "column": 1
         }
       }

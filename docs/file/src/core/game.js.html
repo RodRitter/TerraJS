@@ -229,7 +229,7 @@ export class Game {
      * @return {Component}
      */
     getComponentFromEntity(entityId, componentId) {
-        return this.getEntity(entityId).getComponent(componentId);
+        return this.getEntity(entityId).find(componentId);
     }
 }</code></pre>
 

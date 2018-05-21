@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "name": "Entity#detatch",
+    "filePath": "src/core/entity.js",
+    "lines": [
+      {
+        "lineNumber": 44,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 45,
+        "line": "     * Detatch a component from entity"
+      },
+      {
+        "lineNumber": 46,
+        "line": "     * @param {string} ID of component"
+      },
+      {
+        "lineNumber": 47,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 48,
+        "line": "    detatch(id) {"
+      }
+    ],
+    "codeParams": [
+      "id"
+    ],
+    "docParams": [
+      "ID"
+    ]
+  }
+]

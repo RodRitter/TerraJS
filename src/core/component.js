@@ -19,7 +19,11 @@ export class Component {
     /**
      * This is called when it is attached to an Entity
      */
-    onAttach() {
-        
-    }
+    onAttach() {}
+
+    /**
+     * This is called when it is detatched from an Entity
+     */
+    onDetatch() {}
+
 }
