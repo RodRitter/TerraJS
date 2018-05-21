@@ -18,18 +18,37 @@ export class Entity {
         /**
          * @type {number}
          */
-        this.x = 0;
+        this._x = 0;
 
         /**
          * @type {number}
          */
-        this.y = 0;
+        this._y = 0;
+
+        /**
+         * @type {Pixi.Container}
+         */
+        this.container;
         
-        if(components) {
-            for(let i=0; i<components.length; i++) {
-                this.attach(components[i]);
-            }
-        }
+        this.components = components;
+    }
+
+    set x(value) {
+        this._x = value;
+        if(this.container) this.container.x = value;
+    }
+
+    get x() {
+        return this._x;
+    }
+
+    set y(value) {
+        this._y = value;
+        if(this.container) this.container.y = value;
+    }
+
+    get y() {
+        return this._y;
     }
 
     /**
@@ -50,6 +69,14 @@ export class Entity {
             
         } else {
             throw(`There is already a component with the ID '${component.id}'`);
+        }
+    }
+
+    attachComponents() {
+        if(this.components) {
+            for(let i=0; i<this.components.length; i++) {
+                this.attach(this.components[i]);
+            }
         }
     }
 
@@ -84,6 +111,10 @@ export class Entity {
         throw new Error(`Cannot find Component '${id}' on Entity '${this.id}'`);
     }
 
+    /**
+     * Whenever a component is attached, it's callbacks are called
+     * @param {Component} component 
+     */
     componentCallback(component) {
         if(this.game.running) {
             component.beforeAttach(this);

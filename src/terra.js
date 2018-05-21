@@ -5,6 +5,7 @@ import { System } from './core/system.js';
 
 // Components
 import { ShapeComponent } from './modules/components/shapeComponent.js';
+import { RenderingSystem } from './modules/systems/renderingSystem.js';
 
 /**
  * This is the global class for accessing the framework from your document
@@ -19,7 +20,8 @@ class Terra {
         this.System = System;
 
         this.Module = {
-            ShapeComponent: ShapeComponent
+            ShapeComponent: ShapeComponent,
+            RenderingSystem: RenderingSystem
         }
     }
 }

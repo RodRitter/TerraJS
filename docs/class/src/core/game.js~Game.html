@@ -34,6 +34,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~ReneringSystem.html">ReneringSystem</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -477,6 +478,34 @@
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/core/game.js~Game.html#instance-method-addEntityToStage">addEntityToStage</a></span></span><span class="code" data-ice="signature">(entity: <span>*</span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/core/game.js~Game.html#instance-method-addSystem">addSystem</a></span></span><span class="code" data-ice="signature">(system: <span><a href="class/src/core/system.js~System.html">System</a></span>): <span><a href="class/src/core/system.js~System.html">System</a></span></span>
         </p>
       </div>
@@ -709,6 +738,35 @@
           
           
           
+          <span class="code" data-ice="name"><span><a href="class/src/core/game.js~Game.html#instance-method-removeEntity">removeEntity</a></span></span><span class="code" data-ice="signature">(ID: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Remove entity from game</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
           <span class="code" data-ice="name"><span><a href="class/src/core/game.js~Game.html#instance-method-rendererSetup">rendererSetup</a></span></span><span class="code" data-ice="signature">(settings: <span>*</span>)</span>
         </p>
       </div>
@@ -881,7 +939,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber217">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber255">source</a></span></span>
     </span>
   </h3>
 
@@ -1096,7 +1154,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber225">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber263">source</a></span></span>
     </span>
   </h3>
 
@@ -1225,7 +1283,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber224">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber262">source</a></span></span>
     </span>
   </h3>
 
@@ -1357,7 +1415,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber133">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber137">source</a></span></span>
     </span>
   </h3>
 
@@ -1406,6 +1464,65 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-addEntityToStage">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">addEntityToStage</span><span class="code" data-ice="signature">(entity: <span>*</span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber269">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">entity</td>
+      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-addSystem">
     <span class="access" data-ice="access">public</span>
     
@@ -1417,7 +1534,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber149">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber187">source</a></span></span>
     </span>
   </h3>
 
@@ -1489,7 +1606,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber119">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber123">source</a></span></span>
     </span>
   </h3>
 
@@ -1550,7 +1667,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber212">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber250">source</a></span></span>
     </span>
   </h3>
 
@@ -1630,7 +1747,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber177">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber215">source</a></span></span>
     </span>
   </h3>
 
@@ -1703,7 +1820,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber166">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber204">source</a></span></span>
     </span>
   </h3>
 
@@ -1777,7 +1894,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber202">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber240">source</a></span></span>
     </span>
   </h3>
 
@@ -1850,7 +1967,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber111">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber115">source</a></span></span>
     </span>
   </h3>
 
@@ -1894,7 +2011,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
@@ -1943,6 +2060,67 @@
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-removeEntity">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">removeEntity</span><span class="code" data-ice="signature">(ID: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber154">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Remove entity from game</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">ID</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>of entity</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-rendererSetup">
     <span class="access" data-ice="access">public</span>
     
@@ -1954,7 +2132,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber216">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber254">source</a></span></span>
     </span>
   </h3>
 
@@ -2057,7 +2235,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber91">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/core/game.js.html#lineNumber95">source</a></span></span>
     </span>
   </h3>
 

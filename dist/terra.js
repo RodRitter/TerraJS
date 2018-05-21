@@ -44014,28 +44014,29 @@ var Entity = exports.Entity = function () {
         /**
          * @type {number}
          */
-        this.x = 0;
+        this._x = 0;
 
         /**
          * @type {number}
          */
-        this.y = 0;
+        this._y = 0;
 
-        if (components) {
-            for (var i = 0; i < components.length; i++) {
-                this.attach(components[i]);
-            }
-        }
+        /**
+         * @type {Pixi.Container}
+         */
+        this.container;
+
+        this.components = components;
     }
-
-    /**
-     * Attach a Component to this Entity
-     * @param {Component} component
-     */
-
 
     _createClass(Entity, [{
         key: "attach",
+
+
+        /**
+         * Attach a Component to this Entity
+         * @param {Component} component
+         */
         value: function attach(component) {
             if (this.componentMap[component.id] === undefined) {
                 this.componentMap[component.id] = component;
@@ -44049,6 +44050,15 @@ var Entity = exports.Entity = function () {
                 this.componentCallback(component);
             } else {
                 throw "There is already a component with the ID '" + component.id + "'";
+            }
+        }
+    }, {
+        key: "attachComponents",
+        value: function attachComponents() {
+            if (this.components) {
+                for (var i = 0; i < this.components.length; i++) {
+                    this.attach(this.components[i]);
+                }
             }
         }
 
@@ -44090,6 +44100,12 @@ var Entity = exports.Entity = function () {
             }
             throw new Error("Cannot find Component '" + id + "' on Entity '" + this.id + "'");
         }
+
+        /**
+         * Whenever a component is attached, it's callbacks are called
+         * @param {Component} component 
+         */
+
     }, {
         key: "componentCallback",
         value: function componentCallback(component) {
@@ -44097,6 +44113,24 @@ var Entity = exports.Entity = function () {
                 component.beforeAttach(this);
                 component.onAttach();
             }
+        }
+    }, {
+        key: "x",
+        set: function set(value) {
+            this._x = value;
+            if (this.container) this.container.x = value;
+        },
+        get: function get() {
+            return this._x;
+        }
+    }, {
+        key: "y",
+        set: function set(value) {
+            this._y = value;
+            if (this.container) this.container.y = value;
+        },
+        get: function get() {
+            return this._y;
         }
     }]);
 
@@ -44208,10 +44242,14 @@ var Game = exports.Game = function () {
             // Run component callbacks
             for (var i = 0; i < Object.keys(this.entities).length; i++) {
                 var entity = this.entities[Object.keys(this.entities)[i]];
+                this.addEntityToStage(entity);
                 for (var j = 0; j < Object.keys(entity.componentMap).length; j++) {
                     entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
                 }
             };
+
+            // Add entities to stage
+
 
             // Run start callbacks
             this.callbacks.onStart.forEach(function (systemObj) {
@@ -44286,8 +44324,51 @@ var Game = exports.Game = function () {
             if (entity instanceof _entity.Entity) {
                 this.entities[entity.id] = entity;
                 entity.game = this;
+                entity.container = new PIXI.Container();
+                entity.container.x = entity.x;
+                entity.container.y = entity.y;
+                entity.container.gameId = entity.id;
+                entity.attachComponents();
+                this.addEntityToStage(entity);
             } else {
                 throw new TypeError('Trying to add an entity which is not of type \'Entity\'');
+            }
+        }
+
+        /**
+         * Remove entity from game
+         * @param {string} ID of entity
+         */
+
+    }, {
+        key: 'removeEntity',
+        value: function removeEntity(id) {
+            var _this = this;
+
+            if (this.entities[id] !== undefined) {
+                // Remove Pixi child for this entity
+                this.stage.children.forEach(function (child) {
+                    if (child.gameId == id) {
+                        _this.stage.removeChild(child);
+                    }
+                });
+
+                // Remove components in the game global list
+                var entity = this.entities[id];
+                var compIds = Object.keys(entity.componentMap);
+
+                compIds.forEach(function (compId) {
+                    _this.components[compId].forEach(function (comp) {
+                        if (comp.entity.id == id) {
+                            var index = _this.components[comp.id].indexOf(comp);
+                            if (index > -1) {
+                                _this.components[comp.id].splice(index, 1);
+                            }
+                        }
+                    });
+                });
+
+                delete this.entities[id];
             }
         }
 
@@ -44303,8 +44384,7 @@ var Game = exports.Game = function () {
             if (this.systems[system.id] === undefined && system instanceof _system.System) {
                 system.game = this;
                 this.systems[system.id] = system;
-                this.callbacks.onStart.push({ system: system, callback: system.onStart });
-                this.callbacks.onUpdate.push({ system: system, callback: system.onUpdate });
+                system.registerCallbacks();
                 return system;
             } else {
                 throw new TypeError('Trying to add system which is not type of \'System\'');
@@ -44334,12 +44414,12 @@ var Game = exports.Game = function () {
     }, {
         key: 'getEntitiesWith',
         value: function getEntitiesWith(components) {
-            var _this = this;
+            var _this2 = this;
 
             var entities = [];
 
             var _loop = function _loop(i) {
-                var entity = _this.entities[Object.keys(_this.entities)[i]];
+                var entity = _this2.entities[Object.keys(_this2.entities)[i]];
                 var count = 0;
                 var target = components.length;
 
@@ -44392,6 +44472,7 @@ var Game = exports.Game = function () {
     }, {
         key: 'rendererSetup',
         value: function rendererSetup(settings) {
+            this.PIXI = PIXI;
             this.application = new PIXI.Application({
                 width: this.width,
                 height: this.height,
@@ -44404,6 +44485,13 @@ var Game = exports.Game = function () {
             this.renderer.autoResize = true;
 
             document.body.appendChild(this.application.view);
+        }
+    }, {
+        key: 'addEntityToStage',
+        value: function addEntityToStage(entity) {
+            if (this.stage) {
+                this.stage.addChild(entity.container);
+            }
         }
     }]);
 
@@ -44480,6 +44568,17 @@ var System = exports.System = function () {
                 return this.game.getEntity(entityId).getComponent(componentId);
             }
         }
+    }, {
+        key: "registerCallbacks",
+        value: function registerCallbacks() {
+            if (this.onStart) {
+                this.game.callbacks.onStart.push({ system: this, callback: this.onStart });
+            }
+
+            if (this.onUpdate) {
+                this.game.callbacks.onUpdate.push({ system: this, callback: this.onUpdate });
+            }
+        }
     }]);
 
     return System;
@@ -44502,6 +44601,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ShapeComponent = undefined;
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _component = __webpack_require__(/*! ../../core/component.js */ "./src/core/component.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44516,14 +44617,91 @@ var ShapeComponent = exports.ShapeComponent = function (_Component) {
     function ShapeComponent(id, data) {
         _classCallCheck(this, ShapeComponent);
 
-        var _this = _possibleConstructorReturn(this, (ShapeComponent.__proto__ || Object.getPrototypeOf(ShapeComponent)).call(this, id, data));
-
-        _this.hasDependency('Transform');
-        return _this;
+        return _possibleConstructorReturn(this, (ShapeComponent.__proto__ || Object.getPrototypeOf(ShapeComponent)).call(this, id, data));
     }
+
+    _createClass(ShapeComponent, [{
+        key: 'onAttach',
+        value: function onAttach() {
+            var system = this.entity.game.systems['RenderingSystem'];
+            system.renderShape(system, this.entity);
+        }
+    }]);
 
     return ShapeComponent;
 }(_component.Component);
+
+/***/ }),
+
+/***/ "./src/modules/systems/renderingSystem.js":
+/*!************************************************!*\
+  !*** ./src/modules/systems/renderingSystem.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.RenderingSystem = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _system = __webpack_require__(/*! ../../core/system.js */ "./src/core/system.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RenderingSystem = exports.RenderingSystem = function (_System) {
+    _inherits(RenderingSystem, _System);
+
+    function RenderingSystem() {
+        _classCallCheck(this, RenderingSystem);
+
+        var _this = _possibleConstructorReturn(this, (RenderingSystem.__proto__ || Object.getPrototypeOf(RenderingSystem)).call(this, 'RenderingSystem', function () {}, function () {}));
+
+        _this.onStart = _this.start;
+        _this.onUpdate = _this.update;
+        return _this;
+    }
+
+    _createClass(RenderingSystem, [{
+        key: 'start',
+        value: function start(system) {}
+    }, {
+        key: 'update',
+        value: function update() {}
+    }, {
+        key: 'renderShape',
+        value: function renderShape(system, entity) {
+            var comp = entity.find('ShapeComponent');
+            var gfx = new system.game.PIXI.Graphics();
+
+            switch (comp.data.type) {
+                case 'circle':
+                    gfx.beginFill(comp.data.color);
+                    gfx.drawCircle(entity.x, entity.y, comp.data.radius);
+                    gfx.endFill();
+                    entity.container.addChild(gfx);
+                    break;
+                case 'rect':
+                    gfx.beginFill(comp.data.color);
+                    gfx.drawRect(entity.x, entity.y, comp.data.width, comp.data.height);
+                    gfx.endFill();
+                    entity.container.addChild(gfx);
+                    break;
+            }
+        }
+    }]);
+
+    return RenderingSystem;
+}(_system.System);
 
 /***/ }),
 
@@ -44547,6 +44725,8 @@ var _system = __webpack_require__(/*! ./core/system.js */ "./src/core/system.js"
 
 var _shapeComponent = __webpack_require__(/*! ./modules/components/shapeComponent.js */ "./src/modules/components/shapeComponent.js");
 
+var _renderingSystem = __webpack_require__(/*! ./modules/systems/renderingSystem.js */ "./src/modules/systems/renderingSystem.js");
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Components
@@ -44566,7 +44746,8 @@ var Terra = function Terra() {
     this.System = _system.System;
 
     this.Module = {
-        ShapeComponent: _shapeComponent.ShapeComponent
+        ShapeComponent: _shapeComponent.ShapeComponent,
+        RenderingSystem: _renderingSystem.RenderingSystem
     };
 };
 

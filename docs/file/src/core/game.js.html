@@ -34,6 +34,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~ReneringSystem.html">ReneringSystem</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -111,10 +112,14 @@ export class Game {
         // Run component callbacks
         for(let i=0; i &lt; Object.keys(this.entities).length; i++) {
             let entity = this.entities[Object.keys(this.entities)[i]];
+            this.addEntityToStage(entity);
             for(let j=0; j &lt; Object.keys(entity.componentMap).length; j++) {
                 entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
             }
         };
+
+        // Add entities to stage
+
 
         // Run start callbacks
         this.callbacks.onStart.forEach((systemObj) =&gt; {
@@ -175,11 +180,45 @@ export class Game {
         if(entity instanceof Entity) {
             this.entities[entity.id] = entity;
             entity.game = this;
-
+            entity.container = new PIXI.Container();
+            entity.container.gameId = entity.id;
+            this.addEntityToStage(entity);
         } else {
             throw new TypeError(`Trying to add an entity which is not of type &apos;Entity&apos;`);
         }
         
+    }
+
+    /**
+     * Remove entity from game
+     * @param {string} ID of entity
+     */
+    removeEntity(id) {
+        if(this.entities[id] !== undefined) {
+            // Remove Pixi child for this entity
+            this.stage.children.forEach((child) =&gt; {
+                if(child.gameId == id) {
+                    this.stage.removeChild(child);
+                }
+            });
+            
+            // Remove components in the game global list
+            let entity = this.entities[id];
+            let compIds = Object.keys(entity.componentMap);
+
+            compIds.forEach((compId) =&gt; {
+                this.components[compId].forEach((comp) =&gt; {
+                    if(comp.entity.id == id) {
+                        let index = this.components[comp.id].indexOf(comp);
+                        if(index &gt; -1) {
+                            this.components[comp.id].splice(index, 1);
+                        }
+                    }
+                });
+            });
+
+            delete this.entities[id];
+        }
     }
 
     /**
@@ -267,6 +306,12 @@ export class Game {
         this.renderer.autoResize = true;
 
         document.body.appendChild(this.application.view);
+    }
+
+    addEntityToStage(entity) {
+        if(this.stage) {
+            this.stage.addChild(entity.container);
+        }
     }
 }</code></pre>
 

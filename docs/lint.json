@@ -4,24 +4,56 @@
     "filePath": "src/core/entity.js",
     "lines": [
       {
-        "lineNumber": 55,
+        "lineNumber": 60,
         "line": "    /**"
       },
       {
-        "lineNumber": 56,
+        "lineNumber": 61,
         "line": "     * Detatch a component from entity"
       },
       {
-        "lineNumber": 57,
+        "lineNumber": 62,
         "line": "     * @param {string} ID of component"
       },
       {
-        "lineNumber": 58,
+        "lineNumber": 63,
         "line": "     */"
       },
       {
-        "lineNumber": 59,
+        "lineNumber": 64,
         "line": "    detatch(id) {"
+      }
+    ],
+    "codeParams": [
+      "id"
+    ],
+    "docParams": [
+      "ID"
+    ]
+  },
+  {
+    "name": "Game#removeEntity",
+    "filePath": "src/core/game.js",
+    "lines": [
+      {
+        "lineNumber": 149,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 150,
+        "line": "     * Remove entity from game"
+      },
+      {
+        "lineNumber": 151,
+        "line": "     * @param {string} ID of entity"
+      },
+      {
+        "lineNumber": 152,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 153,
+        "line": "    removeEntity(id) {"
       }
     ],
     "codeParams": [

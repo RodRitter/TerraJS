@@ -18,6 +18,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "terra/src/modules/systems/renderingsystem.js~reneringsystem",
+    "class/src/modules/systems/renderingSystem.js~ReneringSystem.html",
+    "<span>ReneringSystem</span> <span class=\"search-result-import-path\">terra/src/modules/systems/renderingSystem.js</span>",
+    "class"
+  ],
+  [
     "terra/src/modules/components/shapecomponent.js~shapecomponent",
     "class/src/modules/components/shapeComponent.js~ShapeComponent.html",
     "<span>ShapeComponent</span> <span class=\"search-result-import-path\">terra/src/modules/components/shapeComponent.js</span>",
@@ -456,6 +462,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/core/game.js~game#addentitytostage",
+    "class/src/core/game.js~Game.html#instance-method-addEntityToStage",
+    "src/core/game.js~Game#addEntityToStage",
+    "method"
+  ],
+  [
     "src/core/game.js~game#addsystem",
     "class/src/core/game.js~Game.html#instance-method-addSystem",
     "src/core/game.js~Game#addSystem",
@@ -537,6 +549,12 @@ window.esdocSearchIndex = [
     "src/core/game.js~game#onupdate",
     "class/src/core/game.js~Game.html#instance-method-onUpdate",
     "src/core/game.js~Game#onUpdate",
+    "method"
+  ],
+  [
+    "src/core/game.js~game#removeentity",
+    "class/src/core/game.js~Game.html#instance-method-removeEntity",
+    "src/core/game.js~Game#removeEntity",
     "method"
   ],
   [
@@ -654,9 +672,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/modules/systems/shapesystem.js",
-    "file/src/modules/systems/shapeSystem.js.html",
-    "src/modules/systems/shapeSystem.js",
+    "src/modules/systems/renderingsystem.js",
+    "file/src/modules/systems/renderingSystem.js.html",
+    "src/modules/systems/renderingSystem.js",
     "file"
   ],
   [

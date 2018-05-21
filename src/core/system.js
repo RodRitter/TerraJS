@@ -39,4 +39,14 @@ export class System {
             return this.game.getEntity(entityId).getComponent(componentId);
         }
     }
+
+    registerCallbacks() {
+        if(this.onStart) {
+            this.game.callbacks.onStart.push({system: this, callback: this.onStart});
+        }
+
+        if(this.onUpdate) {
+            this.game.callbacks.onUpdate.push({system: this, callback: this.onUpdate});
+        }
+    }
 }

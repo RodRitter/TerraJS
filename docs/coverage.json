@@ -1,7 +1,7 @@
 {
-  "coverage": "64.06%",
-  "expectCount": 64,
-  "actualCount": 41,
+  "coverage": "62.68%",
+  "expectCount": 67,
+  "actualCount": 42,
   "files": {
     "src/core/component.js": {
       "expectCount": 11,
@@ -18,19 +18,20 @@
       "undocumentLines": [
         1,
         2,
-        87
+        92
       ]
     },
     "src/core/game.js": {
-      "expectCount": 25,
-      "actualCount": 19,
+      "expectCount": 27,
+      "actualCount": 20,
       "undocumentLines": [
         5,
         59,
-        216,
-        217,
-        224,
-        225
+        254,
+        255,
+        262,
+        263,
+        269
       ]
     },
     "src/core/system.js": {
@@ -48,6 +49,13 @@
       "undocumentLines": [
         3,
         4
+      ]
+    },
+    "src/modules/systems/renderingSystem.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
       ]
     },
     "src/terra.js": {

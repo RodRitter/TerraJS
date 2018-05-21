@@ -70,10 +70,14 @@ export class Game {
         // Run component callbacks
         for(let i=0; i < Object.keys(this.entities).length; i++) {
             let entity = this.entities[Object.keys(this.entities)[i]];
+            this.addEntityToStage(entity);
             for(let j=0; j < Object.keys(entity.componentMap).length; j++) {
                 entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
             }
         };
+
+        // Add entities to stage
+
 
         // Run start callbacks
         this.callbacks.onStart.forEach((systemObj) => {
@@ -134,11 +138,48 @@ export class Game {
         if(entity instanceof Entity) {
             this.entities[entity.id] = entity;
             entity.game = this;
-
+            entity.container = new PIXI.Container();
+            entity.container.x = entity.x;
+            entity.container.y = entity.y;
+            entity.container.gameId = entity.id;
+            entity.attachComponents();
+            this.addEntityToStage(entity);
         } else {
             throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);
         }
         
+    }
+
+    /**
+     * Remove entity from game
+     * @param {string} ID of entity
+     */
+    removeEntity(id) {
+        if(this.entities[id] !== undefined) {
+            // Remove Pixi child for this entity
+            this.stage.children.forEach((child) => {
+                if(child.gameId == id) {
+                    this.stage.removeChild(child);
+                }
+            });
+            
+            // Remove components in the game global list
+            let entity = this.entities[id];
+            let compIds = Object.keys(entity.componentMap);
+
+            compIds.forEach((compId) => {
+                this.components[compId].forEach((comp) => {
+                    if(comp.entity.id == id) {
+                        let index = this.components[comp.id].indexOf(comp);
+                        if(index > -1) {
+                            this.components[comp.id].splice(index, 1);
+                        }
+                    }
+                });
+            });
+
+            delete this.entities[id];
+        }
     }
 
     /**
@@ -150,8 +191,7 @@ export class Game {
         if(this.systems[system.id] === undefined && system instanceof System) {
             system.game = this;
             this.systems[system.id] = system;
-            this.callbacks.onStart.push({system: system, callback: system.onStart});
-            this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});
+            system.registerCallbacks();
             return system;
         } else {
             throw(new TypeError(`Trying to add system which is not type of 'System'`));
@@ -214,6 +254,7 @@ export class Game {
     }
 
     rendererSetup(settings) {
+        this.PIXI = PIXI;
         this.application = new PIXI.Application({
             width: this.width,
             height: this.height,
@@ -226,5 +267,11 @@ export class Game {
         this.renderer.autoResize = true;
 
         document.body.appendChild(this.application.view);
+    }
+
+    addEntityToStage(entity) {
+        if(this.stage) {
+            this.stage.addChild(entity.container);
+        }
     }
 }
