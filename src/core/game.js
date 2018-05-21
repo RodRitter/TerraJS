@@ -8,8 +8,9 @@ export class Game {
      * The Game class takes in dimensions of the game screen
      * @param {number} width width of game screen
      * @param {number} height height of game screen
+     * @param {Object} extra settings for the renderer
      */
-    constructor(width, height) {
+    constructor(width, height, settings) {
         /**
          * @type {number}
          */
@@ -49,15 +50,15 @@ export class Game {
          * @type {Array}
          */
         this.callbacks.onUpdate = [];
+
+        this.rendererSettings = settings;
     }
 
     /**
      * The game start function. Use onStart() callback to hook in here
      */
     start() {
-        // Renderer Setup
-        this.setupCanvas();
-
+        this.rendererSetup(this.rendererSettings);
         this.onStart();
 
         // Run start callbacks
@@ -118,6 +119,7 @@ export class Game {
         if(entity instanceof Entity) {
             this.entities[entity.id] = entity;
             entity.game = this;
+
         } else {
             throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);
         }
@@ -196,11 +198,18 @@ export class Game {
         return this.getEntity(entityId).find(componentId);
     }
 
-    setupCanvas() {
-        let canvas = document.createElement('canvas');
-        canvas.setAttribute('width', `${this.width}px`);
-        canvas.setAttribute('height', `${this.height}px`);
-        document.body.appendChild(canvas);
-        this.canvas = canvas.getContext('2d');
+    rendererSetup(settings) {
+        this.application = new PIXI.Application({
+            width: this.width,
+            height: this.height,
+            antialias: settings.antialias ? settings.antialias : false,
+            transparent: settings.transparent ? settings.transparent : false,
+            resolution: settings.resolution ? settings.resolution : 1
+        });
+        this.stage = this.application.stage;
+        this.renderer = this.application.renderer;
+        this.renderer.autoResize = true;
+
+        document.body.appendChild(this.application.view);
     }
 }
