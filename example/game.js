@@ -1,24 +1,30 @@
+
 // Creating game here
 let Game = new Terra.Game(500, 500, {antialias: true});
 
+// Define Initial Entities & Components
+let Entities = {
+    Ball: new Terra.Entity('Ball', Game, [
+        new Terra.Shape('ShapeComponent', {type: 'circle', radius: 10, color: '0xFFFFFF'})
+    ]),
+    Paddle: new Terra.Entity('Paddle', Game, [
+        new Terra.Shape('ShapeComponent', {type: 'rect', width: 30, height: 10, color: '0xFFFFFF'})
+    ])
+}
+
 // Systems
 let coreSystems = [
-    new Terra.Renderer('Renderer')
+    new Terra.Renderer('Renderer') // Renders Shapes & Sprites (WIP)
 ];
 
-// Entity
-let circle = new Terra.Shape('ShapeComponent', {type: 'circle', radius: 10, color: '0xFFFFFF'});
-let rect = new Terra.Shape('ShapeComponent', {type: 'rect', width: 50, height: 20, color: '0xFFFFFF'});
-
-let entity = new Terra.Entity('Ball', Game, [circle]);
-let entity2 = new Terra.Entity('Rect', Game, [rect]);
 
 
-Game.addEntities([entity, entity2]);
+Game.addEntities([Entities.Ball, Entities.Paddle]);
 Game.addSystems([...coreSystems]);
 
 // Game Loop
 Game.start();
 
-entity.x = 100;
-entity.y = 50;
+
+Entities.Ball.x = Game.width/2;
+Entities.Ball.y = 10;
