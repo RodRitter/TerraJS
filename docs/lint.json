@@ -4,23 +4,23 @@
     "filePath": "src/core/entity.js",
     "lines": [
       {
-        "lineNumber": 60,
+        "lineNumber": 91,
         "line": "    /**"
       },
       {
-        "lineNumber": 61,
+        "lineNumber": 92,
         "line": "     * Detatch a component from entity"
       },
       {
-        "lineNumber": 62,
+        "lineNumber": 93,
         "line": "     * @param {string} ID of component"
       },
       {
-        "lineNumber": 63,
+        "lineNumber": 94,
         "line": "     */"
       },
       {
-        "lineNumber": 64,
+        "lineNumber": 95,
         "line": "    detatch(id) {"
       }
     ],
@@ -32,27 +32,59 @@
     ]
   },
   {
+    "name": "Game#addEntities",
+    "filePath": "src/core/game.js",
+    "lines": [
+      {
+        "lineNumber": 153,
+        "line": "    /**"
+      },
+      {
+        "lineNumber": 154,
+        "line": "     * Create & add multiple entities"
+      },
+      {
+        "lineNumber": 155,
+        "line": "     * @param {Entity[]} array of entities"
+      },
+      {
+        "lineNumber": 156,
+        "line": "     */"
+      },
+      {
+        "lineNumber": 157,
+        "line": "    addEntities(entities) {"
+      }
+    ],
+    "codeParams": [
+      "entities"
+    ],
+    "docParams": [
+      "array"
+    ]
+  },
+  {
     "name": "Game#removeEntity",
     "filePath": "src/core/game.js",
     "lines": [
       {
-        "lineNumber": 149,
+        "lineNumber": 172,
         "line": "    /**"
       },
       {
-        "lineNumber": 150,
+        "lineNumber": 173,
         "line": "     * Remove entity from game"
       },
       {
-        "lineNumber": 151,
+        "lineNumber": 174,
         "line": "     * @param {string} ID of entity"
       },
       {
-        "lineNumber": 152,
+        "lineNumber": 175,
         "line": "     */"
       },
       {
-        "lineNumber": 153,
+        "lineNumber": 176,
         "line": "    removeEntity(id) {"
       }
     ],

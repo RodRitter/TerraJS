@@ -43911,14 +43911,14 @@ var Component = exports.Component = function () {
     }
 
     /**
-     * This is called before onAttach
+     * This is called if attached while game is not running
      */
 
 
     _createClass(Component, [{
-        key: "beforeAttach",
-        value: function beforeAttach(entity) {
-            this.checkDependencies(entity);
+        key: "offlineAttach",
+        value: function offlineAttach(entity) {
+            this._checkDependencies(entity);
         }
 
         /**
@@ -43937,8 +43937,8 @@ var Component = exports.Component = function () {
         key: "onDetatch",
         value: function onDetatch() {}
     }, {
-        key: "hasDependency",
-        value: function hasDependency(id) {
+        key: "setDependency",
+        value: function setDependency(id) {
             this.dependencies.push(id);
         }
 
@@ -43947,15 +43947,15 @@ var Component = exports.Component = function () {
          */
 
     }, {
-        key: "checkDependencies",
-        value: function checkDependencies(entity) {
+        key: "_checkDependencies",
+        value: function _checkDependencies(entity) {
             var missingDependencies = [];
 
             this.dependencies.forEach(function (dependency) {
                 var isMissing = true;
 
-                for (var i = 0; i < Object.keys(entity.componentMap).length; i++) {
-                    if (Object.keys(entity.componentMap)[i] == dependency) {
+                for (var i = 0; i < Object.keys(entity.components).length; i++) {
+                    if (Object.keys(entity.components)[i] == dependency) {
                         isMissing = false;
                     }
                 }
@@ -43987,8 +43987,11 @@ var Component = exports.Component = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Entity = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _component = __webpack_require__(/*! ./component.js */ "./src/core/component.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44004,7 +44007,12 @@ var Entity = exports.Entity = function () {
         /**
          * @type {Object}
          */
-        this.componentMap = {};
+        this.components = {};
+
+        /**
+         * @type {string[]}
+         */
+        this._components = components;
 
         /**
          * @type {Game}
@@ -44025,12 +44033,12 @@ var Entity = exports.Entity = function () {
          * @type {Pixi.Container}
          */
         this.container;
-
-        this.components = components;
+        this.container = new PIXI.Container();
+        this.container.gameId = this.id;
     }
 
     _createClass(Entity, [{
-        key: "attach",
+        key: 'attach',
 
 
         /**
@@ -44038,8 +44046,8 @@ var Entity = exports.Entity = function () {
          * @param {Component} component
          */
         value: function attach(component) {
-            if (this.componentMap[component.id] === undefined) {
-                this.componentMap[component.id] = component;
+            if (this.components[component.id] === undefined) {
+                this.components[component.id] = component;
 
                 if (this.game.components[component.id] === undefined) {
                     this.game.components[component.id] = [];
@@ -44048,16 +44056,18 @@ var Entity = exports.Entity = function () {
                 component.entity = this;
 
                 this.componentCallback(component);
+            } else if (!(component instanceof _component.Component)) {
+                throw new TypeError('Not of type Component');
             } else {
-                throw "There is already a component with the ID '" + component.id + "'";
+                throw new Error('There is already a component with the ID \'' + component.id + '\'');
             }
         }
     }, {
-        key: "attachComponents",
+        key: 'attachComponents',
         value: function attachComponents() {
-            if (this.components) {
-                for (var i = 0; i < this.components.length; i++) {
-                    this.attach(this.components[i]);
+            if (this._components) {
+                for (var i = 0; i < this._components.length; i++) {
+                    this.attach(this._components[i]);
                 }
             }
         }
@@ -44068,12 +44078,12 @@ var Entity = exports.Entity = function () {
          */
 
     }, {
-        key: "detatch",
-        value: function detatch(id) {
+        key: 'detach',
+        value: function detach(id) {
             var _this = this;
 
-            this.componentMap[id].onDetatch(); // First call onDetatch before removing it
-            delete this.componentMap[id]; // Remove from Entity map
+            this.components[id].onDetatch(); // First call onDetatch before removing it
+            delete this.components[id]; // Remove from Entity map
 
             // Remove from Game global component list
             this.game.components[id].forEach(function (component) {
@@ -44093,12 +44103,12 @@ var Entity = exports.Entity = function () {
          */
 
     }, {
-        key: "find",
+        key: 'find',
         value: function find(id) {
-            if (this.componentMap[id] !== undefined) {
-                return this.componentMap[id];
+            if (this.components[id] !== undefined) {
+                return this.components[id];
             }
-            throw new Error("Cannot find Component '" + id + "' on Entity '" + this.id + "'");
+            throw new Error('Cannot find Component \'' + id + '\' on Entity \'' + this.id + '\'');
         }
 
         /**
@@ -44107,27 +44117,42 @@ var Entity = exports.Entity = function () {
          */
 
     }, {
-        key: "componentCallback",
+        key: 'componentCallback',
         value: function componentCallback(component) {
             if (this.game.running) {
-                component.beforeAttach(this);
                 component.onAttach();
+            } else {
+                component.offlineAttach(this);
             }
         }
     }, {
-        key: "x",
+        key: 'listenSignal',
+        value: function listenSignal(signalId, callback) {
+            this.game.signal.bind(signalId, this, callback);
+        }
+    }, {
+        key: 'sendSignal',
+        value: function sendSignal(signalId, data) {
+            this.game.signal.send(signalId, data);
+        }
+    }, {
+        key: 'x',
         set: function set(value) {
-            this._x = value;
-            if (this.container) this.container.x = value;
+            if (this.container) {
+                this._x = value;
+                this.container.x = value;
+            }
         },
         get: function get() {
             return this._x;
         }
     }, {
-        key: "y",
+        key: 'y',
         set: function set(value) {
-            this._y = value;
-            if (this.container) this.container.y = value;
+            if (this.container) {
+                this._y = value;
+                this.container.y = value;
+            }
         },
         get: function get() {
             return this._y;
@@ -44147,7 +44172,7 @@ var Entity = exports.Entity = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(global) {
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -44159,6 +44184,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _entity = __webpack_require__(/*! ./entity.js */ "./src/core/entity.js");
 
 var _system = __webpack_require__(/*! ./system.js */ "./src/core/system.js");
+
+var _signal = __webpack_require__(/*! ./signal.js */ "./src/core/signal.js");
 
 var _pixi = __webpack_require__(/*! pixi.js */ "./node_modules/pixi.js/lib/index.js");
 
@@ -44172,17 +44199,22 @@ var Game = exports.Game = function () {
 
     /**
      * The Game class takes in dimensions of the game screen
-     * @param {number} width width of game screen
-     * @param {number} height height of game screen
+     * @param {number} width - width of game screen
+     * @param {number} height - height of game screen
      * @param {Object} extra settings for the renderer
      */
-    function Game(width, height, settings) {
+    function Game(width, height, rendererSettings) {
         _classCallCheck(this, Game);
 
         /**
          * @type {boolean}
          */
         this.running = false;
+
+        /**
+         * @type {boolean}
+         */
+        this.hasSetup = false;
 
         /**
          * @type {number}
@@ -44224,7 +44256,15 @@ var Game = exports.Game = function () {
          */
         this.callbacks.onUpdate = [];
 
-        this.rendererSettings = settings;
+        /**
+         * @type {Object}
+         */
+        this.rendererSettings = rendererSettings;
+
+        /**
+         * @type {Signal}
+         */
+        this.signal = new _signal.Signal();
     }
 
     /**
@@ -44236,28 +44276,30 @@ var Game = exports.Game = function () {
         key: 'start',
         value: function start() {
             this.running = true;
-            this.rendererSetup(this.rendererSettings);
+            this._rendererSetup(this.rendererSettings);
             this.onStart();
-
-            // Run component callbacks
-            for (var i = 0; i < Object.keys(this.entities).length; i++) {
-                var entity = this.entities[Object.keys(this.entities)[i]];
-                this.addEntityToStage(entity);
-                for (var j = 0; j < Object.keys(entity.componentMap).length; j++) {
-                    entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
-                }
-            };
-
-            // Add entities to stage
-
 
             // Run start callbacks
             this.callbacks.onStart.forEach(function (systemObj) {
                 systemObj.callback(systemObj.system);
             });
 
+            // Run component callbacks
+            for (var i = 0; i < Object.keys(this.entities).length; i++) {
+                var entity = this.entities[Object.keys(this.entities)[i]];
+                this.addEntityToStage(entity);
+                for (var j = 0; j < Object.keys(entity.components).length; j++) {
+                    entity.componentCallback(entity.components[Object.keys(entity.components)[j]]);
+                }
+            };
+
             // Start game loop
-            window.requestAnimationFrame(this.update.bind(this));
+            global.requestAnimationFrame(this.update.bind(this));
+        }
+    }, {
+        key: 'stop',
+        value: function stop() {
+            this.running = false;
         }
 
         /**
@@ -44267,13 +44309,15 @@ var Game = exports.Game = function () {
     }, {
         key: 'update',
         value: function update(time) {
+            if (!this.running) return;
+
             this.onUpdate(time);
 
             this.callbacks.onUpdate.forEach(function (systemObj) {
                 systemObj.callback(systemObj.system, time);
             });
 
-            window.requestAnimationFrame(this.update.bind(this));
+            global.requestAnimationFrame(this.update.bind(this));
         }
 
         /**
@@ -44324,15 +44368,33 @@ var Game = exports.Game = function () {
             if (entity instanceof _entity.Entity) {
                 this.entities[entity.id] = entity;
                 entity.game = this;
-                entity.container = new PIXI.Container();
-                entity.container.x = entity.x;
-                entity.container.y = entity.y;
-                entity.container.gameId = entity.id;
                 entity.attachComponents();
                 this.addEntityToStage(entity);
             } else {
                 throw new TypeError('Trying to add an entity which is not of type \'Entity\'');
             }
+        }
+
+        /**
+         * Create & add multiple entities
+         * @param {Entity[]} array of entities
+         */
+
+    }, {
+        key: 'addEntities',
+        value: function addEntities(entities) {
+            var _this = this;
+
+            entities.forEach(function (entity) {
+                if (entity instanceof _entity.Entity) {
+                    _this.entities[entity.id] = entity;
+                    entity.game = _this;
+                    entity.attachComponents();
+                    _this.addEntityToStage(entity);
+                } else {
+                    throw new TypeError('Trying to add an entity which is not of type \'Entity\'');
+                }
+            });
         }
 
         /**
@@ -44343,26 +44405,26 @@ var Game = exports.Game = function () {
     }, {
         key: 'removeEntity',
         value: function removeEntity(id) {
-            var _this = this;
+            var _this2 = this;
 
             if (this.entities[id] !== undefined) {
                 // Remove Pixi child for this entity
                 this.stage.children.forEach(function (child) {
                     if (child.gameId == id) {
-                        _this.stage.removeChild(child);
+                        _this2.stage.removeChild(child);
                     }
                 });
 
                 // Remove components in the game global list
                 var entity = this.entities[id];
-                var compIds = Object.keys(entity.componentMap);
+                var compIds = Object.keys(entity.components);
 
                 compIds.forEach(function (compId) {
-                    _this.components[compId].forEach(function (comp) {
+                    _this2.components[compId].forEach(function (comp) {
                         if (comp.entity.id == id) {
-                            var index = _this.components[comp.id].indexOf(comp);
+                            var index = _this2.components[comp.id].indexOf(comp);
                             if (index > -1) {
-                                _this.components[comp.id].splice(index, 1);
+                                _this2.components[comp.id].splice(index, 1);
                             }
                         }
                     });
@@ -44382,12 +44444,39 @@ var Game = exports.Game = function () {
         key: 'addSystem',
         value: function addSystem(system) {
             if (this.systems[system.id] === undefined && system instanceof _system.System) {
-                system.game = this;
-                this.systems[system.id] = system;
-                system.registerCallbacks();
+                this._registerSystem(system);
                 return system;
             } else {
                 throw new TypeError('Trying to add system which is not type of \'System\'');
+            }
+        }
+
+        /**
+         * Register multiple systems in the game instance
+         * @param {System[]} systems
+         */
+
+    }, {
+        key: 'addSystems',
+        value: function addSystems(systems) {
+            var _this3 = this;
+
+            systems.forEach(function (system) {
+                _this3.addSystem(system);
+            });
+        }
+    }, {
+        key: '_registerSystem',
+        value: function _registerSystem(system) {
+            system.game = this;
+            this.systems[system.id] = system;
+
+            if (system.onStart) {
+                this.callbacks.onStart.push({ system: system, callback: system.onStart });
+            }
+
+            if (system.onUpdate) {
+                this.callbacks.onUpdate.push({ system: system, callback: system.onUpdate });
             }
         }
 
@@ -44414,24 +44503,24 @@ var Game = exports.Game = function () {
     }, {
         key: 'getEntitiesWith',
         value: function getEntitiesWith(components) {
-            var _this2 = this;
+            var _this4 = this;
 
             var entities = [];
 
             var _loop = function _loop(i) {
-                var entity = _this2.entities[Object.keys(_this2.entities)[i]];
+                var entity = _this4.entities[Object.keys(_this4.entities)[i]];
                 var count = 0;
                 var target = components.length;
 
                 var _loop2 = function _loop2(j) {
-                    var key = Object.keys(entity.componentMap)[j];
+                    var key = Object.keys(entity.components)[j];
                     var result = components.find(function (c) {
-                        return c == entity.componentMap[key].id;
+                        return c == entity.components[key].id;
                     });
                     if (result) count++;
                 };
 
-                for (var j = 0; j < Object.keys(entity.componentMap).length; j++) {
+                for (var j = 0; j < Object.keys(entity.components).length; j++) {
                     _loop2(j);
                 }
 
@@ -44470,21 +44559,25 @@ var Game = exports.Game = function () {
             return this.getEntity(entityId).find(componentId);
         }
     }, {
-        key: 'rendererSetup',
-        value: function rendererSetup(settings) {
-            this.PIXI = PIXI;
-            this.application = new PIXI.Application({
-                width: this.width,
-                height: this.height,
-                antialias: settings.antialias ? settings.antialias : false,
-                transparent: settings.transparent ? settings.transparent : false,
-                resolution: settings.resolution ? settings.resolution : 1
-            });
-            this.stage = this.application.stage;
-            this.renderer = this.application.renderer;
-            this.renderer.autoResize = true;
+        key: '_rendererSetup',
+        value: function _rendererSetup(settings) {
+            if (!this.hasSetup) {
+                this.PIXI = PIXI;
+                PIXI.utils.skipHello(); // Disables console log stuff;
+                this.application = new PIXI.Application({
+                    width: this.width,
+                    height: this.height,
+                    antialias: settings.antialias ? settings.antialias : false,
+                    transparent: settings.transparent ? settings.transparent : false,
+                    resolution: settings.resolution ? settings.resolution : 1
+                });
+                this.stage = this.application.stage;
+                this.renderer = this.application.renderer;
+                this.renderer.autoResize = true;
 
-            document.body.appendChild(this.application.view);
+                document.body.appendChild(this.application.view);
+                this.hasSetup = true;
+            };
         }
     }, {
         key: 'addEntityToStage',
@@ -44496,6 +44589,71 @@ var Game = exports.Game = function () {
     }]);
 
     return Game;
+}();
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./src/core/signal.js":
+/*!****************************!*\
+  !*** ./src/core/signal.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Signal = exports.Signal = function () {
+    function Signal() {
+        _classCallCheck(this, Signal);
+
+        this.signals = {};
+    }
+
+    _createClass(Signal, [{
+        key: "bind",
+        value: function bind(id, system, callback) {
+            if (!this.signals[id]) {
+                this.signals[id] = [];
+            }
+
+            this.signals[id].push({ system: system, callback: callback });
+        }
+    }, {
+        key: "unbind",
+        value: function unbind(id, system) {
+            var _this = this;
+
+            if (this.signals[id]) {
+                this.signals[id].forEach(function (signal) {
+                    if (signal.system.id == system.id) {
+                        var index = _this.signals[id].indexOf(signal);
+                        _this.signals[id].splice(index, 1);
+                    }
+                });
+            }
+        }
+    }, {
+        key: "send",
+        value: function send(id, data) {
+            if (this.signals[id]) {
+                this.signals[id].forEach(function (signal) {
+                    signal.callback(data);
+                });
+            }
+        }
+    }]);
+
+    return Signal;
 }();
 
 /***/ }),
@@ -44569,15 +44727,14 @@ var System = exports.System = function () {
             }
         }
     }, {
-        key: "registerCallbacks",
-        value: function registerCallbacks() {
-            if (this.onStart) {
-                this.game.callbacks.onStart.push({ system: this, callback: this.onStart });
-            }
-
-            if (this.onUpdate) {
-                this.game.callbacks.onUpdate.push({ system: this, callback: this.onUpdate });
-            }
+        key: "listenSignal",
+        value: function listenSignal(signalId, callback) {
+            this.game.signal.bind(signalId, this, callback);
+        }
+    }, {
+        key: "sendSignal",
+        value: function sendSignal(signalId, data) {
+            this.game.signal.send(signalId, data);
         }
     }]);
 
@@ -44623,9 +44780,11 @@ var ShapeComponent = exports.ShapeComponent = function (_Component) {
     _createClass(ShapeComponent, [{
         key: 'onAttach',
         value: function onAttach() {
-            var system = this.entity.game.systems['RenderingSystem'];
-            system.renderShape(system, this.entity);
+            this.entity.sendSignal('shape.render', { entity: this.entity });
         }
+    }, {
+        key: 'onDetatch',
+        value: function onDetatch() {}
     }]);
 
     return ShapeComponent;
@@ -44673,30 +44832,78 @@ var RenderingSystem = exports.RenderingSystem = function (_System) {
 
     _createClass(RenderingSystem, [{
         key: 'start',
-        value: function start(system) {}
+        value: function start(system) {
+            system.listenSignal('shape.render', function (data) {
+                system.renderShape(system, data.entity);
+            });
+        }
     }, {
         key: 'update',
-        value: function update() {}
+        value: function update(system, time) {}
+
+        /**
+         * Renders a shape on an entity with a Shape component
+         * @param {System} system 
+         * @param {Entity} entity 
+         */
+
     }, {
         key: 'renderShape',
         value: function renderShape(system, entity) {
             var comp = entity.find('ShapeComponent');
-            var gfx = new system.game.PIXI.Graphics();
 
-            switch (comp.data.type) {
-                case 'circle':
-                    gfx.beginFill(comp.data.color);
-                    gfx.drawCircle(entity.x, entity.y, comp.data.radius);
-                    gfx.endFill();
-                    entity.container.addChild(gfx);
-                    break;
-                case 'rect':
-                    gfx.beginFill(comp.data.color);
-                    gfx.drawRect(entity.x, entity.y, comp.data.width, comp.data.height);
-                    gfx.endFill();
-                    entity.container.addChild(gfx);
-                    break;
+            if (comp) {
+                switch (comp.data.type) {
+                    case 'circle':
+                        var circle = system._drawCircle(system, entity.x, entity.y, comp.data.radius, comp.data.color);
+                        entity.container.addChild(circle);
+                        break;
+                    case 'rect':
+                        var rect = system._drawRect(entity.x, entity.y, comp.data.width, comp.data.height, comp.data.color);
+                        entity.container.addChild(rect);
+                        break;
+                }
             }
+        }
+
+        /**
+         * Creates a Circle Pixi Graphics object
+         * @param {System} system 
+         * @param {number} x 
+         * @param {number} y 
+         * @param {number} radius 
+         * @param {color} color - eg. '0xFFFFFF' or 'white'
+         * @returns {Pixi.Graphic} Pixi Graphics object
+         */
+
+    }, {
+        key: '_drawCircle',
+        value: function _drawCircle(system, x, y, radius, color) {
+            var gfx = new this.game.PIXI.Graphics();
+            gfx.beginFill(color);
+            gfx.drawCircle(x, y, radius);
+            gfx.endFill();
+            return gfx;
+        }
+
+        /**
+         * Creates a Rect Pixi Graphics object
+         * @param {number} x 
+         * @param {number} y 
+         * @param {number} width 
+         * @param {number} height 
+         * @param {color} color - eg. '0xFFFFFF' or 'white'
+         * @returns {Pixi.Graphic} Pixi Graphics object
+         */
+
+    }, {
+        key: '_drawRect',
+        value: function _drawRect(x, y, width, height, color) {
+            var gfx = new this.game.PIXI.Graphics();
+            gfx.beginFill(color);
+            gfx.drawRect(x, y, width, height);
+            gfx.endFill();
+            return gfx;
         }
     }]);
 
@@ -44745,9 +44952,10 @@ var Terra = function Terra() {
     this.Component = _component.Component;
     this.System = _system.System;
 
-    this.Module = {
-        ShapeComponent: _shapeComponent.ShapeComponent,
-        RenderingSystem: _renderingSystem.RenderingSystem
+    this.Renderer = _renderingSystem.RenderingSystem;
+
+    this.Shape = {
+        Component: _shapeComponent.ShapeComponent
     };
 };
 

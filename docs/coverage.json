@@ -1,7 +1,7 @@
 {
-  "coverage": "62.68%",
-  "expectCount": 67,
-  "actualCount": 42,
+  "coverage": "51%",
+  "expectCount": 100,
+  "actualCount": 51,
   "files": {
     "src/core/component.js": {
       "expectCount": 11,
@@ -13,61 +13,91 @@
       ]
     },
     "src/core/entity.js": {
-      "expectCount": 11,
-      "actualCount": 8,
+      "expectCount": 20,
+      "actualCount": 10,
       "undocumentLines": [
         1,
         2,
-        92
+        37,
+        41,
+        48,
+        52,
+        59,
+        84,
+        134,
+        138
       ]
     },
     "src/core/game.js": {
-      "expectCount": 27,
-      "actualCount": 20,
+      "expectCount": 32,
+      "actualCount": 24,
       "undocumentLines": [
-        5,
-        59,
-        254,
-        255,
-        262,
-        263,
-        269
+        6,
+        229,
+        297,
+        298,
+        299,
+        306,
+        307,
+        313
+      ]
+    },
+    "src/core/signal.js": {
+      "expectCount": 6,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        3,
+        4,
+        7,
+        15,
+        26
       ]
     },
     "src/core/system.js": {
-      "expectCount": 8,
+      "expectCount": 10,
       "actualCount": 5,
       "undocumentLines": [
         1,
         2,
-        18
+        18,
+        43,
+        47
       ]
     },
     "src/modules/components/shapeComponent.js": {
-      "expectCount": 2,
+      "expectCount": 4,
       "actualCount": 0,
       "undocumentLines": [
         3,
-        4
+        4,
+        8,
+        12
       ]
     },
     "src/modules/systems/renderingSystem.js": {
-      "expectCount": 1,
-      "actualCount": 0,
+      "expectCount": 9,
+      "actualCount": 3,
       "undocumentLines": [
-        3
+        3,
+        4,
+        6,
+        7,
+        10,
+        16
       ]
     },
     "src/terra.js": {
-      "expectCount": 7,
+      "expectCount": 8,
       "actualCount": 1,
       "undocumentLines": [
-        13,
         14,
-        17,
+        15,
         18,
         19,
-        21
+        20,
+        22,
+        24
       ]
     }
   }

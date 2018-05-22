@@ -19,9 +19,10 @@ class Terra {
         this.Component = Component;
         this.System = System;
 
-        this.Module = {
-            ShapeComponent: ShapeComponent,
-            RenderingSystem: RenderingSystem
+        this.Renderer = RenderingSystem;
+
+        this.Shape = {
+            Component: ShapeComponent
         }
     }
 }

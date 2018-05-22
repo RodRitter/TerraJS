@@ -22,10 +22,10 @@ export class Component {
     }
 
     /**
-     * This is called before onAttach
+     * This is called if attached while game is not running
      */
-    beforeAttach(entity) {
-        this.checkDependencies(entity);
+    offlineAttach(entity) {
+        this._checkDependencies(entity);
     }
 
     /**
@@ -38,21 +38,21 @@ export class Component {
      */
     onDetatch() {}
 
-    hasDependency(id) {
+    setDependency(id) {
         this.dependencies.push(id);
     }
 
     /**
      * This will check if the entity it's being attached to, has this component's dependencies.
      */
-    checkDependencies(entity) {
+    _checkDependencies(entity) {
         let missingDependencies = [];
 
         this.dependencies.forEach((dependency) => {
             let isMissing = true;
 
-            for(let i=0; i < Object.keys(entity.componentMap).length; i++) {
-                if(Object.keys(entity.componentMap)[i] == dependency) {
+            for(let i=0; i < Object.keys(entity.components).length; i++) {
+                if(Object.keys(entity.components)[i] == dependency) {
                     isMissing = false;
                 }
             }
@@ -64,5 +64,4 @@ export class Component {
             throw new Error(`${this.id} requires ${missingDependencies.length} other component dependencies. Make sure ${this.id} is added after it's dependencies.`);
         }
     }
-
 }

@@ -32,14 +32,15 @@
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/component.js~Component.html">Component</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/signal.js~Signal.html">Signal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~ReneringSystem.html">ReneringSystem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
 </ul>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">42/67</span></h1>
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">51/100</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -58,57 +59,65 @@
       <td data-ice="filePath"><span><a href="file/src/core/component.js.html#errorLines=1,2,41">src/core/component.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/core/component.js~Component.html">Component</a></span></td>
       <td class="coverage"><span data-ice="coverage">72 %</span><span data-ice="coverageCount" class="coverage-count">8/11</span></td>
-      <td style="display: none;" data-ice="size">1550 byte</td>
-      <td style="display: none;" data-ice="lines">67</td>
-      <td style="display: none;" data-ice="updated">2018-05-02 07:24:10 (UTC)</td>
+      <td style="display: none;" data-ice="size">1547 byte</td>
+      <td style="display: none;" data-ice="lines">66</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 11:13:24 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/core/entity.js.html#errorLines=1,2,92">src/core/entity.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/core/entity.js.html#errorLines=1,134,138,2,37,41,48,52,59,84">src/core/entity.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></td>
-      <td class="coverage"><span data-ice="coverage">72 %</span><span data-ice="coverageCount" class="coverage-count">8/11</span></td>
-      <td style="display: none;" data-ice="size">2476 byte</td>
-      <td style="display: none;" data-ice="lines">98</td>
-      <td style="display: none;" data-ice="updated">2018-05-02 09:33:10 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">10/20</span></td>
+      <td style="display: none;" data-ice="size">3357 byte</td>
+      <td style="display: none;" data-ice="lines">141</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 11:14:35 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/core/game.js.html#errorLines=254,255,262,263,269,5,59">src/core/game.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/core/game.js.html#errorLines=229,297,298,299,306,307,313,6">src/core/game.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/core/game.js~Game.html">Game</a></span></td>
-      <td class="coverage"><span data-ice="coverage">74 %</span><span data-ice="coverageCount" class="coverage-count">20/27</span></td>
-      <td style="display: none;" data-ice="size">7615 byte</td>
-      <td style="display: none;" data-ice="lines">273</td>
-      <td style="display: none;" data-ice="updated">2018-05-02 11:01:57 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">75 %</span><span data-ice="coverageCount" class="coverage-count">24/32</span></td>
+      <td style="display: none;" data-ice="size">8630 byte</td>
+      <td style="display: none;" data-ice="lines">317</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 11:15:48 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/core/system.js.html#errorLines=1,18,2">src/core/system.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/core/signal.js.html#errorLines=15,2,26,3,4,7">src/core/signal.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/core/signal.js~Signal.html">Signal</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/6</span></td>
+      <td style="display: none;" data-ice="size">772 byte</td>
+      <td style="display: none;" data-ice="lines">32</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 11:12:45 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/core/system.js.html#errorLines=1,18,2,43,47">src/core/system.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/core/system.js~System.html">System</a></span></td>
-      <td class="coverage"><span data-ice="coverage">62 %</span><span data-ice="coverageCount" class="coverage-count">5/8</span></td>
-      <td style="display: none;" data-ice="size">931 byte</td>
-      <td style="display: none;" data-ice="lines">41</td>
-      <td style="display: none;" data-ice="updated">2018-05-06 11:24:55 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">5/10</span></td>
+      <td style="display: none;" data-ice="size">1121 byte</td>
+      <td style="display: none;" data-ice="lines">49</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 09:59:24 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/components/shapeComponent.js.html#errorLines=3,4">src/modules/components/shapeComponent.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/modules/components/shapeComponent.js.html#errorLines=12,3,4,8">src/modules/components/shapeComponent.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
-      <td style="display: none;" data-ice="size">162 byte</td>
-      <td style="display: none;" data-ice="lines">6</td>
-      <td style="display: none;" data-ice="updated">2018-05-02 11:30:54 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/4</span></td>
+      <td style="display: none;" data-ice="size">277 byte</td>
+      <td style="display: none;" data-ice="lines">12</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 11:18:14 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/modules/systems/renderingSystem.js.html#errorLines=3">src/modules/systems/renderingSystem.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/systems/renderingSystem.js~ReneringSystem.html">ReneringSystem</a></span></td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
-      <td style="display: none;" data-ice="size">99 byte</td>
-      <td style="display: none;" data-ice="lines">4</td>
-      <td style="display: none;" data-ice="updated">2018-05-02 11:31:54 (UTC)</td>
+      <td data-ice="filePath"><span><a href="file/src/modules/systems/renderingSystem.js.html#errorLines=10,16,3,4,6,7">src/modules/systems/renderingSystem.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/modules/systems/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></td>
+      <td class="coverage"><span data-ice="coverage">33 %</span><span data-ice="coverageCount" class="coverage-count">3/9</span></td>
+      <td style="display: none;" data-ice="size">2183 byte</td>
+      <td style="display: none;" data-ice="lines">73</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 11:34:32 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/src/terra.js.html#errorLines=13,14,17,18,19,21">src/terra.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/src/terra.js.html#errorLines=14,15,18,19,20,22,24">src/terra.js</a></span></td>
       <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">14 %</span><span data-ice="coverageCount" class="coverage-count">1/7</span></td>
-      <td style="display: none;" data-ice="size">641 byte</td>
-      <td style="display: none;" data-ice="lines">26</td>
-      <td style="display: none;" data-ice="updated">2018-05-02 06:23:05 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">12 %</span><span data-ice="coverageCount" class="coverage-count">1/8</span></td>
+      <td style="display: none;" data-ice="size">749 byte</td>
+      <td style="display: none;" data-ice="lines">29</td>
+      <td style="display: none;" data-ice="updated">2018-05-03 10:06:02 (UTC)</td>
     </tr>
 </tbody>
 </table>

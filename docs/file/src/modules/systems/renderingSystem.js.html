@@ -32,9 +32,10 @@
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/component.js~Component.html">Component</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/signal.js~Signal.html">Signal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~ReneringSystem.html">ReneringSystem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -42,8 +43,77 @@
 <div class="content" data-ice="content"><h1 data-ice="title">src/modules/systems/renderingSystem.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { System } from &apos;../../core/system.js&apos;;
 
-export class ReneringSystem extends System {
-    
+export class RenderingSystem extends System {
+    constructor() {
+        super(&apos;RenderingSystem&apos;, ()=&gt;{}, ()=&gt;{});
+        this.onStart = this.start;
+        this.onUpdate = this.update;
+    }
+
+    start(system) {
+        system.listenSignal(&apos;shape.render&apos;, (data) =&gt; {
+            system.renderShape(system, data.entity);
+        });
+    }
+
+    update(system, time) {}
+
+
+    /**
+     * Renders a shape on an entity with a Shape component
+     * @param {System} system 
+     * @param {Entity} entity 
+     */
+    renderShape(system, entity) {
+        let comp = entity.find(&apos;ShapeComponent&apos;);
+
+        if(comp) {
+            switch(comp.data.type) {
+                case &apos;circle&apos;:
+                    let circle = system._drawCircle(system, entity.x, entity.y, comp.data.radius, comp.data.color);
+                    entity.container.addChild(circle);
+                    break;
+                case &apos;rect&apos;:
+                    let rect = system._drawRect(entity.x, entity.y, comp.data.width, comp.data.height, comp.data.color);
+                    entity.container.addChild(rect);
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Creates a Circle Pixi Graphics object
+     * @param {System} system 
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} radius 
+     * @param {color} color - eg. &apos;0xFFFFFF&apos; or &apos;white&apos;
+     * @returns {Pixi.Graphic} Pixi Graphics object
+     */
+    _drawCircle(system, x, y, radius, color) {
+        let gfx = new this.game.PIXI.Graphics();
+        gfx.beginFill(color);
+        gfx.drawCircle(x, y, radius);
+        gfx.endFill();
+        return gfx;
+    }
+
+    /**
+     * Creates a Rect Pixi Graphics object
+     * @param {number} x 
+     * @param {number} y 
+     * @param {number} width 
+     * @param {number} height 
+     * @param {color} color - eg. &apos;0xFFFFFF&apos; or &apos;white&apos;
+     * @returns {Pixi.Graphic} Pixi Graphics object
+     */
+    _drawRect(x, y, width, height, color) {
+        let gfx = new this.game.PIXI.Graphics();
+        gfx.beginFill(color);
+        gfx.drawRect(x, y, width, height); 
+        gfx.endFill();
+        return gfx;
+    }
 }</code></pre>
 
 </div>

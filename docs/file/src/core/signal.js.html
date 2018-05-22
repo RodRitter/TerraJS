@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/core/system.js | terra</title>
+  <title data-ice="title">src/core/signal.js | terra</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -40,55 +40,38 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/core/system.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export class System {
-    constructor(id, onStart, onUpdate) {
-        /**
-         * @type {string}
-         */
-        this.id = id;
-
-        /**
-         * @type {Game}
-         */
-        this.game = null;
-
-        /**
-         * @type {function}
-         */
-
-        this.onStart = onStart;
-        this.onUpdate = onUpdate;
+<div class="content" data-ice="content"><h1 data-ice="title">src/core/signal.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+export class Signal {
+    constructor() {
+        this.signals = {};
     }
 
-    /**
-     * Retrieves an Entity from the Game
-     * @param {string} id - ID of the entity
-     * @return {Entity}
-     */
-    getEntity(id) {
-        if(this.game !== null) {
-            return this.game.getEntity(id);
+    bind(id, system, callback) {
+        if(!this.signals[id]) {
+            this.signals[id] = [];
+        }
+
+        this.signals[id].push({ system: system, callback: callback });
+    }
+
+    unbind(id, system) {
+        if(this.signals[id]) {
+            this.signals[id].forEach((signal) =&gt; {
+                if(signal.system.id == system.id) {
+                    let index = this.signals[id].indexOf(signal);
+                    this.signals[id].splice(index, 1);
+                }
+            });
         }
     }
 
-    /**
-     * Retrieves a Components from a specific Entity
-     * @param {string} entityId - The ID of the Entity
-     * @param {string} componentId - The ID of the Component
-     */
-    getComponentFromEntity(entityId, componentId) {
-        if(this.game) {
-            return this.game.getEntity(entityId).getComponent(componentId);
+    send(id, data) {
+        if(this.signals[id]) {
+            this.signals[id].forEach((signal) =&gt; {
+                signal.callback(data);
+            });
         }
-    }
-
-    listenSignal(signalId, callback) {
-        this.game.signal.bind(signalId, this, callback);
-    }
-
-    sendSignal(signalId, data) {
-        this.game.signal.send(signalId, data);
     }
 }</code></pre>
 

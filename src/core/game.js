@@ -1,20 +1,26 @@
 import { Entity } from './entity.js';
 import { System } from './system.js';
+import { Signal } from './signal.js';
 import * as PIXI from 'pixi.js';
 
 export class Game {
 
     /**
      * The Game class takes in dimensions of the game screen
-     * @param {number} width width of game screen
-     * @param {number} height height of game screen
+     * @param {number} width - width of game screen
+     * @param {number} height - height of game screen
      * @param {Object} extra settings for the renderer
      */
-    constructor(width, height, settings) {
+    constructor(width, height, rendererSettings) {
         /**
          * @type {boolean}
          */
         this.running = false;
+
+        /**
+         * @type {boolean}
+         */
+        this.hasSetup = false;
 
         /**
          * @type {number}
@@ -56,7 +62,15 @@ export class Game {
          */
         this.callbacks.onUpdate = [];
 
-        this.rendererSettings = settings;
+        /**
+         * @type {Object}
+         */
+        this.rendererSettings = rendererSettings;
+
+        /**
+         * @type {Signal}
+         */
+        this.signal = new Signal();
     }
 
     /**
@@ -64,42 +78,44 @@ export class Game {
      */
     start() {
         this.running = true;
-        this.rendererSetup(this.rendererSettings);
+        this._rendererSetup(this.rendererSettings);
         this.onStart();
-
-        // Run component callbacks
-        for(let i=0; i < Object.keys(this.entities).length; i++) {
-            let entity = this.entities[Object.keys(this.entities)[i]];
-            this.addEntityToStage(entity);
-            for(let j=0; j < Object.keys(entity.componentMap).length; j++) {
-                entity.componentCallback(entity.componentMap[Object.keys(entity.componentMap)[j]]);
-            }
-        };
-
-        // Add entities to stage
-
 
         // Run start callbacks
         this.callbacks.onStart.forEach((systemObj) => {
             systemObj.callback(systemObj.system);
         });
-  
+
+        // Run component callbacks
+        for(let i=0; i < Object.keys(this.entities).length; i++) {
+            let entity = this.entities[Object.keys(this.entities)[i]];
+            this.addEntityToStage(entity);
+            for(let j=0; j < Object.keys(entity.components).length; j++) {
+                entity.componentCallback(entity.components[Object.keys(entity.components)[j]]);
+            }
+        };
 
         // Start game loop
-        window.requestAnimationFrame(this.update.bind(this));
+        global.requestAnimationFrame(this.update.bind(this));
+    }
+
+    stop() {
+        this.running = false;
     }
 
     /**
      * The game update function. Use onUpdate() callback to hook into here
      */
     update(time) {
+        if(!this.running) return;
+
         this.onUpdate(time);
 
         this.callbacks.onUpdate.forEach((systemObj) => {
             systemObj.callback(systemObj.system, time);
         });
         
-        window.requestAnimationFrame(this.update.bind(this));
+        global.requestAnimationFrame(this.update.bind(this));
     }
 
     /**
@@ -138,10 +154,6 @@ export class Game {
         if(entity instanceof Entity) {
             this.entities[entity.id] = entity;
             entity.game = this;
-            entity.container = new PIXI.Container();
-            entity.container.x = entity.x;
-            entity.container.y = entity.y;
-            entity.container.gameId = entity.id;
             entity.attachComponents();
             this.addEntityToStage(entity);
         } else {
@@ -149,6 +161,25 @@ export class Game {
         }
         
     }
+
+    /**
+     * Create & add multiple entities
+     * @param {Entity[]} array of entities
+     */
+    addEntities(entities) {
+        entities.forEach((entity) => {
+            if(entity instanceof Entity) {
+                this.entities[entity.id] = entity;
+                entity.game = this;
+                entity.attachComponents();
+                this.addEntityToStage(entity);
+            } else {
+                throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);
+            }
+        });
+    }
+
+
 
     /**
      * Remove entity from game
@@ -165,7 +196,7 @@ export class Game {
             
             // Remove components in the game global list
             let entity = this.entities[id];
-            let compIds = Object.keys(entity.componentMap);
+            let compIds = Object.keys(entity.components);
 
             compIds.forEach((compId) => {
                 this.components[compId].forEach((comp) => {
@@ -189,12 +220,33 @@ export class Game {
      */
     addSystem(system) {
         if(this.systems[system.id] === undefined && system instanceof System) {
-            system.game = this;
-            this.systems[system.id] = system;
-            system.registerCallbacks();
+            this._registerSystem(system);
             return system;
         } else {
             throw(new TypeError(`Trying to add system which is not type of 'System'`));
+        }
+    }
+
+    /**
+     * Register multiple systems in the game instance
+     * @param {System[]} systems
+     */
+    addSystems(systems) {
+        systems.forEach((system) => {
+            this.addSystem(system)
+        });
+    }
+
+    _registerSystem(system) {
+        system.game = this;
+        this.systems[system.id] = system;
+
+        if(system.onStart) {
+            this.callbacks.onStart.push({system: system, callback: system.onStart});
+        }
+
+        if(system.onUpdate) {
+            this.callbacks.onUpdate.push({system: system, callback: system.onUpdate});
         }
     }
 
@@ -222,9 +274,9 @@ export class Game {
             let count = 0;
             let target = components.length;
             
-            for(let j=0; j<Object.keys(entity.componentMap).length; j++) {
-                let key = Object.keys(entity.componentMap)[j];
-                let result = components.find(c => c == entity.componentMap[key].id);
+            for(let j=0; j<Object.keys(entity.components).length; j++) {
+                let key = Object.keys(entity.components)[j];
+                let result = components.find(c => c == entity.components[key].id);
                 if(result) count++
             }
 
@@ -253,20 +305,24 @@ export class Game {
         return this.getEntity(entityId).find(componentId);
     }
 
-    rendererSetup(settings) {
-        this.PIXI = PIXI;
-        this.application = new PIXI.Application({
-            width: this.width,
-            height: this.height,
-            antialias: settings.antialias ? settings.antialias : false,
-            transparent: settings.transparent ? settings.transparent : false,
-            resolution: settings.resolution ? settings.resolution : 1
-        });
-        this.stage = this.application.stage;
-        this.renderer = this.application.renderer;
-        this.renderer.autoResize = true;
+    _rendererSetup(settings) {
+        if(!this.hasSetup) {
+            this.PIXI = PIXI;
+            PIXI.utils.skipHello(); // Disables console log stuff;
+            this.application = new PIXI.Application({
+                width: this.width,
+                height: this.height,
+                antialias: settings.antialias ? settings.antialias : false,
+                transparent: settings.transparent ? settings.transparent : false,
+                resolution: settings.resolution ? settings.resolution : 1
+            });
+            this.stage = this.application.stage;
+            this.renderer = this.application.renderer;
+            this.renderer.autoResize = true;
 
-        document.body.appendChild(this.application.view);
+            document.body.appendChild(this.application.view);
+            this.hasSetup = true;
+        };
     }
 
     addEntityToStage(entity) {

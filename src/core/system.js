@@ -36,17 +36,17 @@ export class System {
      */
     getComponentFromEntity(entityId, componentId) {
         if(this.game) {
-            return this.game.getEntity(entityId).getComponent(componentId);
+            let entity = this.game.getEntity(entityId);
+            let component = entity.find(componentId)
+            return component;
         }
     }
 
-    registerCallbacks() {
-        if(this.onStart) {
-            this.game.callbacks.onStart.push({system: this, callback: this.onStart});
-        }
+    listenSignal(signalId, callback) {
+        this.game.signal.bind(signalId, this, callback);
+    }
 
-        if(this.onUpdate) {
-            this.game.callbacks.onUpdate.push({system: this, callback: this.onUpdate});
-        }
+    sendSignal(signalId, data) {
+        this.game.signal.send(signalId, data);
     }
 }

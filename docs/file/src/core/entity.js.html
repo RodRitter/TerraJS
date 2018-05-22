@@ -32,9 +32,10 @@
   <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#core">core</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/component.js~Component.html">Component</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/entity.js~Entity.html">Entity</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/signal.js~Signal.html">Signal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~ReneringSystem.html">ReneringSystem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -50,7 +51,12 @@
         /**
          * @type {Object}
          */
-        this.componentMap = {};
+        this.components = {};
+
+        /**
+         * @type {string[]}
+         */
+        this._componentIds = components;
 
         /**
          * @type {Game}
@@ -60,23 +66,41 @@
         /**
          * @type {number}
          */
-        this.x = 0;
+        this._x = 0;
 
         /**
          * @type {number}
          */
-        this.y = 0;
+        this._y = 0;
 
         /**
          * @type {Pixi.Container}
          */
         this.container;
-        
-        if(components) {
-            for(let i=0; i&lt;components.length; i++) {
-                this.attach(components[i]);
-            }
+        this.container = new PIXI.Container();
+        this.container.gameId = this.id;
+    }
+
+    set x(value) {
+        if(this.container) {
+            this._x = value;
+            this.container.x = value;
         }
+    }
+
+    get x() {
+        return this._x;
+    }
+
+    set y(value) {
+        if(this.container) {
+            this._y = value;
+            this.container.y = value;
+        }
+    }
+
+    get y() {
+        return this._y;
     }
 
     /**
@@ -84,8 +108,8 @@
      * @param {Component} component
      */
     attach(component) {
-        if(this.componentMap[component.id] === undefined) {
-            this.componentMap[component.id] = component;
+        if(this.components[component.id] === undefined) {
+            this.components[component.id] = component;
 
             if(this.game.components[component.id] === undefined) {
                 this.game.components[component.id] = [];
@@ -100,13 +124,21 @@
         }
     }
 
+    attachComponents() {
+        if(this._componentIds) {
+            for(let i=0; i&lt;this._componentIds.length; i++) {
+                this.attach(this._componentIds[i]);
+            }
+        }
+    }
+
     /**
      * Detatch a component from entity
      * @param {string} ID of component
      */
     detatch(id) {
-        this.componentMap[id].onDetatch(); // First call onDetatch before removing it
-        delete this.componentMap[id]; // Remove from Entity map
+        this.components[id].onDetatch(); // First call onDetatch before removing it
+        delete this.components[id]; // Remove from Entity map
 
         // Remove from Game global component list
         this.game.components[id].forEach((component) =&gt; {
@@ -125,17 +157,29 @@
      * @return {Component}
      */
     find(id) {
-        if(this.componentMap[id] !== undefined) {
-            return this.componentMap[id];
+        if(this.components[id] !== undefined) {
+            return this.components[id];
         }
         throw new Error(`Cannot find Component &apos;${id}&apos; on Entity &apos;${this.id}&apos;`);
     }
 
+    /**
+     * Whenever a component is attached, it&apos;s callbacks are called
+     * @param {Component} component 
+     */
     componentCallback(component) {
         if(this.game.running) {
             component.beforeAttach(this);
             component.onAttach();
         }
+    }
+
+    listenSignal(signalId, callback) {
+        this.game.signal.bind(signalId, this, callback);
+    }
+
+    sendSignal(signalId, data) {
+        this.game.signal.send(signalId, data);
     }
 
 }</code></pre>

@@ -18,15 +18,21 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "terra/src/modules/systems/renderingsystem.js~reneringsystem",
-    "class/src/modules/systems/renderingSystem.js~ReneringSystem.html",
-    "<span>ReneringSystem</span> <span class=\"search-result-import-path\">terra/src/modules/systems/renderingSystem.js</span>",
+    "terra/src/modules/systems/renderingsystem.js~renderingsystem",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html",
+    "<span>RenderingSystem</span> <span class=\"search-result-import-path\">terra/src/modules/systems/renderingSystem.js</span>",
     "class"
   ],
   [
     "terra/src/modules/components/shapecomponent.js~shapecomponent",
     "class/src/modules/components/shapeComponent.js~ShapeComponent.html",
     "<span>ShapeComponent</span> <span class=\"search-result-import-path\">terra/src/modules/components/shapeComponent.js</span>",
+    "class"
+  ],
+  [
+    "terra/src/core/signal.js~signal",
+    "class/src/core/signal.js~Signal.html",
+    "<span>Signal</span> <span class=\"search-result-import-path\">terra/src/core/signal.js</span>",
     "class"
   ],
   [
@@ -324,15 +330,15 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/core/component.js~component#beforeattach",
-    "class/src/core/component.js~Component.html#instance-method-beforeAttach",
-    "src/core/component.js~Component#beforeAttach",
+    "src/core/component.js~component#_checkdependencies",
+    "class/src/core/component.js~Component.html#instance-method-_checkDependencies",
+    "src/core/component.js~Component#_checkDependencies",
     "method"
   ],
   [
-    "src/core/component.js~component#checkdependencies",
-    "class/src/core/component.js~Component.html#instance-method-checkDependencies",
-    "src/core/component.js~Component#checkDependencies",
+    "src/core/component.js~component#beforeattach",
+    "class/src/core/component.js~Component.html#instance-method-beforeAttach",
+    "src/core/component.js~Component#beforeAttach",
     "method"
   ],
   [
@@ -390,9 +396,33 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/core/entity.js~entity#_componentids",
+    "class/src/core/entity.js~Entity.html#instance-member-_componentIds",
+    "src/core/entity.js~Entity#_componentIds",
+    "member"
+  ],
+  [
+    "src/core/entity.js~entity#_x",
+    "class/src/core/entity.js~Entity.html#instance-member-_x",
+    "src/core/entity.js~Entity#_x",
+    "member"
+  ],
+  [
+    "src/core/entity.js~entity#_y",
+    "class/src/core/entity.js~Entity.html#instance-member-_y",
+    "src/core/entity.js~Entity#_y",
+    "member"
+  ],
+  [
     "src/core/entity.js~entity#attach",
     "class/src/core/entity.js~Entity.html#instance-method-attach",
     "src/core/entity.js~Entity#attach",
+    "method"
+  ],
+  [
+    "src/core/entity.js~entity#attachcomponents",
+    "class/src/core/entity.js~Entity.html#instance-method-attachComponents",
+    "src/core/entity.js~Entity#attachComponents",
     "method"
   ],
   [
@@ -402,9 +432,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/core/entity.js~entity#componentmap",
-    "class/src/core/entity.js~Entity.html#instance-member-componentMap",
-    "src/core/entity.js~Entity#componentMap",
+    "src/core/entity.js~entity#components",
+    "class/src/core/entity.js~Entity.html#instance-member-components",
+    "src/core/entity.js~Entity#components",
     "member"
   ],
   [
@@ -412,6 +442,12 @@ window.esdocSearchIndex = [
     "class/src/core/entity.js~Entity.html#instance-constructor-constructor",
     "src/core/entity.js~Entity#constructor",
     "method"
+  ],
+  [
+    "src/core/entity.js~entity#container",
+    "class/src/core/entity.js~Entity.html#instance-member-container",
+    "src/core/entity.js~Entity#container",
+    "member"
   ],
   [
     "src/core/entity.js~entity#detatch",
@@ -438,14 +474,38 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/core/entity.js~entity#listensignal",
+    "class/src/core/entity.js~Entity.html#instance-method-listenSignal",
+    "src/core/entity.js~Entity#listenSignal",
+    "method"
+  ],
+  [
+    "src/core/entity.js~entity#sendsignal",
+    "class/src/core/entity.js~Entity.html#instance-method-sendSignal",
+    "src/core/entity.js~Entity#sendSignal",
+    "method"
+  ],
+  [
     "src/core/entity.js~entity#x",
-    "class/src/core/entity.js~Entity.html#instance-member-x",
+    "class/src/core/entity.js~Entity.html#instance-set-x",
+    "src/core/entity.js~Entity#x",
+    "member"
+  ],
+  [
+    "src/core/entity.js~entity#x",
+    "class/src/core/entity.js~Entity.html#instance-get-x",
     "src/core/entity.js~Entity#x",
     "member"
   ],
   [
     "src/core/entity.js~entity#y",
-    "class/src/core/entity.js~Entity.html#instance-member-y",
+    "class/src/core/entity.js~Entity.html#instance-get-y",
+    "src/core/entity.js~Entity#y",
+    "member"
+  ],
+  [
+    "src/core/entity.js~entity#y",
+    "class/src/core/entity.js~Entity.html#instance-set-y",
     "src/core/entity.js~Entity#y",
     "member"
   ],
@@ -454,6 +514,30 @@ window.esdocSearchIndex = [
     "file/src/core/game.js.html",
     "src/core/game.js",
     "file"
+  ],
+  [
+    "src/core/game.js~game#pixi",
+    "class/src/core/game.js~Game.html#instance-member-PIXI",
+    "src/core/game.js~Game#PIXI",
+    "member"
+  ],
+  [
+    "src/core/game.js~game#_registersystem",
+    "class/src/core/game.js~Game.html#instance-method-_registerSystem",
+    "src/core/game.js~Game#_registerSystem",
+    "method"
+  ],
+  [
+    "src/core/game.js~game#_renderersetup",
+    "class/src/core/game.js~Game.html#instance-method-_rendererSetup",
+    "src/core/game.js~Game#_rendererSetup",
+    "method"
+  ],
+  [
+    "src/core/game.js~game#addentities",
+    "class/src/core/game.js~Game.html#instance-method-addEntities",
+    "src/core/game.js~Game#addEntities",
+    "method"
   ],
   [
     "src/core/game.js~game#addentity",
@@ -471,6 +555,12 @@ window.esdocSearchIndex = [
     "src/core/game.js~game#addsystem",
     "class/src/core/game.js~Game.html#instance-method-addSystem",
     "src/core/game.js~Game#addSystem",
+    "method"
+  ],
+  [
+    "src/core/game.js~game#addsystems",
+    "class/src/core/game.js~Game.html#instance-method-addSystems",
+    "src/core/game.js~Game#addSystems",
     "method"
   ],
   [
@@ -570,15 +660,15 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/core/game.js~game#renderersetup",
-    "class/src/core/game.js~Game.html#instance-method-rendererSetup",
-    "src/core/game.js~Game#rendererSetup",
-    "method"
-  ],
-  [
     "src/core/game.js~game#running",
     "class/src/core/game.js~Game.html#instance-member-running",
     "src/core/game.js~Game#running",
+    "member"
+  ],
+  [
+    "src/core/game.js~game#signal",
+    "class/src/core/game.js~Game.html#instance-member-signal",
+    "src/core/game.js~Game#signal",
     "member"
   ],
   [
@@ -610,6 +700,42 @@ window.esdocSearchIndex = [
     "class/src/core/game.js~Game.html#instance-member-width",
     "src/core/game.js~Game#width",
     "member"
+  ],
+  [
+    "src/core/signal.js",
+    "file/src/core/signal.js.html",
+    "src/core/signal.js",
+    "file"
+  ],
+  [
+    "src/core/signal.js~signal#bind",
+    "class/src/core/signal.js~Signal.html#instance-method-bind",
+    "src/core/signal.js~Signal#bind",
+    "method"
+  ],
+  [
+    "src/core/signal.js~signal#constructor",
+    "class/src/core/signal.js~Signal.html#instance-constructor-constructor",
+    "src/core/signal.js~Signal#constructor",
+    "method"
+  ],
+  [
+    "src/core/signal.js~signal#send",
+    "class/src/core/signal.js~Signal.html#instance-method-send",
+    "src/core/signal.js~Signal#send",
+    "method"
+  ],
+  [
+    "src/core/signal.js~signal#signals",
+    "class/src/core/signal.js~Signal.html#instance-member-signals",
+    "src/core/signal.js~Signal#signals",
+    "member"
+  ],
+  [
+    "src/core/signal.js~signal#unbind",
+    "class/src/core/signal.js~Signal.html#instance-method-unbind",
+    "src/core/signal.js~Signal#unbind",
+    "method"
   ],
   [
     "src/core/system.js",
@@ -648,6 +774,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/core/system.js~system#listensignal",
+    "class/src/core/system.js~System.html#instance-method-listenSignal",
+    "src/core/system.js~System#listenSignal",
+    "method"
+  ],
+  [
     "src/core/system.js~system#onstart",
     "class/src/core/system.js~System.html#instance-member-onStart",
     "src/core/system.js~System#onStart",
@@ -658,6 +790,12 @@ window.esdocSearchIndex = [
     "class/src/core/system.js~System.html#instance-member-onUpdate",
     "src/core/system.js~System#onUpdate",
     "member"
+  ],
+  [
+    "src/core/system.js~system#sendsignal",
+    "class/src/core/system.js~System.html#instance-method-sendSignal",
+    "src/core/system.js~System#sendSignal",
+    "method"
   ],
   [
     "src/modules/components/shapecomponent.js",
@@ -672,10 +810,70 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/modules/components/shapecomponent.js~shapecomponent#onattach",
+    "class/src/modules/components/shapeComponent.js~ShapeComponent.html#instance-method-onAttach",
+    "src/modules/components/shapeComponent.js~ShapeComponent#onAttach",
+    "method"
+  ],
+  [
+    "src/modules/components/shapecomponent.js~shapecomponent#ondetatch",
+    "class/src/modules/components/shapeComponent.js~ShapeComponent.html#instance-method-onDetatch",
+    "src/modules/components/shapeComponent.js~ShapeComponent#onDetatch",
+    "method"
+  ],
+  [
     "src/modules/systems/renderingsystem.js",
     "file/src/modules/systems/renderingSystem.js.html",
     "src/modules/systems/renderingSystem.js",
     "file"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#_drawcircle",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-_drawCircle",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#_drawCircle",
+    "method"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#_drawrect",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-_drawRect",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#_drawRect",
+    "method"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#constructor",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-constructor-constructor",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#constructor",
+    "method"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#onstart",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-member-onStart",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#onStart",
+    "member"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#onupdate",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-member-onUpdate",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#onUpdate",
+    "member"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#rendershape",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-renderShape",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#renderShape",
+    "method"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#start",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-start",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#start",
+    "method"
+  ],
+  [
+    "src/modules/systems/renderingsystem.js~renderingsystem#update",
+    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-update",
+    "src/modules/systems/renderingSystem.js~RenderingSystem#update",
+    "method"
   ],
   [
     "src/terra.js",

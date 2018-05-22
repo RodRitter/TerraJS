@@ -6,7 +6,8 @@ export class ShapeComponent extends Component {
     }
 
     onAttach() {
-        let system = this.entity.game.systems['RenderingSystem'];
-        system.renderShape(system, this.entity);
+        this.entity.sendSignal('shape.render', {entity: this.entity});
     }
+
+    onDetatch() {}
 }

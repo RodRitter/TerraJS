@@ -20,6 +20,10 @@ describe('Game', function() {
         game.height.should.equal(100);
     });
 
+    it('should have a renderer', function() {
+        (typeof game.renderer).should.not.equal(undefined);
+    });
+
     describe('createEntities()', function() {
         it('should add entities to the game', function() {
             let entities = [
@@ -129,6 +133,143 @@ describe('Game', function() {
             getExisting.length.should.equal(1);
         });
 
+    });
+
+});
+
+describe('Component', function() {
+    var game;
+        
+    beforeEach(function() {
+        game = new Game(100,100, {});
+    });
+
+    describe('offlineAttach()', function() {
+        it('should not throw error if dependencies ARE fulfilled', function() {
+            let setup = function() {
+                var component1 = new Component('TestComponent1', {});
+                var component2 = new Component('TestComponent2', {});
+                var entity = new Entity ('TestEntity', game, []);
+
+                component1.setDependency('TestComponent2');
+                entity.attach(component2);
+                entity.attach(component1);
+                game.addEntity(entity);
+                return;
+            }
+
+            setup.should.not.throw(Error);
+        });
+
+        it('should throw an error if dependencies are NOT fulfilled', function() {
+            let setup = function() {
+                var component1 = new Component('TestComponent1', {});
+                var entity = new Entity ('TestEntity', game, []);
+
+                component1.setDependency('TestComponent2');
+                entity.attach(component1);
+                game.addEntity(entity);
+                return;
+            }
+
+            setup.should.throw(Error);
+        });
+    });
+});
+
+describe('Entity', function() {
+    var game;
+        
+    beforeEach(function() {
+        game = new Game(100,100, {});
+    });
+
+    describe('set x & y', function() {
+        it('should change both Entity & Pixi.Container\'s values', function() {
+           let entity = new Entity('TestEntity', []);
+           game.addEntity(entity);
+           entity.x = 123;
+           entity.y = 246;
+           entity._x.should.equal(123);
+           entity.container.x.should.equal(123);
+           entity._y.should.equal(246);
+           entity.container.y.should.equal(246);
+        });
+    });
+
+    describe('attach()', function() {
+        it('should throw an error if a component already exists', function() {
+            let setup = function() {
+                let comp1 = new Component('Comp1', {});
+                let duplicate_comp1 = new Component('Comp1', {});
+                let entity = new Entity('TestEntity', game, [comp1, duplicate_comp1]);
+                game.addEntity(entity);
+            }
+            setup.should.throw(Error);
+        });
+    });
+
+    describe('detach()', function() {
+        it('should detach a given component', function() {
+            let comp1 = new Component('Comp1', {});
+            let comp2 = new Component('Comp2', {});
+            let entity = new Entity('TestEntity', game, [comp1, comp2]);
+
+            game.addEntity(entity);
+            Object.keys(entity.components).length.should.equal(2);
+            entity.detach('Comp1');
+            Object.keys(entity.components).length.should.equal(1);
+        });
+    });
+
+    describe('find()', function() {
+        it('should find a specified component', function() {
+            let comp1 = new Component('Comp1', {foo: 'bar'});
+            let entity = new Entity('TestEntity', game, [comp1]);
+
+            game.addEntity(entity);
+
+            let comp = entity.find('Comp1');
+            comp.data.foo.should.equal('bar');
+        });
+    });
+});
+
+describe('System', function() {
+    var game;
+        
+    beforeEach(function() {
+        game = new Game(100,100, {});
+    });
+
+    describe('getEntity()', function() {
+        it('should find a specified entity', function() {
+            let entity = new Entity('TestEntity', game, []);
+            game.addEntity(entity);
+
+            let system = new System('TestSystem', () => {}, () =>{});
+            game.addSystem(system);
+
+            let searchedEntity = system.getEntity('TestEntity');
+
+            searchedEntity.should.equal(entity);
+        });
+    });
+
+    describe('getComponentFromEntity()', function() {
+        it('should find a component from specified entity', function() {
+            let comp1 = new Component('Comp1', {foo: 'bar'});
+
+            let entity = new Entity('TestEntity', game, [comp1]);
+            game.addEntity(entity);
+
+            let system = new System('TestSystem', () => {}, () =>{});
+            game.addSystem(system);
+
+            let searchedComponent = system.getComponentFromEntity('TestEntity', 'Comp1');
+            
+            searchedComponent.should.equal(comp1);
+        });
     });
 
 });

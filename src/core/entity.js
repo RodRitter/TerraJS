@@ -1,3 +1,5 @@
+import { Component } from './component.js';
+
 export class Entity {
     constructor(id, game, components) {
         /**
@@ -8,7 +10,12 @@ export class Entity {
         /**
          * @type {Object}
          */
-        this.componentMap = {};
+        this.components = {};
+
+        /**
+         * @type {string[]}
+         */
+        this._components = components;
 
         /**
          * @type {Game}
@@ -29,13 +36,15 @@ export class Entity {
          * @type {Pixi.Container}
          */
         this.container;
-        
-        this.components = components;
+        this.container = new PIXI.Container();
+        this.container.gameId = this.id;
     }
 
     set x(value) {
-        this._x = value;
-        if(this.container) this.container.x = value;
+        if(this.container) {
+            this._x = value;
+            this.container.x = value;
+        }
     }
 
     get x() {
@@ -43,8 +52,10 @@ export class Entity {
     }
 
     set y(value) {
-        this._y = value;
-        if(this.container) this.container.y = value;
+        if(this.container) {
+            this._y = value;
+            this.container.y = value;
+        }
     }
 
     get y() {
@@ -56,8 +67,8 @@ export class Entity {
      * @param {Component} component
      */
     attach(component) {
-        if(this.componentMap[component.id] === undefined) {
-            this.componentMap[component.id] = component;
+        if(this.components[component.id] === undefined) {
+            this.components[component.id] = component;
 
             if(this.game.components[component.id] === undefined) {
                 this.game.components[component.id] = [];
@@ -67,15 +78,17 @@ export class Entity {
 
             this.componentCallback(component);
             
+        } else if(!(component instanceof Component))  {
+            throw new TypeError(`Not of type Component`);
         } else {
-            throw(`There is already a component with the ID '${component.id}'`);
+            throw new Error(`There is already a component with the ID '${component.id}'`);
         }
     }
 
     attachComponents() {
-        if(this.components) {
-            for(let i=0; i<this.components.length; i++) {
-                this.attach(this.components[i]);
+        if(this._components) {
+            for(let i=0; i<this._components.length; i++) {
+                this.attach(this._components[i]);
             }
         }
     }
@@ -84,9 +97,9 @@ export class Entity {
      * Detatch a component from entity
      * @param {string} ID of component
      */
-    detatch(id) {
-        this.componentMap[id].onDetatch(); // First call onDetatch before removing it
-        delete this.componentMap[id]; // Remove from Entity map
+    detach(id) {
+        this.components[id].onDetatch(); // First call onDetatch before removing it
+        delete this.components[id]; // Remove from Entity map
 
         // Remove from Game global component list
         this.game.components[id].forEach((component) => {
@@ -105,8 +118,8 @@ export class Entity {
      * @return {Component}
      */
     find(id) {
-        if(this.componentMap[id] !== undefined) {
-            return this.componentMap[id];
+        if(this.components[id] !== undefined) {
+            return this.components[id];
         }
         throw new Error(`Cannot find Component '${id}' on Entity '${this.id}'`);
     }
@@ -117,9 +130,18 @@ export class Entity {
      */
     componentCallback(component) {
         if(this.game.running) {
-            component.beforeAttach(this);
             component.onAttach();
+        } else {
+            component.offlineAttach(this);
         }
+    }
+
+    listenSignal(signalId, callback) {
+        this.game.signal.bind(signalId, this, callback);
+    }
+
+    sendSignal(signalId, data) {
+        this.game.signal.send(signalId, data);
     }
 
 }
