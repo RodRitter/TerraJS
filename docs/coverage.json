@@ -1,7 +1,7 @@
 {
-  "coverage": "51%",
-  "expectCount": 100,
-  "actualCount": 51,
+  "coverage": "50.98%",
+  "expectCount": 102,
+  "actualCount": 52,
   "files": {
     "src/core/component.js": {
       "expectCount": 11,
@@ -16,30 +16,31 @@
       "expectCount": 20,
       "actualCount": 10,
       "undocumentLines": [
-        1,
-        2,
-        37,
-        41,
-        48,
-        52,
-        59,
-        84,
-        134,
-        138
+        3,
+        4,
+        39,
+        43,
+        50,
+        54,
+        61,
+        88,
+        139,
+        143
       ]
     },
     "src/core/game.js": {
-      "expectCount": 32,
-      "actualCount": 24,
+      "expectCount": 34,
+      "actualCount": 25,
       "undocumentLines": [
         6,
-        229,
-        297,
-        298,
-        299,
-        306,
-        307,
-        313
+        102,
+        240,
+        308,
+        310,
+        312,
+        319,
+        320,
+        328
       ]
     },
     "src/core/signal.js": {
@@ -61,21 +62,11 @@
         1,
         2,
         18,
-        43,
-        47
+        45,
+        49
       ]
     },
-    "src/modules/components/shapeComponent.js": {
-      "expectCount": 4,
-      "actualCount": 0,
-      "undocumentLines": [
-        3,
-        4,
-        8,
-        12
-      ]
-    },
-    "src/modules/systems/renderingSystem.js": {
+    "src/modules/rendering/renderingSystem.js": {
       "expectCount": 9,
       "actualCount": 3,
       "undocumentLines": [
@@ -87,6 +78,16 @@
         16
       ]
     },
+    "src/modules/rendering/shapeComponent.js": {
+      "expectCount": 4,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        8,
+        12
+      ]
+    },
     "src/terra.js": {
       "expectCount": 8,
       "actualCount": 1,
@@ -96,7 +97,7 @@
         18,
         19,
         20,
-        22,
+        23,
         24
       ]
     }

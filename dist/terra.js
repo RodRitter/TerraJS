@@ -44723,7 +44723,9 @@ var System = exports.System = function () {
         key: "getComponentFromEntity",
         value: function getComponentFromEntity(entityId, componentId) {
             if (this.game) {
-                return this.game.getEntity(entityId).getComponent(componentId);
+                var entity = this.game.getEntity(entityId);
+                var component = entity.find(componentId);
+                return component;
             }
         }
     }, {
@@ -44743,59 +44745,10 @@ var System = exports.System = function () {
 
 /***/ }),
 
-/***/ "./src/modules/components/shapeComponent.js":
+/***/ "./src/modules/rendering/renderingSystem.js":
 /*!**************************************************!*\
-  !*** ./src/modules/components/shapeComponent.js ***!
+  !*** ./src/modules/rendering/renderingSystem.js ***!
   \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.ShapeComponent = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _component = __webpack_require__(/*! ../../core/component.js */ "./src/core/component.js");
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var ShapeComponent = exports.ShapeComponent = function (_Component) {
-    _inherits(ShapeComponent, _Component);
-
-    function ShapeComponent(id, data) {
-        _classCallCheck(this, ShapeComponent);
-
-        return _possibleConstructorReturn(this, (ShapeComponent.__proto__ || Object.getPrototypeOf(ShapeComponent)).call(this, id, data));
-    }
-
-    _createClass(ShapeComponent, [{
-        key: 'onAttach',
-        value: function onAttach() {
-            this.entity.sendSignal('shape.render', { entity: this.entity });
-        }
-    }, {
-        key: 'onDetatch',
-        value: function onDetatch() {}
-    }]);
-
-    return ShapeComponent;
-}(_component.Component);
-
-/***/ }),
-
-/***/ "./src/modules/systems/renderingSystem.js":
-/*!************************************************!*\
-  !*** ./src/modules/systems/renderingSystem.js ***!
-  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -44820,10 +44773,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var RenderingSystem = exports.RenderingSystem = function (_System) {
     _inherits(RenderingSystem, _System);
 
-    function RenderingSystem() {
+    function RenderingSystem(id) {
         _classCallCheck(this, RenderingSystem);
 
-        var _this = _possibleConstructorReturn(this, (RenderingSystem.__proto__ || Object.getPrototypeOf(RenderingSystem)).call(this, 'RenderingSystem', function () {}, function () {}));
+        var _this = _possibleConstructorReturn(this, (RenderingSystem.__proto__ || Object.getPrototypeOf(RenderingSystem)).call(this, id, function () {}, function () {}));
 
         _this.onStart = _this.start;
         _this.onUpdate = _this.update;
@@ -44912,6 +44865,55 @@ var RenderingSystem = exports.RenderingSystem = function (_System) {
 
 /***/ }),
 
+/***/ "./src/modules/rendering/shapeComponent.js":
+/*!*************************************************!*\
+  !*** ./src/modules/rendering/shapeComponent.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.ShapeComponent = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _component = __webpack_require__(/*! ../../core/component.js */ "./src/core/component.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ShapeComponent = exports.ShapeComponent = function (_Component) {
+    _inherits(ShapeComponent, _Component);
+
+    function ShapeComponent(id, data) {
+        _classCallCheck(this, ShapeComponent);
+
+        return _possibleConstructorReturn(this, (ShapeComponent.__proto__ || Object.getPrototypeOf(ShapeComponent)).call(this, id, data));
+    }
+
+    _createClass(ShapeComponent, [{
+        key: 'onAttach',
+        value: function onAttach() {
+            this.entity.sendSignal('shape.render', { entity: this.entity });
+        }
+    }, {
+        key: 'onDetatch',
+        value: function onDetatch() {}
+    }]);
+
+    return ShapeComponent;
+}(_component.Component);
+
+/***/ }),
+
 /***/ "./src/terra.js":
 /*!**********************!*\
   !*** ./src/terra.js ***!
@@ -44930,9 +44932,9 @@ var _component = __webpack_require__(/*! ./core/component.js */ "./src/core/comp
 
 var _system = __webpack_require__(/*! ./core/system.js */ "./src/core/system.js");
 
-var _shapeComponent = __webpack_require__(/*! ./modules/components/shapeComponent.js */ "./src/modules/components/shapeComponent.js");
+var _shapeComponent = __webpack_require__(/*! ./modules/rendering/shapeComponent.js */ "./src/modules/rendering/shapeComponent.js");
 
-var _renderingSystem = __webpack_require__(/*! ./modules/systems/renderingSystem.js */ "./src/modules/systems/renderingSystem.js");
+var _renderingSystem = __webpack_require__(/*! ./modules/rendering/renderingSystem.js */ "./src/modules/rendering/renderingSystem.js");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -44952,11 +44954,11 @@ var Terra = function Terra() {
     this.Component = _component.Component;
     this.System = _system.System;
 
+    // Rendering Module
     this.Renderer = _renderingSystem.RenderingSystem;
+    this.Shape = _shapeComponent.ShapeComponent;
 
-    this.Shape = {
-        Component: _shapeComponent.ShapeComponent
-    };
+    // Input Module
 };
 
 global.Terra = new Terra();

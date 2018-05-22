@@ -34,14 +34,16 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/signal.js~Signal.html">Signal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-rendering">modules/rendering</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/rendering/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/rendering/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
 </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/core/entity.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export class Entity {
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Component } from &apos;./component.js&apos;;
+
+export class Entity {
     constructor(id, game, components) {
         /**
          * @type {string}
@@ -56,7 +58,7 @@
         /**
          * @type {string[]}
          */
-        this._componentIds = components;
+        this._components = components;
 
         /**
          * @type {Game}
@@ -119,15 +121,17 @@
 
             this.componentCallback(component);
             
+        } else if(!(component instanceof Component))  {
+            throw new TypeError(`Not of type Component`);
         } else {
-            throw(`There is already a component with the ID &apos;${component.id}&apos;`);
+            throw new Error(`There is already a component with the ID &apos;${component.id}&apos;`);
         }
     }
 
     attachComponents() {
-        if(this._componentIds) {
-            for(let i=0; i&lt;this._componentIds.length; i++) {
-                this.attach(this._componentIds[i]);
+        if(this._components) {
+            for(let i=0; i&lt;this._components.length; i++) {
+                this.attach(this._components[i]);
             }
         }
     }
@@ -136,7 +140,7 @@
      * Detatch a component from entity
      * @param {string} ID of component
      */
-    detatch(id) {
+    detach(id) {
         this.components[id].onDetatch(); // First call onDetatch before removing it
         delete this.components[id]; // Remove from Entity map
 
@@ -169,8 +173,9 @@
      */
     componentCallback(component) {
         if(this.game.running) {
-            component.beforeAttach(this);
             component.onAttach();
+        } else {
+            component.offlineAttach(this);
         }
     }
 

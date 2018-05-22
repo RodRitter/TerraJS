@@ -18,15 +18,15 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "terra/src/modules/systems/renderingsystem.js~renderingsystem",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html",
-    "<span>RenderingSystem</span> <span class=\"search-result-import-path\">terra/src/modules/systems/renderingSystem.js</span>",
+    "terra/src/modules/rendering/renderingsystem.js~renderingsystem",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html",
+    "<span>RenderingSystem</span> <span class=\"search-result-import-path\">terra/src/modules/rendering/renderingSystem.js</span>",
     "class"
   ],
   [
-    "terra/src/modules/components/shapecomponent.js~shapecomponent",
-    "class/src/modules/components/shapeComponent.js~ShapeComponent.html",
-    "<span>ShapeComponent</span> <span class=\"search-result-import-path\">terra/src/modules/components/shapeComponent.js</span>",
+    "terra/src/modules/rendering/shapecomponent.js~shapecomponent",
+    "class/src/modules/rendering/shapeComponent.js~ShapeComponent.html",
+    "<span>ShapeComponent</span> <span class=\"search-result-import-path\">terra/src/modules/rendering/shapeComponent.js</span>",
     "class"
   ],
   [
@@ -336,12 +336,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/core/component.js~component#beforeattach",
-    "class/src/core/component.js~Component.html#instance-method-beforeAttach",
-    "src/core/component.js~Component#beforeAttach",
-    "method"
-  ],
-  [
     "src/core/component.js~component#constructor",
     "class/src/core/component.js~Component.html#instance-constructor-constructor",
     "src/core/component.js~Component#constructor",
@@ -366,16 +360,16 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/core/component.js~component#hasdependency",
-    "class/src/core/component.js~Component.html#instance-method-hasDependency",
-    "src/core/component.js~Component#hasDependency",
-    "method"
-  ],
-  [
     "src/core/component.js~component#id",
     "class/src/core/component.js~Component.html#instance-member-id",
     "src/core/component.js~Component#id",
     "member"
+  ],
+  [
+    "src/core/component.js~component#offlineattach",
+    "class/src/core/component.js~Component.html#instance-method-offlineAttach",
+    "src/core/component.js~Component#offlineAttach",
+    "method"
   ],
   [
     "src/core/component.js~component#onattach",
@@ -390,15 +384,21 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/core/component.js~component#setdependency",
+    "class/src/core/component.js~Component.html#instance-method-setDependency",
+    "src/core/component.js~Component#setDependency",
+    "method"
+  ],
+  [
     "src/core/entity.js",
     "file/src/core/entity.js.html",
     "src/core/entity.js",
     "file"
   ],
   [
-    "src/core/entity.js~entity#_componentids",
-    "class/src/core/entity.js~Entity.html#instance-member-_componentIds",
-    "src/core/entity.js~Entity#_componentIds",
+    "src/core/entity.js~entity#_components",
+    "class/src/core/entity.js~Entity.html#instance-member-_components",
+    "src/core/entity.js~Entity#_components",
     "member"
   ],
   [
@@ -450,9 +450,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/core/entity.js~entity#detatch",
-    "class/src/core/entity.js~Entity.html#instance-method-detatch",
-    "src/core/entity.js~Entity#detatch",
+    "src/core/entity.js~entity#detach",
+    "class/src/core/entity.js~Entity.html#instance-method-detach",
+    "src/core/entity.js~Entity#detach",
     "method"
   ],
   [
@@ -487,13 +487,13 @@ window.esdocSearchIndex = [
   ],
   [
     "src/core/entity.js~entity#x",
-    "class/src/core/entity.js~Entity.html#instance-set-x",
+    "class/src/core/entity.js~Entity.html#instance-get-x",
     "src/core/entity.js~Entity#x",
     "member"
   ],
   [
     "src/core/entity.js~entity#x",
-    "class/src/core/entity.js~Entity.html#instance-get-x",
+    "class/src/core/entity.js~Entity.html#instance-set-x",
     "src/core/entity.js~Entity#x",
     "member"
   ],
@@ -624,6 +624,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/core/game.js~game#hassetup",
+    "class/src/core/game.js~Game.html#instance-member-hasSetup",
+    "src/core/game.js~Game#hasSetup",
+    "member"
+  ],
+  [
     "src/core/game.js~game#height",
     "class/src/core/game.js~Game.html#instance-member-height",
     "src/core/game.js~Game#height",
@@ -681,6 +687,12 @@ window.esdocSearchIndex = [
     "src/core/game.js~game#start",
     "class/src/core/game.js~Game.html#instance-method-start",
     "src/core/game.js~Game#start",
+    "method"
+  ],
+  [
+    "src/core/game.js~game#stop",
+    "class/src/core/game.js~Game.html#instance-method-stop",
+    "src/core/game.js~Game#stop",
     "method"
   ],
   [
@@ -798,81 +810,81 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/modules/components/shapecomponent.js",
-    "file/src/modules/components/shapeComponent.js.html",
-    "src/modules/components/shapeComponent.js",
+    "src/modules/rendering/renderingsystem.js",
+    "file/src/modules/rendering/renderingSystem.js.html",
+    "src/modules/rendering/renderingSystem.js",
     "file"
   ],
   [
-    "src/modules/components/shapecomponent.js~shapecomponent#constructor",
-    "class/src/modules/components/shapeComponent.js~ShapeComponent.html#instance-constructor-constructor",
-    "src/modules/components/shapeComponent.js~ShapeComponent#constructor",
+    "src/modules/rendering/renderingsystem.js~renderingsystem#_drawcircle",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-method-_drawCircle",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#_drawCircle",
     "method"
   ],
   [
-    "src/modules/components/shapecomponent.js~shapecomponent#onattach",
-    "class/src/modules/components/shapeComponent.js~ShapeComponent.html#instance-method-onAttach",
-    "src/modules/components/shapeComponent.js~ShapeComponent#onAttach",
+    "src/modules/rendering/renderingsystem.js~renderingsystem#_drawrect",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-method-_drawRect",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#_drawRect",
     "method"
   ],
   [
-    "src/modules/components/shapecomponent.js~shapecomponent#ondetatch",
-    "class/src/modules/components/shapeComponent.js~ShapeComponent.html#instance-method-onDetatch",
-    "src/modules/components/shapeComponent.js~ShapeComponent#onDetatch",
+    "src/modules/rendering/renderingsystem.js~renderingsystem#constructor",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-constructor-constructor",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#constructor",
     "method"
   ],
   [
-    "src/modules/systems/renderingsystem.js",
-    "file/src/modules/systems/renderingSystem.js.html",
-    "src/modules/systems/renderingSystem.js",
+    "src/modules/rendering/renderingsystem.js~renderingsystem#onstart",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-member-onStart",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#onStart",
+    "member"
+  ],
+  [
+    "src/modules/rendering/renderingsystem.js~renderingsystem#onupdate",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-member-onUpdate",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#onUpdate",
+    "member"
+  ],
+  [
+    "src/modules/rendering/renderingsystem.js~renderingsystem#rendershape",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-method-renderShape",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#renderShape",
+    "method"
+  ],
+  [
+    "src/modules/rendering/renderingsystem.js~renderingsystem#start",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-method-start",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#start",
+    "method"
+  ],
+  [
+    "src/modules/rendering/renderingsystem.js~renderingsystem#update",
+    "class/src/modules/rendering/renderingSystem.js~RenderingSystem.html#instance-method-update",
+    "src/modules/rendering/renderingSystem.js~RenderingSystem#update",
+    "method"
+  ],
+  [
+    "src/modules/rendering/shapecomponent.js",
+    "file/src/modules/rendering/shapeComponent.js.html",
+    "src/modules/rendering/shapeComponent.js",
     "file"
   ],
   [
-    "src/modules/systems/renderingsystem.js~renderingsystem#_drawcircle",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-_drawCircle",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#_drawCircle",
+    "src/modules/rendering/shapecomponent.js~shapecomponent#constructor",
+    "class/src/modules/rendering/shapeComponent.js~ShapeComponent.html#instance-constructor-constructor",
+    "src/modules/rendering/shapeComponent.js~ShapeComponent#constructor",
     "method"
   ],
   [
-    "src/modules/systems/renderingsystem.js~renderingsystem#_drawrect",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-_drawRect",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#_drawRect",
+    "src/modules/rendering/shapecomponent.js~shapecomponent#onattach",
+    "class/src/modules/rendering/shapeComponent.js~ShapeComponent.html#instance-method-onAttach",
+    "src/modules/rendering/shapeComponent.js~ShapeComponent#onAttach",
     "method"
   ],
   [
-    "src/modules/systems/renderingsystem.js~renderingsystem#constructor",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-constructor-constructor",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#constructor",
-    "method"
-  ],
-  [
-    "src/modules/systems/renderingsystem.js~renderingsystem#onstart",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-member-onStart",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#onStart",
-    "member"
-  ],
-  [
-    "src/modules/systems/renderingsystem.js~renderingsystem#onupdate",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-member-onUpdate",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#onUpdate",
-    "member"
-  ],
-  [
-    "src/modules/systems/renderingsystem.js~renderingsystem#rendershape",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-renderShape",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#renderShape",
-    "method"
-  ],
-  [
-    "src/modules/systems/renderingsystem.js~renderingsystem#start",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-start",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#start",
-    "method"
-  ],
-  [
-    "src/modules/systems/renderingsystem.js~renderingsystem#update",
-    "class/src/modules/systems/renderingSystem.js~RenderingSystem.html#instance-method-update",
-    "src/modules/systems/renderingSystem.js~RenderingSystem#update",
+    "src/modules/rendering/shapecomponent.js~shapecomponent#ondetatch",
+    "class/src/modules/rendering/shapeComponent.js~ShapeComponent.html#instance-method-onDetatch",
+    "src/modules/rendering/shapeComponent.js~ShapeComponent#onDetatch",
     "method"
   ],
   [

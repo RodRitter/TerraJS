@@ -1,27 +1,27 @@
 [
   {
-    "name": "Entity#detatch",
+    "name": "Entity#detach",
     "filePath": "src/core/entity.js",
     "lines": [
       {
-        "lineNumber": 91,
+        "lineNumber": 95,
         "line": "    /**"
       },
       {
-        "lineNumber": 92,
+        "lineNumber": 96,
         "line": "     * Detatch a component from entity"
       },
       {
-        "lineNumber": 93,
+        "lineNumber": 97,
         "line": "     * @param {string} ID of component"
       },
       {
-        "lineNumber": 94,
+        "lineNumber": 98,
         "line": "     */"
       },
       {
-        "lineNumber": 95,
-        "line": "    detatch(id) {"
+        "lineNumber": 99,
+        "line": "    detach(id) {"
       }
     ],
     "codeParams": [
@@ -36,23 +36,23 @@
     "filePath": "src/core/game.js",
     "lines": [
       {
-        "lineNumber": 153,
+        "lineNumber": 164,
         "line": "    /**"
       },
       {
-        "lineNumber": 154,
+        "lineNumber": 165,
         "line": "     * Create & add multiple entities"
       },
       {
-        "lineNumber": 155,
+        "lineNumber": 166,
         "line": "     * @param {Entity[]} array of entities"
       },
       {
-        "lineNumber": 156,
+        "lineNumber": 167,
         "line": "     */"
       },
       {
-        "lineNumber": 157,
+        "lineNumber": 168,
         "line": "    addEntities(entities) {"
       }
     ],
@@ -68,23 +68,23 @@
     "filePath": "src/core/game.js",
     "lines": [
       {
-        "lineNumber": 172,
+        "lineNumber": 183,
         "line": "    /**"
       },
       {
-        "lineNumber": 173,
+        "lineNumber": 184,
         "line": "     * Remove entity from game"
       },
       {
-        "lineNumber": 174,
+        "lineNumber": 185,
         "line": "     * @param {string} ID of entity"
       },
       {
-        "lineNumber": 175,
+        "lineNumber": 186,
         "line": "     */"
       },
       {
-        "lineNumber": 176,
+        "lineNumber": 187,
         "line": "    removeEntity(id) {"
       }
     ],

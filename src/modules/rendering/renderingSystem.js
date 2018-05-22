@@ -1,8 +1,8 @@
 import { System } from '../../core/system.js';
 
 export class RenderingSystem extends System {
-    constructor() {
-        super('RenderingSystem', ()=>{}, ()=>{});
+    constructor(id) {
+        super(id, ()=>{}, ()=>{});
         this.onStart = this.start;
         this.onUpdate = this.update;
     }

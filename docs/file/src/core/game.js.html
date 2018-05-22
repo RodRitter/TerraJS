@@ -34,8 +34,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/game.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/signal.js~Signal.html">Signal</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/core/system.js~System.html">System</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-components">modules/components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/components/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-systems">modules/systems</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/systems/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#modules-rendering">modules/rendering</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/rendering/renderingSystem.js~RenderingSystem.html">RenderingSystem</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/modules/rendering/shapeComponent.js~ShapeComponent.html">ShapeComponent</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -59,6 +59,11 @@ export class Game {
          * @type {boolean}
          */
         this.running = false;
+
+        /**
+         * @type {boolean}
+         */
+        this.hasSetup = false;
 
         /**
          * @type {number}
@@ -134,20 +139,26 @@ export class Game {
         };
 
         // Start game loop
-        window.requestAnimationFrame(this.update.bind(this));
+        global.requestAnimationFrame(this.update.bind(this));
+    }
+
+    stop() {
+        this.running = false;
     }
 
     /**
      * The game update function. Use onUpdate() callback to hook into here
      */
     update(time) {
+        if(!this.running) return;
+
         this.onUpdate(time);
 
         this.callbacks.onUpdate.forEach((systemObj) =&gt; {
             systemObj.callback(systemObj.system, time);
         });
         
-        window.requestAnimationFrame(this.update.bind(this));
+        global.requestAnimationFrame(this.update.bind(this));
     }
 
     /**
@@ -338,19 +349,23 @@ export class Game {
     }
 
     _rendererSetup(settings) {
-        this.PIXI = PIXI;
-        this.application = new PIXI.Application({
-            width: this.width,
-            height: this.height,
-            antialias: settings.antialias ? settings.antialias : false,
-            transparent: settings.transparent ? settings.transparent : false,
-            resolution: settings.resolution ? settings.resolution : 1
-        });
-        this.stage = this.application.stage;
-        this.renderer = this.application.renderer;
-        this.renderer.autoResize = true;
+        if(!this.hasSetup) {
+            this.PIXI = PIXI;
+            PIXI.utils.skipHello(); // Disables console log stuff;
+            this.application = new PIXI.Application({
+                width: this.width,
+                height: this.height,
+                antialias: settings.antialias ? settings.antialias : false,
+                transparent: settings.transparent ? settings.transparent : false,
+                resolution: settings.resolution ? settings.resolution : 1
+            });
+            this.stage = this.application.stage;
+            this.renderer = this.application.renderer;
+            this.renderer.autoResize = true;
 
-        document.body.appendChild(this.application.view);
+            document.body.appendChild(this.application.view);
+            this.hasSetup = true;
+        };
     }
 
     addEntityToStage(entity) {
