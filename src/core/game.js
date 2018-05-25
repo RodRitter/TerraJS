@@ -79,14 +79,8 @@ export class Game {
     start() {
         this.running = true;
         this._rendererSetup(this.rendererSettings);
-        this.onStart();
 
-        // Run start callbacks
-        this.callbacks.onStart.forEach((systemObj) => {
-            systemObj.callback(systemObj.system);
-        });
-
-        // Run component callbacks
+        // Run component attach callbacks
         for(let i=0; i < Object.keys(this.entities).length; i++) {
             let entity = this.entities[Object.keys(this.entities)[i]];
             this.addEntityToStage(entity);
@@ -94,6 +88,13 @@ export class Game {
                 entity.componentCallback(entity.components[Object.keys(entity.components)[j]]);
             }
         };
+
+        // Run start callbacks
+        this.callbacks.onStart.forEach((systemObj) => {
+            systemObj.callback(systemObj.system);
+        });
+
+        this.onStart();
 
         // Start game loop
         global.requestAnimationFrame(this.update.bind(this));
@@ -115,6 +116,7 @@ export class Game {
             systemObj.callback(systemObj.system, time);
         });
         
+        if(this.renderer) this.renderer.render(this.stage);
         global.requestAnimationFrame(this.update.bind(this));
     }
 
@@ -160,6 +162,15 @@ export class Game {
             throw new TypeError(`Trying to add an entity which is not of type 'Entity'`);
         }
         
+    }
+
+    destroyEntity(entity) {
+        if(this.entities[entity.id] !== undefined) {
+            delete this.entities[entity.id];
+            if(this.stage) {
+                this.stage.removeChild(entity.container);
+            }
+        }
     }
 
     /**
@@ -238,7 +249,6 @@ export class Game {
     }
 
     _registerSystem(system) {
-        system.game = this;
         this.systems[system.id] = system;
 
         if(system.onStart) {

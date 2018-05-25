@@ -1,5 +1,5 @@
 export class System {
-    constructor(id, onStart, onUpdate) {
+    constructor(id, game, onStart, onUpdate) {
         /**
          * @type {string}
          */
@@ -8,7 +8,7 @@ export class System {
         /**
          * @type {Game}
          */
-        this.game = null;
+        this.game = game;
 
         /**
          * @type {function}

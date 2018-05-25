@@ -44034,6 +44034,10 @@ var Entity = exports.Entity = function () {
          */
         this.container;
         this.container = new PIXI.Container();
+        this.container.width = this._width;
+        this.container.height = this._height;
+        this.container.pivot.x = 0.5;
+        this.container.pivot.y = 0.5;
         this.container.gameId = this.id;
     }
 
@@ -44136,6 +44140,11 @@ var Entity = exports.Entity = function () {
             this.game.signal.send(signalId, data);
         }
     }, {
+        key: 'destroy',
+        value: function destroy() {
+            this.game.destroyEntity(this);
+        }
+    }, {
         key: 'x',
         set: function set(value) {
             if (this.container) {
@@ -44156,6 +44165,26 @@ var Entity = exports.Entity = function () {
         },
         get: function get() {
             return this._y;
+        }
+    }, {
+        key: 'width',
+        set: function set(value) {
+            if (this.container) {
+                this.container.width = value;
+            }
+        },
+        get: function get() {
+            return this.container.width;
+        }
+    }, {
+        key: 'height',
+        set: function set(value) {
+            if (this.container) {
+                this.container.height = value;
+            }
+        },
+        get: function get() {
+            return this.container.height;
         }
     }]);
 
@@ -44277,14 +44306,8 @@ var Game = exports.Game = function () {
         value: function start() {
             this.running = true;
             this._rendererSetup(this.rendererSettings);
-            this.onStart();
 
-            // Run start callbacks
-            this.callbacks.onStart.forEach(function (systemObj) {
-                systemObj.callback(systemObj.system);
-            });
-
-            // Run component callbacks
+            // Run component attach callbacks
             for (var i = 0; i < Object.keys(this.entities).length; i++) {
                 var entity = this.entities[Object.keys(this.entities)[i]];
                 this.addEntityToStage(entity);
@@ -44292,6 +44315,13 @@ var Game = exports.Game = function () {
                     entity.componentCallback(entity.components[Object.keys(entity.components)[j]]);
                 }
             };
+
+            // Run start callbacks
+            this.callbacks.onStart.forEach(function (systemObj) {
+                systemObj.callback(systemObj.system);
+            });
+
+            this.onStart();
 
             // Start game loop
             global.requestAnimationFrame(this.update.bind(this));
@@ -44317,6 +44347,7 @@ var Game = exports.Game = function () {
                 systemObj.callback(systemObj.system, time);
             });
 
+            if (this.renderer) this.renderer.render(this.stage);
             global.requestAnimationFrame(this.update.bind(this));
         }
 
@@ -44372,6 +44403,16 @@ var Game = exports.Game = function () {
                 this.addEntityToStage(entity);
             } else {
                 throw new TypeError('Trying to add an entity which is not of type \'Entity\'');
+            }
+        }
+    }, {
+        key: 'destroyEntity',
+        value: function destroyEntity(entity) {
+            if (this.entities[entity.id] !== undefined) {
+                delete this.entities[entity.id];
+                if (this.stage) {
+                    this.stage.removeChild(entity.container);
+                }
             }
         }
 
@@ -44468,7 +44509,6 @@ var Game = exports.Game = function () {
     }, {
         key: '_registerSystem',
         value: function _registerSystem(system) {
-            system.game = this;
             this.systems[system.id] = system;
 
             if (system.onStart) {
@@ -44619,6 +44659,14 @@ var Signal = exports.Signal = function () {
         this.signals = {};
     }
 
+    /**
+     * Listen for a specific signal with ID and call the function
+     * @param {string} id - An ID of the signal
+     * @param {System} system 
+     * @param {function} callback 
+     */
+
+
     _createClass(Signal, [{
         key: "bind",
         value: function bind(id, system, callback) {
@@ -44628,6 +44676,13 @@ var Signal = exports.Signal = function () {
 
             this.signals[id].push({ system: system, callback: callback });
         }
+
+        /**
+         * Unbind a message & Remove it from the list of signals
+         * @param {string} id 
+         * @param {System} system 
+         */
+
     }, {
         key: "unbind",
         value: function unbind(id, system) {
@@ -44642,6 +44697,13 @@ var Signal = exports.Signal = function () {
                 });
             }
         }
+
+        /**
+         * Send a signal with data
+         * @param {string} id 
+         * @param {Object} data 
+         */
+
     }, {
         key: "send",
         value: function send(id, data) {
@@ -44677,7 +44739,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var System = exports.System = function () {
-    function System(id, onStart, onUpdate) {
+    function System(id, game, onStart, onUpdate) {
         _classCallCheck(this, System);
 
         /**
@@ -44688,7 +44750,7 @@ var System = exports.System = function () {
         /**
          * @type {Game}
          */
-        this.game = null;
+        this.game = game;
 
         /**
          * @type {function}
@@ -44773,23 +44835,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var RenderingSystem = exports.RenderingSystem = function (_System) {
     _inherits(RenderingSystem, _System);
 
-    function RenderingSystem(id) {
+    function RenderingSystem(id, game) {
         _classCallCheck(this, RenderingSystem);
 
-        var _this = _possibleConstructorReturn(this, (RenderingSystem.__proto__ || Object.getPrototypeOf(RenderingSystem)).call(this, id, function () {}, function () {}));
+        var _this = _possibleConstructorReturn(this, (RenderingSystem.__proto__ || Object.getPrototypeOf(RenderingSystem)).call(this, id, game, function () {}, function () {}));
 
         _this.onStart = _this.start;
         _this.onUpdate = _this.update;
+
+        _this.listenSignal('shape.render', function (data) {
+            _this.renderShape(_this, data.entity);
+        });
         return _this;
     }
 
     _createClass(RenderingSystem, [{
         key: 'start',
-        value: function start(system) {
-            system.listenSignal('shape.render', function (data) {
-                system.renderShape(system, data.entity);
-            });
-        }
+        value: function start(system) {}
     }, {
         key: 'update',
         value: function update(system, time) {}
@@ -44803,16 +44865,18 @@ var RenderingSystem = exports.RenderingSystem = function (_System) {
     }, {
         key: 'renderShape',
         value: function renderShape(system, entity) {
-            var comp = entity.find('ShapeComponent');
+            var shape = entity.find('ShapeComponent');
 
-            if (comp) {
-                switch (comp.data.type) {
+            if (shape) {
+                switch (shape.data.type) {
                     case 'circle':
-                        var circle = system._drawCircle(system, entity.x, entity.y, comp.data.radius, comp.data.color);
+                        var circle = system._drawCircle(system, entity.x, entity.y, shape.data.radius, shape.data.color);
+                        shape.graphic = circle;
                         entity.container.addChild(circle);
                         break;
                     case 'rect':
-                        var rect = system._drawRect(entity.x, entity.y, comp.data.width, comp.data.height, comp.data.color);
+                        var rect = system._drawRect(entity.x, entity.y, shape.data.width, shape.data.height, shape.data.color);
+                        shape.graphic = rect;
                         entity.container.addChild(rect);
                         break;
                 }
@@ -44836,6 +44900,8 @@ var RenderingSystem = exports.RenderingSystem = function (_System) {
             gfx.beginFill(color);
             gfx.drawCircle(x, y, radius);
             gfx.endFill();
+            gfx.x = 0;
+            gfx.y = 0;
             return gfx;
         }
 
@@ -44856,6 +44922,8 @@ var RenderingSystem = exports.RenderingSystem = function (_System) {
             gfx.beginFill(color);
             gfx.drawRect(x, y, width, height);
             gfx.endFill();
+            gfx.x = 0;
+            gfx.y = 0;
             return gfx;
         }
     }]);

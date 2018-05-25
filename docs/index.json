@@ -1995,7 +1995,7 @@
     "__docId__": 121,
     "kind": "file",
     "name": "src/core/signal.js",
-    "content": "\nexport class Signal {\n    constructor() {\n        this.signals = {};\n    }\n\n    bind(id, system, callback) {\n        if(!this.signals[id]) {\n            this.signals[id] = [];\n        }\n\n        this.signals[id].push({ system: system, callback: callback });\n    }\n\n    unbind(id, system) {\n        if(this.signals[id]) {\n            this.signals[id].forEach((signal) => {\n                if(signal.system.id == system.id) {\n                    let index = this.signals[id].indexOf(signal);\n                    this.signals[id].splice(index, 1);\n                }\n            });\n        }\n    }\n\n    send(id, data) {\n        if(this.signals[id]) {\n            this.signals[id].forEach((signal) => {\n                signal.callback(data);\n            });\n        }\n    }\n}",
+    "content": "\nexport class Signal {\n    constructor() {\n        this.signals = {};\n    }\n\n    /**\n     * Listen for a specific signal with ID and call the function\n     * @param {string} id - An ID of the signal\n     * @param {System} system \n     * @param {function} callback \n     */\n    bind(id, system, callback) {\n        if(!this.signals[id]) {\n            this.signals[id] = [];\n        }\n\n        this.signals[id].push({ system: system, callback: callback });\n    }\n\n    /**\n     * Unbind a message & Remove it from the list of signals\n     * @param {string} id \n     * @param {System} system \n     */\n    unbind(id, system) {\n        if(this.signals[id]) {\n            this.signals[id].forEach((signal) => {\n                if(signal.system.id == system.id) {\n                    let index = this.signals[id].indexOf(signal);\n                    this.signals[id].splice(index, 1);\n                }\n            });\n        }\n    }\n\n    /**\n     * Send a signal with data\n     * @param {string} id \n     * @param {Object} data \n     */\n    send(id, data) {\n        if(this.signals[id]) {\n            this.signals[id].forEach((signal) => {\n                signal.callback(data);\n            });\n        }\n    }\n}",
     "static": true,
     "longname": "/Users/rodr/Documents/Projects/terra.js/src/core/signal.js",
     "access": "public",
@@ -2059,27 +2059,38 @@
     "static": false,
     "longname": "src/core/signal.js~Signal#bind",
     "access": "public",
-    "description": null,
-    "lineNumber": 7,
-    "undocument": true,
+    "description": "Listen for a specific signal with ID and call the function",
+    "lineNumber": 13,
     "params": [
       {
+        "nullable": null,
+        "types": [
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
         "name": "id",
-        "types": [
-          "*"
-        ]
+        "description": "An ID of the signal"
       },
       {
+        "nullable": null,
+        "types": [
+          "System"
+        ],
+        "spread": false,
+        "optional": false,
         "name": "system",
-        "types": [
-          "*"
-        ]
+        "description": ""
       },
       {
-        "name": "callback",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "function"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "callback",
+        "description": ""
       }
     ],
     "return": null
@@ -2094,21 +2105,28 @@
     "static": false,
     "longname": "src/core/signal.js~Signal#unbind",
     "access": "public",
-    "description": null,
-    "lineNumber": 15,
-    "undocument": true,
+    "description": "Unbind a message & Remove it from the list of signals",
+    "lineNumber": 26,
     "params": [
       {
-        "name": "id",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
       },
       {
-        "name": "system",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "System"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "system",
+        "description": ""
       }
     ],
     "return": null
@@ -2123,21 +2141,28 @@
     "static": false,
     "longname": "src/core/signal.js~Signal#send",
     "access": "public",
-    "description": null,
-    "lineNumber": 26,
-    "undocument": true,
+    "description": "Send a signal with data",
+    "lineNumber": 42,
     "params": [
       {
-        "name": "id",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "string"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "id",
+        "description": ""
       },
       {
-        "name": "data",
+        "nullable": null,
         "types": [
-          "*"
-        ]
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "data",
+        "description": ""
       }
     ],
     "return": null

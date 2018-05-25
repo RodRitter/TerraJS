@@ -233,6 +233,17 @@ describe('Entity', function() {
             comp.data.foo.should.equal('bar');
         });
     });
+
+    describe('destroy()', function() {
+        it('should destroy & remove an entity from the game', function() {
+            let entity = new Entity('TestEntity', game, []);
+
+            game.addEntity(entity);
+            Object.keys(game.entities).length.should.equal(1);
+            entity.destroy();
+            Object.keys(game.entities).length.should.equal(0);
+        });
+    });
 });
 
 describe('System', function() {
@@ -247,7 +258,7 @@ describe('System', function() {
             let entity = new Entity('TestEntity', game, []);
             game.addEntity(entity);
 
-            let system = new System('TestSystem', () => {}, () =>{});
+            let system = new System('TestSystem', game, () => {}, () =>{});
             game.addSystem(system);
 
             let searchedEntity = system.getEntity('TestEntity');
@@ -263,7 +274,7 @@ describe('System', function() {
             let entity = new Entity('TestEntity', game, [comp1]);
             game.addEntity(entity);
 
-            let system = new System('TestSystem', () => {}, () =>{});
+            let system = new System('TestSystem', game, () => {}, () =>{});
             game.addSystem(system);
 
             let searchedComponent = system.getComponentFromEntity('TestEntity', 'Comp1');

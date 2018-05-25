@@ -37,6 +37,10 @@ export class Entity {
          */
         this.container;
         this.container = new PIXI.Container();
+        this.container.width = this._width;
+        this.container.height = this._height;
+        this.container.pivot.x = 0.5;
+        this.container.pivot.y = 0.5;
         this.container.gameId = this.id;
     }
 
@@ -61,6 +65,27 @@ export class Entity {
     get y() {
         return this._y;
     }
+
+    set width(value) {
+        if(this.container) {
+            this.container.width = value;
+        }
+    }
+
+    get width() {
+        return this.container.width;
+    }
+
+    set height(value) {
+        if(this.container) {
+            this.container.height = value;
+        }
+    }
+
+    get height() {
+        return this.container.height;
+    }
+    
 
     /**
      * Attach a Component to this Entity
@@ -142,6 +167,10 @@ export class Entity {
 
     sendSignal(signalId, data) {
         this.game.signal.send(signalId, data);
+    }
+
+    destroy() {
+        this.game.destroyEntity(this);
     }
 
 }

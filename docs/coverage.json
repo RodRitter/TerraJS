@@ -1,7 +1,7 @@
 {
-  "coverage": "50.98%",
+  "coverage": "53.92%",
   "expectCount": 102,
-  "actualCount": 52,
+  "actualCount": 55,
   "files": {
     "src/core/component.js": {
       "expectCount": 11,
@@ -45,14 +45,11 @@
     },
     "src/core/signal.js": {
       "expectCount": 6,
-      "actualCount": 0,
+      "actualCount": 3,
       "undocumentLines": [
         2,
         3,
-        4,
-        7,
-        15,
-        26
+        4
       ]
     },
     "src/core/system.js": {

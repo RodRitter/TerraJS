@@ -1,16 +1,18 @@
 import { System } from '../../core/system.js';
 
 export class RenderingSystem extends System {
-    constructor(id) {
-        super(id, ()=>{}, ()=>{});
+    constructor(id, game) {
+        super(id, game, ()=>{}, ()=>{});
         this.onStart = this.start;
         this.onUpdate = this.update;
+
+        this.listenSignal('shape.render', (data) => {
+            this.renderShape(this, data.entity);
+        });
     }
 
     start(system) {
-        system.listenSignal('shape.render', (data) => {
-            system.renderShape(system, data.entity);
-        });
+        
     }
 
     update(system, time) {}
@@ -22,16 +24,18 @@ export class RenderingSystem extends System {
      * @param {Entity} entity 
      */
     renderShape(system, entity) {
-        let comp = entity.find('ShapeComponent');
+        let shape = entity.find('ShapeComponent');
 
-        if(comp) {
-            switch(comp.data.type) {
+        if(shape) {
+            switch(shape.data.type) {
                 case 'circle':
-                    let circle = system._drawCircle(system, entity.x, entity.y, comp.data.radius, comp.data.color);
+                    let circle = system._drawCircle(system, entity.x, entity.y, shape.data.radius, shape.data.color);
+                    shape.graphic = circle;
                     entity.container.addChild(circle);
                     break;
                 case 'rect':
-                    let rect = system._drawRect(entity.x, entity.y, comp.data.width, comp.data.height, comp.data.color);
+                    let rect = system._drawRect(entity.x, entity.y, shape.data.width, shape.data.height, shape.data.color);
+                    shape.graphic = rect;
                     entity.container.addChild(rect);
                     break;
             }
@@ -52,6 +56,8 @@ export class RenderingSystem extends System {
         gfx.beginFill(color);
         gfx.drawCircle(x, y, radius);
         gfx.endFill();
+        gfx.x = 0;
+        gfx.y = 0;
         return gfx;
     }
 
@@ -69,6 +75,8 @@ export class RenderingSystem extends System {
         gfx.beginFill(color);
         gfx.drawRect(x, y, width, height); 
         gfx.endFill();
+        gfx.x = 0;
+        gfx.y = 0;
         return gfx;
     }
 }
