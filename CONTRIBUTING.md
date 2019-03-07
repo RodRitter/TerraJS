@@ -16,6 +16,21 @@ Please note we have a code of conduct, please follow it in all your interactions
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
    do not have permission to do that, you may request the second reviewer to merge it for you.
 
+Once you make changes to the code, you need to build
+```
+npm run webpack
+```
+
+Please make sure to write tests for any new functionality (`test/test.js`). You can run tests with the command below.
+```
+npm test
+```
+
+You can run webpack, tests & documentation all together
+```
+npm run build
+```
+
 ## Code of Conduct
 
 ### Our Pledge
